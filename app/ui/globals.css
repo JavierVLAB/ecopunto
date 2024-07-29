@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.font-Montserrat {
+  font-family: "Monteserrat", serif;
+}
+/*
+@layer base {
+  html {
+    
+  }
+}
+*/
+
+
+/*
+.btn {
+  @apply rounded-full w-full py-3 text-center font_h2_bold mx-4;
+}
+
+.btn-primary-darkbg {
+  @apply bg-app_cream text-app_teal;
+}
+
+.btn-primary-darkbg:hover {
+  @apply bg-app_dark_cream;
+}
+
+.btn-primary-lightbg {
+  @apply bg-app_teal text-app_cream;
+}
+
+.btn-primary-lightbg:hover {
+  @apply bg-app_dark_teal;
+}
+
+.btn-secondary {
+  @apply border border-app_cream text-app_cream;
+}
+
+.btn-secondary:hover {
+  @apply border-app_dark_cream text-app_dark_cream;
+}
+
+*/
+.font_h1 {
+  font-family: "Montserrat";
+  font-size: 24px;
+  line-height: 28.8px;
+  letter-spacing: 0em;
+  font-weight: 900;
+}
+
+.font_h2 {
+  font-family: "Montserrat";
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 0em;
+  font-weight: 600;
+}
+
+.font_h3 {
+  font-family: "Montserrat";
+  font-size: 16px;
+  line-height: 20.8px;
+  letter-spacing: 0em;
+  font-weight: 600;
+}
+
+.font_body {
+  font-family: "Montserrat";
+  font-size: 16px;
+  line-height: 22.4px;
+  letter-spacing: 0em;
+  font-weight: 400;
+}
+
+.font_body_secundary {
+  font-family: "Montserrat";
+  font-size: 12px;
+  line-height: 15.6px;
+  letter-spacing: 0em;
+  font-weight: 400;
+}
+
+.font_label {
+  font-family: "Indie Flower", serif;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: 0em;
+  font-weight: 400;
+}
+
+.font_caption {
+  font-family: "Montserrat";
+  font-size: 14px;
+  line-height: 18.2px;
+  letter-spacing: 0em;
+  font-weight: 600;
+}
+
