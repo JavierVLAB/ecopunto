@@ -8,13 +8,13 @@
 .font-Montserrat {
   font-family: "Monteserrat", serif;
 }
-/*
+
 @layer base {
   html {
-    
+    @apply text-grey06
   }
 }
-*/
+
 
 
 /*
@@ -88,7 +88,7 @@
 }
 
 .font_label {
-  font-family: "Indie Flower", serif;
+  font-family: "Indie Flower";
   font-size: 22px;
   line-height: 26px;
   letter-spacing: 0em;
@@ -101,5 +101,22 @@
   line-height: 18.2px;
   letter-spacing: 0em;
   font-weight: 600;
+}
+
+
+.address_input {
+  @apply font-body text-grey06 block w-full px-4 py-3 border border-grey03 rounded-md shadow-sm;
+}
+
+.address_input:focus {
+  @apply outline-none
+}
+
+.btn_primary_dark {
+  @apply bg-ecovidrio_dark text-white font_h2 w-full p-4 rounded-md
+}
+
+.btn_primary_dark:focus {
+  @apply bg-ecovidrio_darkclick
 }
 

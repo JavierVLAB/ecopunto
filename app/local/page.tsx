@@ -6,8 +6,9 @@ import ecovidriologo from "@/public/EcoVidrioLogo.svg"
 import curved_bg from "@/public/curved_bg.svg"
 import contenedor from "@/public/contenedor_generico.svg"
 import chevron_right from "@/public/chevron_right.svg"
+import cubo_generico from "@/public/cubo_generico.svg"
 
-export default function Local() {
+export default function Contenedor() {
   return (
       <main className="h-screen bg-ecovidrio_light">
         <div className="relative">
@@ -36,7 +37,7 @@ export default function Local() {
         
         <Link 
           href={"/local"}
-          className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded-t-lg px-4 py-3"
+          className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded px-4 py-3"
           >
           <Image 
             src={contenedor}
@@ -54,16 +55,18 @@ export default function Local() {
           
         </Link>
 
+        <p className="font_caption text-grey05 mt-12 ms-6">CUBO EN TU ESTABLECIMIENTO</p>
+        
         <Link 
           href={"/local"}
-          className="flex bg-white items-center text-grey06 mt-px mx-4 rounded-b-lg px-4 py-3"
+          className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded px-4 py-3"
           >
           <Image 
-            src={contenedor}
+            src={cubo_generico}
             height={34}
             alt="contenedor"
           />
-          <p className="mx-4 font_h3 flex-grow">Roto</p>
+          <p className="mx-4 font_h3 flex-grow">Solicitar Cubo</p>
 
           <Image 
             src={chevron_right}

@@ -13,6 +13,7 @@ module.exports = {
       },
       colors: {
         ecovidrio_dark: '#005746',
+        ecovidrio_darkclick: '#004A3F',
         ecovidrio_greenish: "#E7F5BD",
         ecovidrio_light: "#EEF8F1",
         error: '#DA3D33',
