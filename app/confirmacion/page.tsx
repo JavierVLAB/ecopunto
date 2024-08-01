@@ -1,5 +1,6 @@
 "use client"
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 import check_circle from '@/public/check-circle.svg'
 import ecovidriologo from "@/public/EcoVidrioLogo.svg"
@@ -9,6 +10,21 @@ import '@/app/ui/globals.css'
 const progress = 25
 
 export default function ConfirmacionContenedor() {
+	const [sessionData, setSessionData] = useState({});
+
+	useEffect(() => {
+		// Leer el objeto JSON desde localStorage
+		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+	
+		// Actualizar el objeto JSON con nuevos datos
+		storedData.lastPage = 'confirmacion';
+
+		
+		// Actualizar el estado local
+		setSessionData(storedData);
+
+		console.log(storedData)
+	  }, []);
 
   return (
 		<main className="h-screen bg-white pt-28">

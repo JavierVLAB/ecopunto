@@ -113,10 +113,76 @@
 }
 
 .btn_primary_dark {
-  @apply bg-ecovidrio_dark text-white font_h2 w-full p-4 rounded-md
+  @apply bg-ecovidrio_dark text-white font_h2 p-4 rounded-md w-full
 }
 
 .btn_primary_dark:focus {
   @apply bg-ecovidrio_darkclick
 }
 
+.form-select {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAQCAYAAAAMJL+VAAAABGdBTUEAALGPC/xhBQAAAQtJREFUOBG1lEEOgjAQRalbGj2OG9caOACn4ALGtfEuHACiazceR1PWOH/CNA3aMiTaBDpt/7zPdBKy7M/DCL9pGkvxxVp7KsvyJftL5rZt1865M+Ucq6pyyF3hNcI7Cuu+728QYn/JQA5yKaempxuZmQngOwEaYx55nu+1lQh8GIatMGi+01NwBcEmhxBqK4nAPZJ78K0KKFAJmR3oPp8+Iwgob0Oa6+TLoeCvRx+mTUYf/FVBGTPRwDkfLxnaSrRwcH0FWhNOmrkWYbE2XEicqgSa1J0LQ+aPCuQgZiLnwewbGuz5MGoAhcIkCQcjaTBjMgtXGURMVHC1wcQEy0J+Zlj8bKAnY1/UzDe2dbAVqfXn6wAAAABJRU5ErkJggg==');
+  background-size: 0.9rem;
+  background-position: right 0.9rem center;
+}
+
+.buttom_increment {
+  @apply flex justify-center items-center w-6 h-6 rounded-full text-white focus:outline-none bg-ecovidrio_dark 
+}
+
+.link_whatsapp {
+  @apply font_h3 text-ecovidrio_dark mt-1 underline
+}
+/*
+.radio {
+  @apply w-8 h-8 text-ecovidrio_dark bg-gray-100 border-gray-300 focus:ring-ecovidrio_dark dark:focus:ring-ecovidrio_dark dark:ring-offset-gray-800 focus:ring-2 dark:bg-ecovidrio_light dark:border-gray-600;
+}
+
+.radio:focus {
+  @apply bg-ecovidrio_dark
+}
+
+.radio:checked {
+  @apply  bg-green-500 text-green-500 ring-offset-green-800
+}
+
+.radio:checked:after {
+  @apply bg-ecovidrio_dark 
+}
+
+*/
+
+.radio_label {
+  @apply ms-2 text-grey06 font_body
+}
+
+/* globals.css */
+
+/* Estilo base para los botones de radio */
+.radio {
+  @apply bg-white border border-black rounded-full cursor-pointer;
+  width: 2rem; /* 32px */
+  height: 2rem; /* 32px */
+  appearance: none; /* Eliminar el estilo predeterminado */
+  position: relative;
+}
+
+/* Estilo cuando el botón de radio está seleccionado */
+.radio:checked {
+  @apply bg-ecovidrio_light border-ecovidrio_dark;
+}
+
+/* Para el círculo interior cuando el radio está seleccionado */
+.radio:checked::after {
+  @apply bg-ecovidrio_dark;
+  content: '';
+  display: block;
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
+  /*background-color: #065f46; /* Verde oscuro */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

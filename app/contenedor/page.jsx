@@ -1,5 +1,10 @@
+"use client"
 import Image from "next/image";
 import Link from 'next/link'
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { v4 as uuidv4 } from 'uuid';
 
 import '../ui/globals.css'
 import ecovidriologo from "@/public/EcoVidrioLogo.svg"
@@ -7,7 +12,31 @@ import curved_bg from "@/public/curved_bg.svg"
 import contenedor from "@/public/contenedor_generico.svg"
 import chevron_right from "@/public/chevron_right.svg"
 
-export default function Local() {
+export default function Contenedor() {
+  const router = useRouter();
+  const [sessionId, setSessionId] = useState('');
+
+  useEffect(() => {
+    // Generar un nuevo ID y construir el JSON inicial
+    let storedId = localStorage.getItem('session_id');
+    if (!storedId) {
+      storedId = uuidv4();
+      localStorage.setItem('session_id', storedId);
+    }
+    setSessionId(storedId);
+
+    // Cargar o inicializar el objeto JSON
+    const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+    storedData.sessionId = storedId;
+    storedData.timestamp = new Date().toISOString();
+    storedData.originalPage = 'contenedor';
+
+    // Guardar el objeto JSON en localStorage
+    localStorage.setItem('session_data', JSON.stringify(storedData));
+
+    console.log(storedData)
+  }, []);
+
   return (
       <main className="h-screen bg-ecovidrio_light">
         <div className="relative">
@@ -34,8 +63,8 @@ export default function Local() {
         
         <p className="font_caption text-grey05 mt-12 ms-6">CONTENEDOR EN LA CALLE</p>
         
-        <Link 
-          href={"/contenedor"}
+        <Link
+          href={{ pathname: '/estado_contenedor', query:'estado=lleno' }}
           className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded-t-lg px-4 py-3"
           >
           <Image 
@@ -55,7 +84,7 @@ export default function Local() {
         </Link>
 
         <Link 
-          href={"/contenedor"}
+          href={{ pathname: '/estado_contenedor', query:'estado=roto' }}
           className="flex bg-white items-center text-grey06 mt-px mx-4 rounded-b-lg px-4 py-3"
           >
           <Image 
