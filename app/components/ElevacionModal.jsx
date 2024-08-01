@@ -4,10 +4,10 @@ import { useState } from 'react';
 import img_sistema_elevacion from '@/public/sistema_elevacion.png'
 
 export default function ElevacionModal ({ isOpen, closeModal }) {
-  
-  if (!isOpen) return null;
 
   const [cerrarModal, setCerrarModal] = useState(false);
+  
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 flex items-end justify-center z-50">
