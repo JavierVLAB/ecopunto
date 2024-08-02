@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import PageTitle from "@/app/components/PageTitle";
 
 export default function Home() {
   const [isCaptured, setIsCaptured] = useState(false);
@@ -41,15 +40,6 @@ export default function Home() {
   };
 
   return (
-    <main className="h-screen bg-white">
-    <PageTitle title={'Contenedor roto'} page={2} totalPages={4} />
-
-			<div className="px-4 mt-6">
-				<h2 className="font_h2 text-grey06 ">Sube foto del estado del contenedor</h2>
-				<p className="font_body_secondary text-grey06 mt-2">Necesitamos una foto del contenedor para determinar el tipo de avería y enviar al técnico adecuado.</p>
-			
-			</div>
-    
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       {cameraError && (
         <div className="mb-4 text-red-500">
@@ -84,6 +74,5 @@ export default function Home() {
       </div>
       <canvas ref={canvasRef} className="hidden" width="640" height="480" />
     </div>
-    </main>
   );
 }

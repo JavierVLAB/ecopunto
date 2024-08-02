@@ -3,7 +3,7 @@ import Image from "next/image";
 import AddressForm from "@/app/components/AddressForm";
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from "next/link";
 
 import near_me from '@/public/near_me.svg'
@@ -13,6 +13,7 @@ import CuboCard from "../components/CuboCard";
 
 
 export default function Solicitud() {
+	const router = useRouter()
 
 	const searchParams = useSearchParams();
   	const estado = searchParams.get('estado'); 
@@ -65,10 +66,11 @@ export default function Solicitud() {
 
 			<div className='fixed inset-x-0 bottom-4 mx-4'>
 				<button
-				type="submit"
-				className="btn_primary_dark"
+					type="submit"
+					onClick={() => router.push('/sistema_elevacion')}
+					className="btn_primary_dark"
 				>
-				Continuar
+					Continuar
 				</button>
 			</div>
 

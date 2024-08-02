@@ -1,3 +1,4 @@
+//contenedor
 "use client"
 import Image from "next/image";
 import Link from 'next/link'
@@ -13,6 +14,7 @@ import contenedor from "@/public/contenedor_generico.svg"
 import chevron_right from "@/public/chevron_right.svg"
 
 export default function Contenedor() {
+  
   const router = useRouter();
   const [sessionId, setSessionId] = useState('');
 
@@ -64,7 +66,7 @@ export default function Contenedor() {
         <p className="font_caption text-grey05 mt-12 ms-6">CONTENEDOR EN LA CALLE</p>
         
         <Link
-          href={{ pathname: '/estado_contenedor', query:'estado=lleno' }}
+          href={{ pathname: '/direccion', query:'estado=lleno' }}
           className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded-t-lg px-4 py-3"
           >
           <Image 
@@ -84,7 +86,7 @@ export default function Contenedor() {
         </Link>
 
         <Link 
-          href={{ pathname: '/estado_contenedor', query:'estado=roto' }}
+          href={{ pathname: '/direccion', query:'estado=roto' }}
           className="flex bg-white items-center text-grey06 mt-px mx-4 rounded-b-lg px-4 py-3"
           >
           <Image 
@@ -106,7 +108,7 @@ export default function Contenedor() {
         <p className="font_caption text-grey05 mt-12 ms-6">¿OTRAS DUDAS?</p>
         
         <div className="px-7">
-          <Link href="/contenedor" className="font_h3 text-ecovidrio_dark mt-1 underline">Escríbenos por Whatsapp</Link>
+          <Link href="/confirmacion" className="font_h3 text-ecovidrio_dark mt-1 underline">Escríbenos por Whatsapp</Link>
           <p className="font_body_secundary text-grey05 mt-1">Horario de antención de 10-18hrs, <br/>de lunes a viernes</p>
         </div>
       </main>

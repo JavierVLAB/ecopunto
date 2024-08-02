@@ -3,12 +3,14 @@ import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ElevacionModal from "../components/ElevacionModal";
+import { useRouter } from "next/navigation";
 
 import '@/app/ui/globals.css'
 
 
 
 export default function SistemaElevacion() {
+	const router = useRouter() 
 
 	const [showElevacionModal, setShowElevacionModal] = useState(false)
   
@@ -81,6 +83,7 @@ export default function SistemaElevacion() {
 			<div className='fixed inset-x-0 bottom-4 mx-4'>
 				<button
 				type="submit"
+				onClick={() => router.push('/direccion?estado=solicitud')}
 				className="btn_primary_dark"
 				>
 				Continuar

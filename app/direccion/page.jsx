@@ -39,11 +39,13 @@ export default function EstadoContenedor() {
   return (
 		<main className="h-screen bg-white">
 
-			<PageTitle title={'Contenedor ' + estado} page={1} totalPages={4} />
+			<PageTitle title={estado == 'solicitud' ? 'Solicitar cubo' :'Contenedor ' + estado} page={1} totalPages={4} />
 
 			<div className="px-4 mt-6">
-				<h2 className="font_h2 text-grey06 ">¿Dónde está el contenedor?</h2>
-				<p className="font_body text-grey06 pe-4 mt-2">Introduzca la ubicación del contenedor. Si está cerca, puede utilizar los servicios de localización.</p>
+				{estado == "solicitud" ? 
+					<h2 className="font_h2 text-grey06 ">¿Dónde está tu establecimiento?</h2> 
+					: <><h2 className="font_h2 text-grey06 ">¿Dónde está el contenedor?</h2>
+				<p className="font_body text-grey06 pe-4 mt-2">Introduzca la ubicación del contenedor. Si está cerca, puede utilizar los servicios de localización.</p></>}
 			</div>
 
 			<div className="flex p-4 mt-6">
@@ -56,7 +58,7 @@ export default function EstadoContenedor() {
 				<p className="font_body underline text-grey06 px-1">Utilizar mi localización actual</p>
 			</div>
 
-			<AddressForm></AddressForm>
+			<AddressForm estado={estado}></AddressForm>
 
 
 		</main>

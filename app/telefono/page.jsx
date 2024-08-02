@@ -3,7 +3,7 @@ import Image from "next/image";
 import AddressForm from "@/app/components/AddressForm";
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 import near_me from '@/public/near_me.svg'
 
@@ -11,6 +11,7 @@ import '@/app/ui/globals.css'
 
 
 export default function EstadoContenedor() {
+	const router = useRouter()
 
 	const searchParams = useSearchParams();
   	const estado = searchParams.get('estado'); 
@@ -61,7 +62,7 @@ export default function EstadoContenedor() {
 
 			<div className='fixed inset-x-0 bottom-4 mx-4'>
 				<button
-					onClick={handleClick}
+					onClick={() => router.push('/horario')}
 					className="btn_primary_dark"
 					>
 					Continuar

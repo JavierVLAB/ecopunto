@@ -8,14 +8,17 @@ interface FormData {
   provincia: string;
 }
 
+interface MyProps {
+  estado: string;
+}
+
 
 const formatName = (name: string) => {
   return name.toLowerCase().replace(/^\w/, c => c.toUpperCase());
 };
 
-export default function AddressForm () {
+const AddressForm: React.FC<MyProps> =({estado}) =>{
   const router = useRouter();
-
   const [formData, setFormData] = useState<FormData>({
     direccion: '',
     municipio: '',
@@ -32,17 +35,23 @@ export default function AddressForm () {
     console.log(e.target.value)
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log('Form Data Submitted:', formData);
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      console.log('Form Data Submitted:', formData);
 
-    const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-    storedData.formData = formData;
-    localStorage.setItem('session_data', JSON.stringify(storedData));
+      const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+      storedData.formData = formData;
+      localStorage.setItem('session_data', JSON.stringify(storedData));
 
-    router.push('/confirmacion');
-    
-  };
+      if(estado=="solicitud"){
+        router.push('/telefono');}
+      else if (estado=="roto"){
+        router.push('/foto');
+      } else {
+        router.push('/confirmacion');
+      }
+      
+    };
 
     const [provincias] = useState<string[]>(Object.keys(municipiosData));
     const [provinciaSeleccionada, setProvinciaSeleccionada] = useState<string>('');
@@ -131,9 +140,11 @@ export default function AddressForm () {
           type="submit"
           className="btn_primary_dark"
         >
-          Enviar
+          Continuar
         </button>
       </div>
     </form>
   );
 };
+
+export default AddressForm;
