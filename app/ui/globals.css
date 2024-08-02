@@ -120,6 +120,10 @@
   @apply bg-ecovidrio_darkclick
 }
 
+.btn_secondary {
+  @apply text-ecovidrio_dark font_h2 p-4 rounded-md w-full m-4 border ring-ecovidrio_dark border-ecovidrio_dark border-2
+}
+
 .form-select {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAQCAYAAAAMJL+VAAAABGdBTUEAALGPC/xhBQAAAQtJREFUOBG1lEEOgjAQRalbGj2OG9caOACn4ALGtfEuHACiazceR1PWOH/CNA3aMiTaBDpt/7zPdBKy7M/DCL9pGkvxxVp7KsvyJftL5rZt1865M+Ucq6pyyF3hNcI7Cuu+728QYn/JQA5yKaempxuZmQngOwEaYx55nu+1lQh8GIatMGi+01NwBcEmhxBqK4nAPZJ78K0KKFAJmR3oPp8+Iwgob0Oa6+TLoeCvRx+mTUYf/FVBGTPRwDkfLxnaSrRwcH0FWhNOmrkWYbE2XEicqgSa1J0LQ+aPCuQgZiLnwewbGuz5MGoAhcIkCQcjaTBjMgtXGURMVHC1wcQEy0J+Zlj8bKAnY1/UzDe2dbAVqfXn6wAAAABJRU5ErkJggg==');
   background-size: 0.9rem;
@@ -133,24 +137,6 @@
 .link_whatsapp {
   @apply font_h3 text-ecovidrio_dark mt-1 underline
 }
-/*
-.radio {
-  @apply w-8 h-8 text-ecovidrio_dark bg-gray-100 border-gray-300 focus:ring-ecovidrio_dark dark:focus:ring-ecovidrio_dark dark:ring-offset-gray-800 focus:ring-2 dark:bg-ecovidrio_light dark:border-gray-600;
-}
-
-.radio:focus {
-  @apply bg-ecovidrio_dark
-}
-
-.radio:checked {
-  @apply  bg-green-500 text-green-500 ring-offset-green-800
-}
-
-.radio:checked:after {
-  @apply bg-ecovidrio_dark 
-}
-
-*/
 
 .radio_label {
   @apply ms-2 text-grey06 font_body
