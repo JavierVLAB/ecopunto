@@ -10,8 +10,7 @@ export default function Home() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const router = useRouter();
-  const [isCameraActive, setIsCameraActive] = useState(false)
-
+  
   useEffect(() => {
     startCamera();
   }, []);
@@ -42,13 +41,12 @@ export default function Home() {
 
   return (
     <main className="h-screen bg-white">
-    <PageTitle title={'Contenedor roto'} page={2} totalPages={4} />
+    {/*<PageTitle title={'Contenedor roto'} page={2} totalPages={4} />
 
 			<div className="px-4 mt-6">
 				<h2 className="font_h2 text-grey06 ">Sube foto del estado del contenedor</h2>
 				<p className="font_body_secondary text-grey06 mt-2">Necesitamos una foto del contenedor para determinar el tipo de avería y enviar al técnico adecuado.</p>
-			
-			</div>
+			</div>*/}
     
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       {cameraError && (
@@ -59,7 +57,7 @@ export default function Home() {
       <div className="relative w-full max-w-sm">
         {!isCaptured ? (
           <>
-            <video ref={videoRef} className="w-full h-auto rounded-lg" playsInline autoPlay muted />
+            <video ref={videoRef} className="h-screen rounded-lg" playsInline autoPlay muted />
             <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
               <button
                 className="relative flex items-center justify-center w-16 h-16 bg-transparent rounded-full border-2 border-ecovidrio_dark"

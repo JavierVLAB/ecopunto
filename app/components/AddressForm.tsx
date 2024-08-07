@@ -1,8 +1,11 @@
 import { useState, ChangeEvent, useEffect, FormEvent } from 'react';
 import municipiosData from './provincias_municipios.json';
 import { useRouter } from 'next/navigation'
+import Image from 'next/image';
+import near_me from '@/public/near_me.svg'
 
 interface FormData {
+  local: string;
   direccion: string;
   municipio: string;
   provincia: string;
@@ -20,6 +23,7 @@ const formatName = (name: string) => {
 const AddressForm: React.FC<MyProps> =({estado}) =>{
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
+    local: '',
     direccion: '',
     municipio: '',
     provincia: '',
@@ -83,54 +87,88 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white">
+      
       <div className=''>
-        <div className="mb-4 relative">
-          <label htmlFor="direccion" className="block font-body_secondary text-grey04 absolute -top-3 left-2 bg-white px-1">
-            Dirección contenedor
+      <div className="mt-4 input-with-float-label">
+
+          <input
+            type="text"
+            name="local"
+            id="local"
+            placeholder=" "
+            value={formData.local}
+            onChange={handleChange}
+            className=""
+          />
+          <label htmlFor="local" className="">
+            Nombre Establecimiento
           </label>
+        </div>
+
+        <div className="flex p-4 mt-6 mb-4">
+          <Image 
+            src={near_me}
+            height={16}
+            alt="arrow"
+            className=""
+          />
+          <p className="font_body underline text-grey06 px-1">Utilizar mi localización actual</p>
+        </div>
+
+
+        <div className="mb-4 input-with-float-label">
           <input
             type="text"
             name="direccion"
             id="direccion"
+            placeholder=" "
             value={formData.direccion}
             onChange={handleChange}
-            placeholder="e.j Calle López de Hoyo"
-            className="address_input"
           />
+          <label htmlFor="direccion" className="block font-body_secondary text-grey04 absolute -top-3 left-2 bg-white px-1">
+            Dirección
+          </label>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 input-with-float-label">
         <select
           id="municipio"
           name="municipio"
           disabled={!provinciaSeleccionada}
           placeholder='Municipio'
           onChange={handleMunicipioChange}
-          className="address_input form-select appearance-none pr-8 pl-2 bg-no-repeat"
+          required
         >
-          <option value="">Municipio</option>
+          <option value="" disabled selected hidden>Municipio</option>
           {municipios.map((municipio, index) => (
             <option key={index} value={municipio}>
               {municipio}
             </option>
           ))}
         </select>
+        <label htmlFor="municipio" className="">
+            Municipio
+          </label>
         </div>
 
-        <div className='mb-4'>
+        <div className='mb-4 input-with-float-label'>
           <select 
             id="provincia"
             name="provincia"
             onChange={handleProvinciaChange}
-            className="address_input form-select appearance-none pr-8 pl-2 bg-no-repeat"
+            placeholder=" "
+            required
           >
-            <option value="">Provincia</option>
+            <option value="" disabled selected hidden></option>
             {provincias.map((provincia, index) => (
               <option key={index} value={provincia}>
                 {provincia}
               </option>
             ))}
           </select>
+          <label htmlFor="provincia">
+            Provincia
+          </label>
 
         </div>
       </div>

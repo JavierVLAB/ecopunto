@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import arrow_back from '@/public/arrow_left.svg'
+import { useRouter } from 'next/navigation';
 
 interface PageTitleProps {
   title: string;
@@ -9,7 +10,7 @@ interface PageTitleProps {
 }
 
 const PageTitle: React.FC<PageTitleProps> = ({ title, page, totalPages }) => {
-
+	const router = useRouter()
 	const progress = page/totalPages * 100
 
 	return (
@@ -21,6 +22,7 @@ const PageTitle: React.FC<PageTitleProps> = ({ title, page, totalPages }) => {
 							height={16}
 							alt="arrow"
 							className=""
+							onClick={() => router.back()}
 						/>
 					</div>
 				<h1 className="font_body text-grey06 flex-grow text-center pe-4">{title}</h1>

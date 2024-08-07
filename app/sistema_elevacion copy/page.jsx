@@ -2,10 +2,8 @@
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import ElevacionModal from "../components/ElevacionModal";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import img_sistema_elevacion from '@/public/sistema_elevacion.png'
-
 
 import '@/app/ui/globals.css'
 
@@ -54,22 +52,18 @@ export default function SistemaElevacion() {
 
 			<div className="px-4 mt-6 mb-8">
 				<h2 className="font_h2 text-grey06 ">¿Tu contenedor de la calle más cercana tiene una sistema de elevación para vaciar el cubo?</h2>
-				<Image 
-                    src={img_sistema_elevacion}
-                    alt="contenedor"
-                    className='w-full mt-4'
-                />
+				<p className="font_body text-grey06 mt-2">Determina el tipo de cubo que enviamos</p>
 			</div>
 
-			<div className="">
-				<div className="flex items-center px-4">
+			<div className="mb-4">
+				<div className="flex items-center mb-4 px-4">
 					<input id="default-radio-1" type="radio" value="" name="default-radio" 
 						class="radio"/>
 					<label for="default-radio-1" 
-						class="radio_label">Si, el contenedor lo tiene</label>
+						class="radio_label">Si</label>
 				</div>
 
-				<div className="flex items-center mt-8 px-4">
+				<div className="flex items-center mb-4 px-4">
 					<input id="default-radio-2" type="radio" value="" name="default-radio" 
 						class="radio"/>
 					<label for="default-radio-2" 
@@ -79,12 +73,12 @@ export default function SistemaElevacion() {
 
 			</div>
 			
-			{/*<div className="px-7 mt-8">
+			<div className="px-7 mt-8">
 				<p className="font_body_secundary text-grey05 mt-1 underline"
 				onClick={showElevacion}>
 					Como se ve el sistema de elevación</p>
 				
-			</div>*/}
+			</div>
 
 			<div className='fixed inset-x-0 bottom-4 mx-4'>
 				<button
@@ -95,6 +89,10 @@ export default function SistemaElevacion() {
 				Continuar
 				</button>
 			</div>
+
+			{ showElevacionModal &&
+            	<ElevacionModal isOpen={showElevacionModal} closeModal={() => setShowElevacionModal(false)}/>
+          	}
 
 		</main>
 

@@ -105,7 +105,7 @@
 
 
 .address_input {
-  @apply font-body text-grey06 block w-full px-4 py-3 border border-grey03 rounded-md shadow-sm;
+  @apply font_body text-grey06 block w-full px-4 py-3 border border-grey03 rounded-md shadow-sm;
 }
 
 .address_input:focus {
@@ -121,7 +121,7 @@
 }
 
 .btn_secondary {
-  @apply text-ecovidrio_dark font_h2 p-4 rounded-md w-full m-4 border ring-ecovidrio_dark border-ecovidrio_dark border-2
+  @apply text-ecovidrio_dark font_h2 p-4 rounded-md w-full border ring-ecovidrio_dark border-ecovidrio_dark border-2
 }
 
 .form-select {
@@ -146,7 +146,7 @@
 
 /* Estilo base para los botones de radio */
 .radio {
-  @apply bg-white border border-black rounded-full cursor-pointer;
+  @apply bg-white border border-black rounded-full cursor-pointer me-1;
   width: 2rem; /* 32px */
   height: 2rem; /* 32px */
   appearance: none; /* Eliminar el estilo predeterminado */
@@ -171,4 +171,49 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+
+/* Clase para el input */
+.input-with-float-label {
+
+  position: relative;
+  width: 100%;
+}
+
+.input-with-float-label input,
+.input-with-float-label select{
+  width: 100%;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  @apply border border-grey03 text-grey06 font_body  p-3
+}
+
+.input-with-float-label input:focus + label,
+.input-with-float-label input:not(:placeholder-shown) + label,
+.input-with-float-label select:focus + label,
+.input-with-float-label select:valid + label {
+  transform: translateY(-24px);
+  font-size: 12px;
+  @apply text-grey06
+}
+
+.input-with-float-label select {
+  appearance: none;
+  background-color: transparent;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAQCAYAAAAMJL+VAAAABGdBTUEAALGPC/xhBQAAAQtJREFUOBG1lEEOgjAQRalbGj2OG9caOACn4ALGtfEuHACiazceR1PWOH/CNA3aMiTaBDpt/7zPdBKy7M/DCL9pGkvxxVp7KsvyJftL5rZt1865M+Ucq6pyyF3hNcI7Cuu+728QYn/JQA5yKaempxuZmQngOwEaYx55nu+1lQh8GIatMGi+01NwBcEmhxBqK4nAPZJ78K0KKFAJmR3oPp8+Iwgob0Oa6+TLoeCvRx+mTUYf/FVBGTPRwDkfLxnaSrRwcH0FWhNOmrkWYbE2XEicqgSa1J0LQ+aPCuQgZiLnwewbGuz5MGoAhcIkCQcjaTBjMgtXGURMVHC1wcQEy0J+Zlj8bKAnY1/UzDe2dbAVqfXn6wAAAABJRU5ErkJggg==');
+  background-size: 0.9rem;
+  background-position: right 0.9rem center;
+  @apply appearance-none pr-8 pl-2 bg-no-repeat
+}
+
+/* Clase para el label */
+.input-with-float-label label {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  pointer-events: none;
+  transition: transform 0.3s, font-size 0.3s, color 0.3s;
+  @apply text-grey04 mx-2 px-2 font_body bg-white
 }

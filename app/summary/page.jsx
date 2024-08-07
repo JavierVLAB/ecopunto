@@ -3,7 +3,7 @@ import Image from "next/image";
 import AddressForm from "@/app/components/AddressForm";
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 import near_me from '@/public/near_me.svg'
 
@@ -11,7 +11,7 @@ import '@/app/ui/globals.css'
 
 
 export default function EstadoContenedor() {
-
+    const router = useRouter()
 	const searchParams = useSearchParams();
   	const estado = searchParams.get('estado'); 
 	console.log(estado)
@@ -36,10 +36,14 @@ export default function EstadoContenedor() {
 	  console.log(storedData)
 	}, []);
 
+    const handleClick = () => {
+        router.push("/confirmacion")
+	};
+
   return (
 		<main className="h-screen bg-white">
 
-			<PageTitle title={estado == 'solicitud' ? 'Solicitar cubo' :'Contenedor ' + estado} page={1} totalPages={4} />
+			<PageTitle title={estado == 'solicitud' ? 'Solicitar cubo' :'Contenedor '} page={4} totalPages={4} />
 
 			<div className="px-4 mt-6">
 				{estado == "solicitud" ? 
@@ -48,7 +52,14 @@ export default function EstadoContenedor() {
 				<p className="font_body text-grey06 pe-4 mt-2">Introduzca la ubicación del contenedor. Si está cerca, puede utilizar los servicios de localización.</p></>}
 			</div>
 
-			<AddressForm estado={estado}></AddressForm>
+            <div className='fixed inset-x-0 bottom-4 mx-4'>
+                <button
+                    onClick={handleClick}
+                    className="btn_primary_dark"
+                    >
+                    Continuar
+                </button>
+            </div>
 
 
 		</main>

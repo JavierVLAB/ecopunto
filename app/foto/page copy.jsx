@@ -1,11 +1,9 @@
 "use client"
-import Image from "next/image";
-import AddressForm from "@/app/components/AddressForm";
+
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-import near_me from '@/public/near_me.svg'
 
 import '@/app/ui/globals.css'
 
@@ -36,19 +34,44 @@ export default function EstadoContenedor() {
 	  console.log(storedData)
 	}, []);
 
+	const handleClick = () => {
+
+	};
+
+	const handleChange = () => {
+
+	};
+
   return (
 		<main className="h-screen bg-white">
 
-			<PageTitle title={estado == 'solicitud' ? 'Solicitar cubo' :'Contenedor ' + estado} page={1} totalPages={4} />
+			<PageTitle title={'Contenedor roto'} page={2} totalPages={4} />
 
 			<div className="px-4 mt-6">
-				{estado == "solicitud" ? 
-					<h2 className="font_h2 text-grey06 ">¿Dónde está tu establecimiento?</h2> 
-					: <><h2 className="font_h2 text-grey06 ">¿Dónde está el contenedor?</h2>
-				<p className="font_body text-grey06 pe-4 mt-2">Introduzca la ubicación del contenedor. Si está cerca, puede utilizar los servicios de localización.</p></>}
+				<h2 className="font_h2 text-grey06 ">Sube foto del estado del contenedor</h2>
+				<p className="font_body_secondary text-grey06 mt-2">Necesitamos una foto del contenedor para determinar el tipo de avería y enviar al técnico adecuado.</p>
+			
 			</div>
 
-			<AddressForm estado={estado}></AddressForm>
+			<div className="mt-2 mx-4 w-11/12 h-auto aspect-square bg-grey01 mx-auto flex items-center rounded-md">
+				<button
+					onClick={handleClick}
+					className="btn_secondary"
+					>
+					Subir Foto
+				</button>
+			</div>
+
+			{/*<div className='fixed inset-x-0 bottom-4 mx-4'>
+				<button
+					onClick={handleClick}
+					className="btn_primary_dark"
+					>
+					Continuar
+				</button>
+			</div>*/}
+
+			<p className="mt-3 p-4 text-center text-grey06 font_h2 underline">Saltar</p>
 
 
 		</main>
