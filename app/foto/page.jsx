@@ -84,14 +84,14 @@ export default function Foto() {
 			</div>
 
       {cameraActive ? (
-        <div className="w-full relative">
+        <div className="w-full absolute inset-0">
           <video id="videoElement" ref={videoRef} className="h-screen rounded-lg" playsInline autoPlay muted />
-					<div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
+					<div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
 						<button
-							className="relative flex items-center justify-center w-16 h-16 bg-transparent rounded-full border-2 border-ecovidrio_dark"
+							className="relative flex items-center justify-center w-[80px] h-[80px] bg-transparent rounded-full border-2 border-ecovidrio_dark"
 							onClick={handleCaptureClick}
 						>
-							<div className="absolute w-12 h-12 bg-ecovidrio_dark rounded-full"></div>
+							<div className="absolute w-[68px] h-[68px] bg-ecovidrio_dark rounded-full"></div>
 						</button>
 					</div>
         </div>
