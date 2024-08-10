@@ -50,7 +50,7 @@ export default function SistemaElevacion() {
   return (
 		<main className="h-screen bg-white">
 
-			<PageTitle title={'Solicitar Cubo'} page={1} totalPages={4} />
+			<PageTitle title={'Solicitar Cubo'} page={2} totalPages={6} />
 
 			<div className="px-4 mt-6 mb-8">
 				<h2 className="font_h2 text-grey06 ">¿Tu contenedor de la calle más cercana tiene una sistema de elevación para vaciar el cubo?</h2>
@@ -89,7 +89,7 @@ export default function SistemaElevacion() {
 			<div className='fixed inset-x-0 bottom-4 mx-4'>
 				<button
 				type="submit"
-				onClick={() => router.push('/direccion?estado=solicitud')}
+				onClick={() => router.push('/direccion?estado=solicitud&prev=s.elevation')}
 				className="btn_primary_dark"
 				>
 				Continuar

@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react';
 import '@/app/ui/globals.css'
 import PageTitle from "@/app/components/PageTitle";
+import Link from 'next/link';
 
 export default function Foto() {
   const [cameraActive, setCameraActive] = useState(false);
@@ -76,17 +77,18 @@ export default function Foto() {
   return (
 	<main className="h-screen bg-white">
 
-			<PageTitle title={'Contenedor roto'} page={2} totalPages={4} />
+			<PageTitle title={'Contenedor roto'} page={2} totalPages={3} />
 			
-			<div className="px-4 mt-6">
+			<div className="px-4 mt-6 mb-4">
 				<h2 className="font_h2 text-grey06 ">Sube foto del estado del contenedor</h2>
-				<p className="font_body_secondary text-grey06 mt-2">Necesitamos una foto del contenedor para determinar el tipo de avería y enviar al técnico adecuado.</p>
+				<p className="font_body text-grey06 mt-1">Necesitamos una foto del contenedor para determinar el tipo de avería y enviar al técnico adecuado.</p>
 			</div>
 
       {cameraActive ? (
-        <div className="w-full absolute inset-0">
-          <video id="videoElement" ref={videoRef} className="h-screen rounded-lg" playsInline autoPlay muted />
-					<div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+        <div className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black">
+          <video id="videoElement" ref={videoRef} autoPlay className="max-w-none w-auto h-full object-cover"></video>
+      
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
 						<button
 							className="relative flex items-center justify-center w-[80px] h-[80px] bg-transparent rounded-full border-2 border-ecovidrio_dark"
 							onClick={handleCaptureClick}
@@ -144,7 +146,7 @@ export default function Foto() {
       )}
 
 			{showSaltar ?
-				<p className="mt-3 p-4 text-center text-grey06 font_h2 underline">Saltar</p>
+				<Link href={'/summary'}><p className="mt-3 p-4 text-center text-grey06 font_h2 underline">Saltar</p></Link>
 				: <></>
 			}
 

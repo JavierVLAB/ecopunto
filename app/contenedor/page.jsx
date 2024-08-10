@@ -66,7 +66,7 @@ export default function Contenedor() {
         <p className="font_caption text-grey05 mt-12 ms-6">CONTENEDOR EN LA CALLE</p>
         
         <Link
-          href={{ pathname: '/direccion', query:'estado=lleno' }}
+          href={{ pathname: '/direccion', query:{estado: 'lleno', prev: 'contenedor'}  }}
           className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded-t-lg px-4 py-3"
           >
           <Image 
@@ -86,7 +86,7 @@ export default function Contenedor() {
         </Link>
 
         <Link 
-          href={{ pathname: '/direccion', query:'estado=roto' }}
+          href={{ pathname: '/direccion', query:{estado: 'roto', prev: 'contenedor'} }}
           className="flex bg-white items-center text-grey06 mt-px mx-4 rounded-b-lg px-4 py-3"
           >
           <Image 

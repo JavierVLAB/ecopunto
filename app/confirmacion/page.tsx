@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import check_circle from '@/public/check-circle.svg'
-import ecovidriologo from "@/public/EcoVidrioLogo.svg"
+import ecovidriologogreen from "@/public/EcoVidrioLogoGreen.png"
 
 import '@/app/ui/globals.css'
 
@@ -11,46 +11,67 @@ const progress = 25
 
 export default function ConfirmacionContenedor() {
 	const [sessionData, setSessionData] = useState({});
+	const [estado, setEstado] = useState('')
+	const [sistemaElevancion, setSistemaElevacion] = useState('')
+	const [title, setTitle] = useState('')
+	const [text, setText] = useState('')
 
 	useEffect(() => {
 		// Leer el objeto JSON desde localStorage
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 	
-		// Actualizar el objeto JSON con nuevos datos
-		storedData.lastPage = 'confirmacion';
-
-		
 		// Actualizar el estado local
 		setSessionData(storedData);
 
 		console.log(storedData)
+		setEstado(storedData.estado)
+		
+		if (estado=='solicitud') {
+			setTitle('')
+		} else {
+			setTitle('Gracias por informarnos sobre el contenedor ' + estado + '.')
+			setText('Enviaremos un técnico para solucionar el problema lo antes posible.')
+		}
+
+
 	  }, []);
 
+	  const handleClick = () => {
+			console.log('cerrado')
+			window.close();
+
+	  };
+
   return (
-		<main className="h-screen bg-white pt-28">
-
+		<main className="h-screen bg-white flex flex-col justify-between">
+			<div className="flex justify-center mt-6">
 				<Image 
-					src={ecovidriologo}
-					height={40}
+					src={ecovidriologogreen}
+					height={30}
 					alt="arrow"
 					className=""
 				/>
-			
+			</div>
 
-			<div className="p-4">
-				<Image 
-					src={check_circle}
-					height={40}
-					alt="arrow"
-					className=""
-				/>
-				<h2 className="font_h2 text-grey06 mt-8">Hemos recibido solicitud de cubos</h2>
-				<p className="font_body text-grey06 mt-2">Gracias por enviar su solicitud. <br/> Un representante de Ecovidrio se pondrá en contacto con usted en breve.</p>
+			<div className="flex flex-1 items-center justify-center">
+				<div className="p-4 items-center">
+					<Image 
+						src={check_circle}
+						height={40}
+						alt="arrow"
+						className=""
+					/>
+					<h2 className="font_h2 text-grey06 mt-8">{title}</h2>
+					<p className="font_body text-grey06 mt-2">{text}</p>
+				</div>
 			</div>
 
 
-			<div className="px-4">
-				<button className="btn_primary_dark">
+			<div className='m-4'>
+				<button
+					onClick={handleClick}
+					className="btn_primary_dark"
+					>
 					Cerrar
 				</button>
 			</div>

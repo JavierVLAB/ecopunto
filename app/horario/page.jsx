@@ -46,9 +46,9 @@ export default function EstadoContenedor() {
 	};
 
   return (
-		<main className="h-screen bg-white">
+		<main className="h-screen bg-white ">
 
-			<PageTitle title={'Solicitar cubo'} page={4} totalPages={5} />
+			<PageTitle title={'Solicitar cubo'} page={5} totalPages={6} />
 
 			<div className="px-4 mt-6">
 				<h2 className="font_h2 text-grey06 ">¿Cuándo debemos ponernos en contacto con usted? (Opcional) </h2>

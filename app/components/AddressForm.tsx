@@ -1,8 +1,7 @@
 import { useState, ChangeEvent, useEffect, FormEvent } from 'react';
 import municipiosData from './provincias_municipios.json';
 import { useRouter } from 'next/navigation'
-import Image from 'next/image';
-import near_me from '@/public/near_me.svg'
+import LocationFetcher from '@/app/components/LocationFetcher';
 
 interface FormData {
   local: string;
@@ -13,6 +12,7 @@ interface FormData {
 
 interface MyProps {
   estado: string;
+  prev_page: string;
 }
 
 
@@ -20,8 +20,12 @@ const formatName = (name: string) => {
   return name.toLowerCase().replace(/^\w/, c => c.toUpperCase());
 };
 
-const AddressForm: React.FC<MyProps> =({estado}) =>{
+const AddressForm: React.FC<MyProps> =({estado, prev_page}) =>{
   const router = useRouter();
+  const [provincias] = useState<string[]>(Object.keys(municipiosData));
+  const [provinciaSeleccionada, setProvinciaSeleccionada] = useState<string>('');
+  const [municipios, setMunicipios] = useState<string[]>([]);
+
   const [formData, setFormData] = useState<FormData>({
     local: '',
     direccion: '',
@@ -35,68 +39,80 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.name)
-    console.log(e.target.value)
+    console.log(formData)
+    //console.log(e.target.name)
+    //console.log(e.target.value)
   };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      console.log('Form Data Submitted:', formData);
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-      storedData.formData = formData;
-      localStorage.setItem('session_data', JSON.stringify(storedData));
+    console.log('Form Data Submitted:', formData);
+    
+    const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+    storedData.addressData = formData;
+    localStorage.setItem('session_data', JSON.stringify(storedData));
+    console.log(localStorage.session_data)
+    
+    if(estado=="solicitud"){
+      router.push('/telefono');}
+    else if (estado=="roto"){
+      router.push('/foto');
+    } else {
+      router.push('/foto');
+    }
+    
+  };
 
-      if(estado=="solicitud"){
-        router.push('/telefono');}
-      else if (estado=="roto"){
-        router.push('/foto');
-      } else {
-        router.push('/confirmacion');
-      }
-      
-    };
 
-    const [provincias] = useState<string[]>(Object.keys(municipiosData));
-    const [provinciaSeleccionada, setProvinciaSeleccionada] = useState<string>('');
-    const [municipios, setMunicipios] = useState<string[]>([]);
+  const sortedProvincias = provincias
+    .map(formatName)
+    .sort((a, b) => a.localeCompare(b));
 
-    const sortedProvincias = provincias
-      .map(formatName)
-      .sort((a, b) => a.localeCompare(b));
+  useEffect(() => {
+    console.log(provinciaSeleccionada)
+    if (provinciaSeleccionada) {
+      //@ts-ignore
+      setMunicipios(municipiosData[provinciaSeleccionada] || []);
+    } else {
+      setMunicipios([]);
+    }
+    console.log(municipios)
+  }, [provinciaSeleccionada]);
   
-    useEffect(() => {
-      console.log(provinciaSeleccionada)
-      if (provinciaSeleccionada) {
-        //@ts-ignore
-        setMunicipios(municipiosData[provinciaSeleccionada] || []);
-      } else {
-        setMunicipios([]);
-      }
-      console.log(municipios)
-    }, [provinciaSeleccionada]);
-  
-    const handleProvinciaChange = (e: ChangeEvent<HTMLSelectElement>) => {
-      setProvinciaSeleccionada(e.target.value);
-    };
-  
-    const handleMunicipioChange = (e: ChangeEvent<HTMLSelectElement>) => {
-      // Aquí puedes manejar el cambio de municipio si es necesario
-      console.log(`Municipio seleccionado: ${e.target.value}`);
-    };
+  const handleProvinciaChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      provincia: e.target.value,
+    });
+    console.log(e.target.value)
+    setProvinciaSeleccionada(e.target.value);
+  };
+
+  const handleMunicipioChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      municipio: e.target.value,
+    });
+    console.log(`Municipio seleccionado: ${e.target.value}`);
+  };
+
+  const update_localStorage = (address: {}) => {
+    
+  }
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white">
       
       <div className=''>
-      <div className="mt-4 input-with-float-label">
-
+        { prev_page == 'local' ?
+        <div className="mt-4 input-with-float-label">
           <input
             type="text"
             name="local"
             id="local"
             placeholder=" "
-            value={formData.local}
+            //value={formData.local}
             onChange={handleChange}
             className=""
           />
@@ -104,25 +120,17 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
             Nombre Establecimiento
           </label>
         </div>
+        : <></>}
 
-        <div className="flex p-4 mt-6 mb-4">
-          <Image 
-            src={near_me}
-            height={16}
-            alt="arrow"
-            className=""
-          />
-          <p className="font_body underline text-grey06 px-1">Utilizar mi localización actual</p>
-        </div>
+        <LocationFetcher /> 
 
-
-        <div className="mb-4 input-with-float-label">
+        <div className="mt-6 mb-4 input-with-float-label">
           <input
             type="text"
             name="direccion"
             id="direccion"
             placeholder=" "
-            value={formData.direccion}
+            //value={formData.direccion}
             onChange={handleChange}
           />
           <label htmlFor="direccion" className="block font-body_secondary text-grey04 absolute -top-3 left-2 bg-white px-1">
@@ -135,7 +143,6 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
           id="municipio"
           name="municipio"
           disabled={!provinciaSeleccionada}
-          placeholder='Municipio'
           onChange={handleMunicipioChange}
           required
         >
@@ -156,7 +163,6 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
             id="provincia"
             name="provincia"
             onChange={handleProvinciaChange}
-            placeholder=" "
             required
           >
             <option value="" disabled selected hidden></option>

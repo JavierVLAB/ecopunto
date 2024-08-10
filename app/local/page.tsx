@@ -37,8 +37,17 @@ export default function Local() {
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
 
-    console.log(storedData)
+    //console.log(storedData)
+    //console.log(localStorage)
   }, []);
+
+  const update_localStorage = (estado: string) => {
+    
+    const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+    storedData.estado = estado
+    localStorage.setItem('session_data', JSON.stringify(storedData));
+    console.log(localStorage)
+  }
 
   return (
       <main className="h-screen bg-ecovidrio_light">
@@ -67,7 +76,8 @@ export default function Local() {
         <p className="font_caption text-grey05 mt-12 ms-6">CONTENEDOR EN LA CALLE</p>
         
         <Link 
-          href={{ pathname: '/direccion', query:'estado=lleno' }}
+          onClick={() => update_localStorage('lleno')}
+          href={{ pathname: '/direccion', query:{ estado: 'lleno', prev: 'local' } }}
           className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded px-4 py-3"
           >
           <Image 
@@ -89,6 +99,7 @@ export default function Local() {
         <p className="font_caption text-grey05 mt-12 ms-6">CUBO EN TU ESTABLECIMIENTO</p>
         
         <Link 
+          onClick={() => update_localStorage('solicitud')}
           href={"/solicitud"}
           className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded px-4 py-3"
           >
