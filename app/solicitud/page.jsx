@@ -58,7 +58,7 @@ export default function Solicitud() {
 			<CuboCard size = {120}/>
 			
 			<div className="px-7 mt-8">
-				<p className="font_body_secundary text-grey05 mt-1 uppercase">
+				<p className="font_body_secondary text-grey05 mt-1 uppercase">
 					¿No sabes el tamaño de que necesitas?</p>
 				<Link href="/contenedor" className="link_whatsapp">Escríbenos por Whatsapp</Link>
 				
