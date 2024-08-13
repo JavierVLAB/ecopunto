@@ -47,7 +47,7 @@ export default function EstadoContenedor() {
 			</div>
 
 			<div className="mt-4 px-4">
-				<div class="input-with-float-label">
+				<div className="input-with-float-label">
 				<input type="tel" id="phone" className="" placeholder="+34 " value={phone} onChange={handleChange}/>
 					<label for="phone" className="">Número teléfono</label>
 					<p className="font_body_secondary text-grey06 mt-2">Sólo nos pondremos en contacto con usted para tramitar su solicitud</p>

@@ -23,7 +23,7 @@ export default function EstadoContenedor() {
 
 	const handleClick = () => {
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-		storedData.horario = horario
+		storedData.horario = horario[0].join() + ', '+ horario[1].join()
 	  	localStorage.setItem('session_data', JSON.stringify(storedData));
 		//console.log(storedData)
 		router.push('/summary')

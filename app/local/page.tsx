@@ -20,13 +20,14 @@ export default function Local() {
 
   useEffect(() => {
     // Generar un nuevo ID y construir el JSON inicial
+    localStorage.clear();
     let storedId = localStorage.getItem('session_id');
     if (!storedId) {
       storedId = uuidv4();
       localStorage.setItem('session_id', storedId);
     }
 
-    localStorage.clear();
+
     // Cargar o inicializar el objeto JSON
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
     storedData.sessionId = storedId;
@@ -35,8 +36,6 @@ export default function Local() {
 
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
-
-    console.log(localStorage.session_data)
 
   }, []);
 
@@ -53,6 +52,7 @@ export default function Local() {
     localStorage.setItem('session_data', JSON.stringify(storedData));
     console.log(localStorage)
   }
+
 
   return (
       <main className="h-screen bg-ecovidrio_light">

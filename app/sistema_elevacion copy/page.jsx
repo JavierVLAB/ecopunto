@@ -58,16 +58,16 @@ export default function SistemaElevacion() {
 			<div className="mb-4">
 				<div className="flex items-center mb-4 px-4">
 					<input id="default-radio-1" type="radio" value="" name="default-radio" 
-						class="radio"/>
+						className="radio"/>
 					<label for="default-radio-1" 
-						class="radio_label">Si</label>
+						className="radio_label">Si</label>
 				</div>
 
 				<div className="flex items-center mb-4 px-4">
 					<input id="default-radio-2" type="radio" value="" name="default-radio" 
-						class="radio"/>
+						className="radio"/>
 					<label for="default-radio-2" 
-						class="radio_label">No</label>
+						className="radio_label">No</label>
 				</div>
 
 

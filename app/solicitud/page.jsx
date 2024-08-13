@@ -18,7 +18,8 @@ export default function Solicitud() {
 	const searchParams = useSearchParams();
 
 	useEffect(() => {
-
+		const storedData = JSON.parse(localStorage.getItem('session_data'));
+		console.log(storedData)
 
 	}, []);
 

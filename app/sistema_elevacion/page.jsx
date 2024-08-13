@@ -31,7 +31,7 @@ export default function SistemaElevacion() {
 			localStorage.setItem('session_data', JSON.stringify(storedData));
 		
 			console.log(localStorage)
-			router.push('/direccion?estado=solicitud&prev=s.elevation')
+			router.push('/direccion?estado=solicitud')
             
         }
 

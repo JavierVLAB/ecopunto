@@ -13,10 +13,7 @@ export default function EstadoContenedor() {
 
 	const searchParams = useSearchParams();
   	const estado = searchParams.get('estado'); 
-	const prev_page = searchParams.get('prev');
-	console.log(estado)
-	console.log(prev_page)
-	const [sessionData, setSessionData] = useState({});
+
 	const [page, setPage] = useState(0)
 	const [totalPages, setTotalPage] = useState(0)
 
@@ -32,19 +29,7 @@ export default function EstadoContenedor() {
 			setTotalPage(3)
 		}
 
-	  // Leer el objeto JSON desde localStorage
-	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-	  
-	  // Actualizar el objeto JSON con nuevos datos
-	  storedData.lastPage = 'estado_contenedor';
-	  storedData.estadoContenedor = estado;
-	  storedData.incidencia = 'contenedor ' + estado
-  
-	  // Guardar de nuevo en localStorage
-	  localStorage.setItem('session_data', JSON.stringify(storedData));
-	  
-	  // Actualizar el estado local
-	  setSessionData(storedData);
+	  const storedData = JSON.parse(localStorage.getItem('session_data'));
 	  console.log(storedData)
 	}, []);
  
@@ -60,7 +45,7 @@ export default function EstadoContenedor() {
 				<p className="font_body text-grey06 pe-4 mt-2">Introduzca la ubicación del contenedor. Si está cerca, puede utilizar los servicios de localización.</p></>}
 			</div>
 
-			<AddressForm estado={estado} prev_page={prev_page} />
+			<AddressForm estado={estado} />
 			
 
 		</main>

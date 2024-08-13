@@ -18,6 +18,7 @@ export default function Contenedor() {
   const router = useRouter();
 
   useEffect(() => {
+    localStorage.clear();
     // Generar un nuevo ID y construir el JSON inicial
     let storedId = localStorage.getItem('session_id');
     if (!storedId) {
@@ -25,7 +26,7 @@ export default function Contenedor() {
       localStorage.setItem('session_id', storedId);
     }
 
-    localStorage.clear();
+
     // Cargar o inicializar el objeto JSON
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
     storedData.sessionId = storedId;
@@ -35,7 +36,6 @@ export default function Contenedor() {
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
 
-    console.log(storedData)
   }, []);
 
   const handleClick = (estado_contenedor) => {
