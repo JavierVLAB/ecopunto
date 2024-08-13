@@ -3,10 +3,10 @@ import cubo_big from '@/public/cubo_big.png'
 import cubo_small from '@/public/cubo_small.png'
 import Image from 'next/image';
 
-export default function CuboCard ({ size }) {
+export default function CuboCard ({ size , onCounterChange }) {
     const [count, setCount] = useState(0);
     const [title, setTitle] = useState('')
-    const [imageSrc, setImageSrc ] = useState('')
+    const [imageSrc, setImageSrc ] = useState(cubo_big)
     const [dim, setDim ] = useState('')
     const [capacity, setCapacity] = useState('')
 
@@ -34,16 +34,22 @@ export default function CuboCard ({ size }) {
     
 
   const handleIncrement = () => {
+    
     if (count < 5) {
-        setCount(count + 1); 
+      setCount(count + 1); 
+      onCounterChange(count+1);
     }
+    
     
   };
 
   const handleDecrement = () => {
+    
     if (count > 0) {
-        setCount(count - 1); 
+      setCount(count - 1);
+      onCounterChange(count-1); 
     }
+    
   };
 
   return (
@@ -63,7 +69,7 @@ export default function CuboCard ({ size }) {
       </div>
       
       <div className="flex flex-col items-center justify-center">
-        <div class="flex items-center justify-center">
+        <div className="flex items-center justify-center">
             { count == 0 ? <></> : 
             
                 <button id="decrement-btn"
@@ -76,7 +82,7 @@ export default function CuboCard ({ size }) {
                 </button>
             }
 
-            { count == 0 ? <></> : <span id="counter" class="font_h2 text-grey06 mx-3">{count}</span>}
+            { count == 0 ? <></> : <span id="counter" className="font_h2 text-grey06 mx-3">{count}</span>}
             
             <button id="increment-btn"
                 onClick={handleIncrement}

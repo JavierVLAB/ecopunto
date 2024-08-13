@@ -1,12 +1,8 @@
 "use client"
-import Image from "next/image";
-import AddressForm from "@/app/components/AddressForm";
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from "next/link";
-
-import near_me from '@/public/near_me.svg'
 
 import '@/app/ui/globals.css'
 import CuboCard from "../components/CuboCard";
@@ -15,33 +11,28 @@ import CuboCard from "../components/CuboCard";
 export default function Solicitud() {
 	const router = useRouter()
 
-	const searchParams = useSearchParams();
-  	const estado = searchParams.get('estado'); 
-	console.log(estado)
-	const [sessionData, setSessionData] = useState({});
+	const [cubo1, setCubo1] = useState(0)
+    const [cubo2, setCubo2] = useState(0)
+    const [cubo3, setCubo3] = useState(0)
 
-	const [user, setUser] = useState(null);
+	const searchParams = useSearchParams();
 
 	useEffect(() => {
-	  // Leer el objeto JSON desde localStorage
-	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-	  
-	  // Actualizar el objeto JSON con nuevos datos
-	  storedData.lastPage = 'estado_contenedor';
-	  storedData.estadoContenedor = estado;
-	  storedData.incidencia = 'contenedor ' + estado
-  
-	  // Guardar de nuevo en localStorage
-	  localStorage.setItem('session_data', JSON.stringify(storedData));
-	  
-	  // Actualizar el estado local
-	  setSessionData(storedData);
-	  console.log(storedData)
+
+
 	}, []);
 
-	const handleIncrement = () => {
-		setCount(count + 1);
-	  };
+	const handleClick = () => {
+		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+	  	let solicitud = cubo1 ? cubo1 + ' cubos de 40L ' : ''
+		solicitud += cubo2 ? cubo2 + ' cubos de 90L ' : ''
+		solicitud += cubo3 ? cubo3 + ' cubos de 120L ' : ''
+		storedData.solicitud = solicitud
+		localStorage.setItem('session_data', JSON.stringify(storedData));
+
+		router.push('/sistema_elevacion')
+	};
+
 
   return (
 		<main className="h-screen bg-white">
@@ -53,9 +44,9 @@ export default function Solicitud() {
 				<p className="font_body text-grey06 pe-4 mt-2">No tendras que pagar por tu cubo</p>
 			</div>
 
-			<CuboCard size = {40}/>
-			<CuboCard size = {90}/>
-			<CuboCard size = {120}/>
+			<CuboCard size = {40} onCounterChange={setCubo1}/>
+			<CuboCard size = {90} onCounterChange={setCubo2}/>
+			<CuboCard size = {120} onCounterChange={setCubo3}/>
 			
 			<div className="px-7 mt-8">
 				<p className="font_body_secondary text-grey05 mt-1 uppercase">
@@ -67,7 +58,7 @@ export default function Solicitud() {
 			<div className='fixed inset-x-0 bottom-4 mx-4'>
 				<button
 					type="submit"
-					onClick={() => router.push('/sistema_elevacion')}
+					onClick={handleClick}
 					className="btn_primary_dark"
 				>
 					Continuar

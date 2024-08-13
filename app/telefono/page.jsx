@@ -13,36 +13,28 @@ import '@/app/ui/globals.css'
 export default function EstadoContenedor() {
 	const router = useRouter()
 
-	const searchParams = useSearchParams();
-  	const estado = searchParams.get('estado'); 
-	console.log(estado)
-	const [sessionData, setSessionData] = useState({});
-
-	const [user, setUser] = useState(null);
+	const [phone, setPhone] = useState(null)
 
 	useEffect(() => {
-	  // Leer el objeto JSON desde localStorage
-	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-	  
-	  // Actualizar el objeto JSON con nuevos datos
-	  storedData.lastPage = 'estado_contenedor';
-	  storedData.estadoContenedor = estado;
-	  storedData.incidencia = 'contenedor ' + estado
-  
-	  // Guardar de nuevo en localStorage
-	  localStorage.setItem('session_data', JSON.stringify(storedData));
-	  
-	  // Actualizar el estado local
-	  setSessionData(storedData);
-	  console.log(storedData)
+
 	}, []);
 
-	const handleClick = () => {
+	const handleSubmit = () => {
+		// Leer el objeto JSON desde localStorage
+		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 
+		storedData.phone = phone;
+
+		localStorage.setItem('session_data', JSON.stringify(storedData));
+
+		console.log(localStorage)
+		router.push('/horario')
 	};
 
-	const handleChange = () => {
-
+	const handleChange = (event) => {
+		setPhone(event.target.value)
+		//console.log(event.target.value)
+		
 	};
 
   return (
@@ -54,15 +46,17 @@ export default function EstadoContenedor() {
 				<h2 className="font_h2 text-grey06 ">¿Cómo nos ponemos en contacto con usted?</h2>
 			</div>
 
-			<div class="mt-8 p-4">
-				<label for="floating_outlined" class="block font-body_secondary text-grey04 -top-5 left-2 bg-white px-1">Número teléfono</label>
-				<input type="text" id="floating_outlined" class="address_input" placeholder=" " />
-				<p className="font_body_secondary text-grey06 mt-2">Sólo nos pondremos en contacto con usted para tramitar su solicitud</p>
+			<div className="mt-4 px-4">
+				<div class="input-with-float-label">
+				<input type="tel" id="phone" className="" placeholder="+34 " value={phone} onChange={handleChange}/>
+					<label for="phone" className="">Número teléfono</label>
+					<p className="font_body_secondary text-grey06 mt-2">Sólo nos pondremos en contacto con usted para tramitar su solicitud</p>
+				</div>
 			</div>
 
 			<div className='fixed inset-x-0 bottom-4 mx-4'>
 				<button
-					onClick={() => router.push('/horario')}
+					onClick={handleSubmit}
 					className="btn_primary_dark"
 					>
 					Continuar

@@ -16,7 +16,6 @@ import chevron_right from "@/public/chevron_right.svg"
 export default function Contenedor() {
   
   const router = useRouter();
-  const [sessionId, setSessionId] = useState('');
 
   useEffect(() => {
     // Generar un nuevo ID y construir el JSON inicial
@@ -25,8 +24,8 @@ export default function Contenedor() {
       storedId = uuidv4();
       localStorage.setItem('session_id', storedId);
     }
-    setSessionId(storedId);
 
+    localStorage.clear();
     // Cargar o inicializar el objeto JSON
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
     storedData.sessionId = storedId;
@@ -38,6 +37,20 @@ export default function Contenedor() {
 
     console.log(storedData)
   }, []);
+
+  const handleClick = (estado_contenedor) => {
+    const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+    storedData.incidencia = "Contenedor " + estado_contenedor;
+    localStorage.setItem('session_data', JSON.stringify(storedData));
+
+    const query = {
+      estado: estado_contenedor, 
+      prev: 'contenedor' 
+    }
+
+    const queryString = new URLSearchParams(query).toString();
+    router.push(`/direccion?${queryString}`);
+  }
 
   return (
       <main className="h-screen bg-ecovidrio_light">
@@ -62,11 +75,10 @@ export default function Contenedor() {
 
         </div>
 
-        
         <p className="font_caption text-grey05 mt-12 ms-6">CONTENEDOR EN LA CALLE</p>
         
-        <Link
-          href={{ pathname: '/direccion', query:{estado: 'lleno', prev: 'contenedor'}  }}
+        <div
+          onClick={() => handleClick('lleno')}
           className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded-t-lg px-4 py-3"
           >
           <Image 
@@ -83,10 +95,10 @@ export default function Contenedor() {
             className=""
           />
           
-        </Link>
+        </div>
 
-        <Link 
-          href={{ pathname: '/direccion', query:{estado: 'roto', prev: 'contenedor'} }}
+        <div
+          onClick={() => handleClick('roto')}
           className="flex bg-white items-center text-grey06 mt-px mx-4 rounded-b-lg px-4 py-3"
           >
           <Image 
@@ -103,7 +115,7 @@ export default function Contenedor() {
             className=""
           />
           
-        </Link>
+        </div>
 
         <p className="font_caption text-grey05 mt-12 ms-6">¿OTRAS DUDAS?</p>
         

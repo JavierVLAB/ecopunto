@@ -1,19 +1,21 @@
 import { useState } from 'react';
 
-const HorarioSelector = () => {
+const HorarioSelector = ({onChange}) => {
   const [selectedHorario, setSelectedHorario] = useState(['Tarde','Mañana']);
   const [selectedDias, setSelectedDias] = useState(['L', 'M', 'X', 'J', 'V']);
 
   const toggleDia = (dia) => {
-    setSelectedDias((prev) =>
-      prev.includes(dia) ? prev.filter((d) => d !== dia) : [...prev, dia]
-    );
+    const newD = selectedDias.includes(dia) ? selectedDias.filter((D) => D !== dia) : [...selectedDias, dia]
+    setSelectedDias(newD);
+
+    onChange([selectedHorario,newD])
   };
 
   const toggleHora = (hora) => {
-    setSelectedHorario((prev) =>
-      prev.includes(hora) ? prev.filter((H) => H !== hora) : [...prev, hora]
-    );
+    const newH = selectedHorario.includes(hora) ? selectedHorario.filter((H) => H !== hora) : [...selectedHorario, hora]
+    setSelectedHorario(newH);
+
+    onChange([newH,selectedDias])
   };
 
   return (

@@ -146,7 +146,7 @@
 
 /* Estilo base para los botones de radio */
 .radio {
-  @apply bg-white border border-black rounded-full cursor-pointer me-1;
+  @apply bg-white border rounded-full cursor-pointer me-1;
   width: 2rem; /* 32px */
   height: 2rem; /* 32px */
   appearance: none; /* Eliminar el estilo predeterminado */

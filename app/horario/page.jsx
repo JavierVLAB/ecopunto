@@ -1,48 +1,36 @@
 "use client"
-import Image from "next/image";
-import AddressForm from "@/app/components/AddressForm";
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import HorarioSelector from '@/app/components/Horarios'
 
-import near_me from '@/public/near_me.svg'
 
 import '@/app/ui/globals.css'
 
 
 export default function EstadoContenedor() {
-
-	const searchParams = useSearchParams();
-  	const estado = searchParams.get('estado'); 
-	console.log(estado)
-	const [sessionData, setSessionData] = useState({});
-
-	const [user, setUser] = useState(null);
+	const router = useRouter()
+	const [horario, setHorario] = useState([['Tarde', 'Mañana'],['L', 'M', 'X', 'J', 'V']])
 
 	useEffect(() => {
 	  // Leer el objeto JSON desde localStorage
 	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 	  
-	  // Actualizar el objeto JSON con nuevos datos
-	  storedData.lastPage = 'estado_contenedor';
-	  storedData.estadoContenedor = estado;
-	  storedData.incidencia = 'contenedor ' + estado
-  
 	  // Guardar de nuevo en localStorage
 	  localStorage.setItem('session_data', JSON.stringify(storedData));
-	  
-	  // Actualizar el estado local
-	  setSessionData(storedData);
-	  console.log(storedData)
+
 	}, []);
 
 	const handleClick = () => {
-
+		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+		storedData.horario = horario
+	  	localStorage.setItem('session_data', JSON.stringify(storedData));
+		//console.log(storedData)
+		router.push('/summary')
 	};
 
-	const handleChange = () => {
-
+	const handleChange = (data) => {
+		setHorario(data)
 	};
 
   return (
@@ -58,7 +46,7 @@ export default function EstadoContenedor() {
 
 			
 
-			<HorarioSelector />
+			<HorarioSelector onChange={handleChange}/>
 
 
 			<div className='fixed inset-x-0 bottom-4 mx-4'>

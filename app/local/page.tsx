@@ -17,7 +17,6 @@ import cubo_generico from "@/public/cubo_generico.svg"
 export default function Local() {
 
   const router = useRouter();
-  const [sessionId, setSessionId] = useState('');
 
   useEffect(() => {
     // Generar un nuevo ID y construir el JSON inicial
@@ -26,8 +25,8 @@ export default function Local() {
       storedId = uuidv4();
       localStorage.setItem('session_id', storedId);
     }
-    setSessionId(storedId);
 
+    localStorage.clear();
     // Cargar o inicializar el objeto JSON
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
     storedData.sessionId = storedId;
@@ -37,14 +36,20 @@ export default function Local() {
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
 
-    //console.log(storedData)
-    //console.log(localStorage)
+    console.log(localStorage.session_data)
+
   }, []);
 
   const update_localStorage = (estado: string) => {
     
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-    storedData.estado = estado
+    
+    if(estado == 'solicitud'){
+      storedData.incidencia = 'Solicitud de cubos'
+    } else {
+      storedData.incidencia = 'Contenedor lleno'
+    }
+
     localStorage.setItem('session_data', JSON.stringify(storedData));
     console.log(localStorage)
   }

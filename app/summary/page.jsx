@@ -1,11 +1,13 @@
 "use client"
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
+import { useRouter } from "next/navigation";
 
 import '@/app/ui/globals.css'
 
 
 export default function Summary() {
+	const router = useRouter()
 
 	const [incidencia, setIncidencia] = useState(null)
 	const [direccion, setDireccion] = useState(null)

@@ -5,47 +5,45 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import img_sistema_elevacion from '@/public/sistema_elevacion.png'
-
-
 import '@/app/ui/globals.css'
-
-
 
 export default function SistemaElevacion() {
 	const router = useRouter() 
 
-	const [showElevacionModal, setShowElevacionModal] = useState(false)
-  
+	const [selectedOption, setSelectedOption] = useState(null);
 
-	const searchParams = useSearchParams();
-  	const estado = searchParams.get('estado'); 
-	console.log(estado)
-	const [sessionData, setSessionData] = useState({});
+	const [showError, setShowError] = useState(false);
 
-	const [user, setUser] = useState(null);
 
 	useEffect(() => {
-	  // Leer el objeto JSON desde localStorage
-	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-	  
-	  // Actualizar el objeto JSON con nuevos datos
-	  storedData.lastPage = 'estado_contenedor';
-	  storedData.estadoContenedor = estado;
-	  storedData.incidencia = 'contenedor ' + estado
-  
-	  // Guardar de nuevo en localStorage
-	  localStorage.setItem('session_data', JSON.stringify(storedData));
-	  
-	  // Actualizar el estado local
-	  setSessionData(storedData);
-	  console.log(storedData)
+
 	}, []);
 
-	const showElevacion = () => {
-		setShowElevacionModal(true)
-	  };
+	const handleSubmit = () => {
 
-	
+        if (!selectedOption) {
+            setShowError(true);
+        } else {
+            console.log("Opción seleccionada:", selectedOption);
+
+			const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+			storedData.SistemaElevacion = selectedOption;
+			localStorage.setItem('session_data', JSON.stringify(storedData));
+		
+			console.log(localStorage)
+			router.push('/direccion?estado=solicitud&prev=s.elevation')
+            
+        }
+
+
+    };
+
+	const handleRadioChange = (event) => {
+        setSelectedOption(event.target.value);
+        //setError(""); // Limpiar error cuando se selecciona una opción
+		setShowError(false)
+    };
+
 
   return (
 		<main className="h-screen bg-white">
@@ -63,19 +61,28 @@ export default function SistemaElevacion() {
 
 			<div className="">
 				<div className="flex items-center px-4">
-					<input id="default-radio-1" type="radio" value="" name="default-radio" 
-						class="radio"/>
+					<input id="default-radio-1" type="radio" value="si" name="default-radio" 
+						className={`radio ${showError ? 'border-error' : 'border-grey06'}`} onChange={handleRadioChange}/>
 					<label for="default-radio-1" 
-						class="radio_label">Si, el contenedor lo tiene</label>
+						className="radio_label">Si, el contenedor lo tiene</label>
 				</div>
 
-				<div className="flex items-center mt-8 px-4">
-					<input id="default-radio-2" type="radio" value="" name="default-radio" 
-						class="radio"/>
+				<div className="flex items-center mt-6 px-4">
+					<input id="default-radio-2" type="radio" value="no" name="default-radio" 
+						className={`radio ${showError ? 'border-error' : 'border-grey06'}`} onChange={handleRadioChange}/>
 					<label for="default-radio-2" 
-						class="radio_label">No</label>
+						className="radio_label">No</label>
 				</div>
 
+				<div className="flex items-center mt-6 px-4">
+					<input id="default-radio-3" type="radio" value="contactame" name="default-radio" 
+						className={`radio ${showError ? 'border-error' : 'border-grey06'}`} onChange={handleRadioChange}/>
+					<label for="default-radio-3" 
+						className="radio_label">No lo sé, contactame</label>
+				</div>
+
+				{showError ? 
+					<div className="font_body_secondary text-error px-4 mt-4 ">Seleccione una opción para continuar</div> : <></>}
 
 			</div>
 			
@@ -89,7 +96,7 @@ export default function SistemaElevacion() {
 			<div className='fixed inset-x-0 bottom-4 mx-4'>
 				<button
 				type="submit"
-				onClick={() => router.push('/direccion?estado=solicitud&prev=s.elevation')}
+				onClick={handleSubmit}
 				className="btn_primary_dark"
 				>
 				Continuar
