@@ -2,6 +2,10 @@
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
+import { send_to_CRM } from "@/app/utils"
+import mixpanel from "mixpanel-browser";
+
+import axios from 'axios';
 
 import '@/app/ui/globals.css'
 
@@ -22,12 +26,14 @@ export default function Summary() {
 	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 	  console.log(storedData)
 	  setIncidencia(storedData.incidencia)
-	  const addressData = storedData.addressData
-	  const local = addressData.local
-	  const dir = addressData.direccion
-	  const municipio = addressData.municipio
-	  const provincia = addressData.provincia
-	
+	  
+	  if(storedData.addressData){
+		const addressData = storedData.addressData
+		const local = addressData.local
+		const dir = addressData.direccion
+		const municipio = addressData.municipio
+		const provincia = addressData.provincia
+	  }
 	  setDireccion(storedData.address)
 	  setSistemaEleva(storedData.SistemaElevacion)
 	  setPhone(storedData.phone)
@@ -39,7 +45,19 @@ export default function Summary() {
 	}, []);
 
     const handleClick = () => {
-        router.push("/confirmacion")
+		const jsonBody = {
+			"nombre": "nuevo envio",
+			"apellido": "desde",
+			"email": "summary.com"
+		}
+
+		try {
+			//send_to_CRM(jsonBody)
+		} catch (error) {
+			console.error('Error al enviar los datos:', error);
+		}
+		
+        //router.push("/confirmacion")
 	};
 
   return (

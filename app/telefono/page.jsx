@@ -1,10 +1,9 @@
 "use client"
-import Image from "next/image";
-import AddressForm from "@/app/components/AddressForm";
+
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-
+import { useRouter } from 'next/navigation';
+import mixpanel from 'mixpanel-browser'
 import near_me from '@/public/near_me.svg'
 
 import '@/app/ui/globals.css'
@@ -16,6 +15,11 @@ export default function EstadoContenedor() {
 	const [phone, setPhone] = useState(null)
 
 	useEffect(() => {
+
+		mixpanel.track('Page View', {
+			'page': 'Telefono',
+			'Page Name': 'Telefono'
+		  });
 
 	}, []);
 

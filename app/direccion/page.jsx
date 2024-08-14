@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import '@/app/ui/globals.css'
-import Solicitud from "../solicitud/page";
+import mixpanel from "mixpanel-browser";
 
 
 export default function EstadoContenedor() {
@@ -20,7 +20,13 @@ export default function EstadoContenedor() {
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
+		try{
+			mixpanel.track('Page View', {
+				'page': 'Direccion'
+			});
+		} catch {
 
+		}
 		if (estado == "solicitud"){
 			setPage(3)
 			setTotalPage(6)

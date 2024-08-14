@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import mixpanel from "mixpanel-browser";
 
 import check_circle from '@/public/check-circle.svg'
 import ecovidriologogreen from "@/public/EcoVidrioLogoGreen.png"
@@ -33,6 +34,10 @@ export default function ConfirmacionContenedor() {
 			setText('Enviaremos un técnico para solucionar el problema lo antes posible.')
 		}
 
+		mixpanel.track('Page View', {
+			'page': 'Confirmacion',
+			'Page Name': 'Confirmacion'
+		  });
 
 	  }, []);
 

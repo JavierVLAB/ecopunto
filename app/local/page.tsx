@@ -3,9 +3,12 @@
 import Image from "next/image";
 import Link from 'next/link'
 
+import mixpanel from "mixpanel-browser";
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
+
 
 import '../ui/globals.css'
 import ecovidriologo from "@/public/EcoVidrioLogo.svg"
@@ -20,7 +23,19 @@ export default function Local() {
 
   useEffect(() => {
     // Generar un nuevo ID y construir el JSON inicial
-    localStorage.clear();
+    localStorage.removeItem('session_data');
+    
+    mixpanel.init('23a01f975fd14691edb1971e67c93d0d', {
+      debug: true,
+      track_pageview: true,
+    });
+
+    mixpanel.track('Page View', {
+      'page': 'Local',
+      'Page Name': 'Local'
+    });
+
+
     let storedId = localStorage.getItem('session_id');
     if (!storedId) {
       storedId = uuidv4();
@@ -36,6 +51,8 @@ export default function Local() {
 
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
+
+
 
   }, []);
 
