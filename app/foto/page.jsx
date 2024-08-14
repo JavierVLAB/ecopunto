@@ -1,9 +1,10 @@
 "use client"
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import '@/app/ui/globals.css'
 import PageTitle from "@/app/components/PageTitle";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import mixpanel from 'mixpanel-browser';
 
 export default function Foto() {
   const router = useRouter()
@@ -13,6 +14,18 @@ export default function Foto() {
   const [modalOpen, setModalOpen] = useState(false);
 	const videoRef = useRef(null);
 	const [showSaltar, setShowSaltar] = useState(true);
+
+  useEffect(() => {
+		try{
+			mixpanel.track('Page View', {
+				'page': 'Foto'
+			});
+		} catch {
+
+		}
+  }, []);
+
+  
 
   const handleUploadClick = async () => {
 		setShowSaltar(false)
