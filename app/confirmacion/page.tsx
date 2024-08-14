@@ -12,7 +12,7 @@ const progress = 25
 
 export default function ConfirmacionContenedor() {
 	const [sessionData, setSessionData] = useState({});
-	const [estado, setEstado] = useState('')
+	
 	const [sistemaElevancion, setSistemaElevacion] = useState('')
 	const [title, setTitle] = useState('')
 	const [text, setText] = useState('')
@@ -21,16 +21,14 @@ export default function ConfirmacionContenedor() {
 		// Leer el objeto JSON desde localStorage
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 	
-		// Actualizar el estado local
-		setSessionData(storedData);
-
+		const incidencia = storedData.incidencia
 		console.log(storedData)
-		setEstado(storedData.estado)
 		
-		if (estado=='solicitud') {
-			setTitle('')
+		if (incidencia=='Solicitud de cubos') {
+			setTitle('Hemos recibido la solicitud correctamente')
+			setText('Gracias por su solicitud. Nos pondremos en contacto con usted lo antes posible para confirmar la solicitud.')
 		} else {
-			setTitle('Gracias por informarnos sobre el contenedor ' + estado + '.')
+			setTitle('Gracias por informarnos sobre el contenedor.')
 			setText('Enviaremos un técnico para solucionar el problema lo antes posible.')
 		}
 

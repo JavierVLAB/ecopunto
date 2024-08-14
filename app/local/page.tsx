@@ -99,7 +99,7 @@ export default function Local() {
         
         <Link 
           onClick={() => update_localStorage('lleno')}
-          href={{ pathname: '/direccion', query:{ estado: 'lleno', prev: 'local' } }}
+          href={{ pathname: '/direccion', query:{ estado: 'lleno'} }}
           className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded px-4 py-3"
           >
           <Image 

@@ -78,18 +78,18 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
 
     localStorage.setItem('session_data', JSON.stringify(storedData));
     console.log(localStorage.session_data)
-    /*
+    
     if(originalPage=="local"){
-      router.push('/confirmacion');
-    } else if
-    if(estado=="solicitud"){
-      router.push('/telefono');}
-    else if (estado=="roto"){
-      router.push('/foto');
+      if(estado=='lleno'){
+        router.push('/confirmacion');
+      } 
+      if(estado=='solicitud'){
+        router.push('/telefono');
+      }
     } else {
       router.push('/foto');
     }
-    */
+    
   };
 
 

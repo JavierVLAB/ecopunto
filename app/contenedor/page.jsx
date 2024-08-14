@@ -53,11 +53,11 @@ export default function Contenedor() {
   const handleClick = (estado_contenedor) => {
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
     storedData.incidencia = "Contenedor " + estado_contenedor;
+    storedData.estado = estado_contenedor
     localStorage.setItem('session_data', JSON.stringify(storedData));
 
     const query = {
-      estado: estado_contenedor, 
-      prev: 'contenedor' 
+      estado: estado_contenedor
     }
 
     const queryString = new URLSearchParams(query).toString();

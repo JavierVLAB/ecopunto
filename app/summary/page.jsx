@@ -57,7 +57,7 @@ export default function Summary() {
 			console.error('Error al enviar los datos:', error);
 		}
 		
-        //router.push("/confirmacion")
+        router.push("/confirmacion")
 	};
 
   return (
