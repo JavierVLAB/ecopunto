@@ -13,8 +13,6 @@ export default function EstadoContenedor() {
 	const [page, setPage] = useState(0)
 	const [totalPages, setTotalPage] = useState(0)
 
-	const [user, setUser] = useState(null);
-
 	useEffect(() => {
 
 		if (estado == "solicitud"){

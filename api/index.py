@@ -1,16 +1,11 @@
 from fastapi import FastAPI
-import gradio as gr
 import sqlite3
-import matplotlib.pyplot as plt
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from datetime import datetime, timedelta, timezone
 
-
 # URL
 url = 'localhost:8000'
-
-
 
 # Crear un objeto timezone para GMT+2
 gmt_plus_2 = timezone(timedelta(hours=2))

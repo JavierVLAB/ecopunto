@@ -105,7 +105,6 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
     } else {
       setMunicipios([]);
     }
-    console.log(municipios)
   }, [provinciaSeleccionada]);
   
   const handleProvinciaChange = (e: ChangeEvent<HTMLSelectElement>) => {
