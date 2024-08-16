@@ -3,8 +3,7 @@ import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import { send_to_CRM } from "@/app/utils"
-
-import axios from 'axios';
+import Image from "next/image";
 
 import '@/app/ui/globals.css'
 
@@ -66,7 +65,6 @@ export default function Summary() {
 
 			<div className="px-4 mt-6">
 				<h2 className="font_h2 text-grey06 ">Confirme sus datos antes de enviar</h2>
-				{/*<p className="font_body text-grey06 pe-4 mt-2">Introduzca la ubicación del contenedor. Si está cerca, puede utilizar los servicios de localización.</p>*/}
 			</div>
 
 			{incidencia ? 
@@ -102,7 +100,7 @@ export default function Summary() {
 			{img ? 
 				<div className="summary">
 					<p className="font_body_secondary text-grey06">Imagen</p>
-					<img src={img} alt="Captured" className="h-[140px]" />
+					<Image src={img} alt="Captured" className="h-[140px]" />
 				</div> : <></>}
 
 

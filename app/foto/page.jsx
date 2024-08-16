@@ -4,6 +4,7 @@ import '@/app/ui/globals.css'
 import PageTitle from "@/app/components/PageTitle";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 
 export default function Foto() {
@@ -115,7 +116,7 @@ export default function Foto() {
         <div className="mt-2 mx-4 w-11/12 aspect-square bg-grey02 mx-auto flex items-center rounded-md">	
           {image ? (
             <div className="relative m-8">
-              <img src={image} alt="Captured" className="w-full h-auto" />
+              <Image src={image} alt="Captured" className="w-full h-auto" />
               <button 
                 className="absolute -top-4 -right-4 bg-grey04 p-1 rounded-full border border-2 border-white"
                 onClick={() => setModalOpen(true)}
