@@ -14,7 +14,7 @@ export default function EstadoContenedor() {
 	useEffect(() => {
 
 		const storedData = JSON.parse(localStorage.getItem('session_data'));
-		const _estado = storedData.estado
+		const _estado = storedData.estado || ''
 
 		if (_estado == "solicitud"){
 			setPage(3)

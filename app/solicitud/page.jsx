@@ -1,7 +1,7 @@
 "use client"
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import '@/app/ui/globals.css'
 import CuboCard from "../components/CuboCard";
