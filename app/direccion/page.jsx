@@ -2,20 +2,21 @@
 import AddressForm from "@/app/components/AddressForm";
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import '@/app/ui/globals.css'
 
 export default function EstadoContenedor() {
 
-	const searchParams = useSearchParams();
-  	const estado = searchParams.get('estado'); 
+  	const [estado, setEstado] = useState('')
 
 	const [page, setPage] = useState(0)
 	const [totalPages, setTotalPage] = useState(0)
 
 	useEffect(() => {
 
-		if (estado == "solicitud"){
+		const storedData = JSON.parse(localStorage.getItem('session_data'));
+		const _estado = storedData.estado
+
+		if (_estado == "solicitud"){
 			setPage(3)
 			setTotalPage(6)
 		} else {
@@ -23,8 +24,7 @@ export default function EstadoContenedor() {
 			setTotalPage(3)
 		}
 
-	  const storedData = JSON.parse(localStorage.getItem('session_data'));
-	  console.log(storedData)
+		setEstado(_estado)
 	}, []);
  
   return (

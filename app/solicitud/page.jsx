@@ -14,8 +14,6 @@ export default function Solicitud() {
     const [cubo2, setCubo2] = useState(0)
     const [cubo3, setCubo3] = useState(0)
 
-	const searchParams = useSearchParams();
-
 	useEffect(() => {
 		const storedData = JSON.parse(localStorage.getItem('session_data'));
 		console.log(storedData)
