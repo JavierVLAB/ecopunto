@@ -3,7 +3,6 @@ import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import { send_to_CRM } from "@/app/utils"
-import mixpanel from "mixpanel-browser";
 
 import axios from 'axios';
 

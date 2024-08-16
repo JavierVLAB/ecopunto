@@ -3,9 +3,6 @@ import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from "next/link";
-
-import mixpanel from 'mixpanel-browser'
-
 import '@/app/ui/globals.css'
 import CuboCard from "../components/CuboCard";
 
@@ -22,11 +19,6 @@ export default function Solicitud() {
 	useEffect(() => {
 		const storedData = JSON.parse(localStorage.getItem('session_data'));
 		console.log(storedData)
-
-		mixpanel.track('Page View', {
-			'page': 'Solicitud',
-			'Page Name': 'Solicitud'
-		  });
 
 	}, []);
 

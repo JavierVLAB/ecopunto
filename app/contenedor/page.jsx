@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from 'next/link'
 
-import mixpanel from "mixpanel-browser";
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -21,16 +20,6 @@ export default function Contenedor() {
 
   useEffect(() => {
     localStorage.removeItem('session_data');
-
-    mixpanel.init('23a01f975fd14691edb1971e67c93d0d', {
-      debug: true,
-      track_pageview: true,
-    });
-
-    mixpanel.track('Page View', {
-      'page': 'Contenedor',
-      'Page Name': 'Contenedor'
-    });
 
     let storedId = localStorage.getItem('session_id');
     if (!storedId) {
