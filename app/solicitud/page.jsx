@@ -1,4 +1,4 @@
-"use client"
+
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
