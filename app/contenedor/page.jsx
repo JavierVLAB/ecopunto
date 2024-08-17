@@ -13,10 +13,31 @@ import ecovidriologo from "@/public/EcoVidrioLogo.svg"
 import curved_bg from "@/public/curved_bg.svg"
 import contenedor from "@/public/contenedor_generico.svg"
 import chevron_right from "@/public/chevron_right.svg"
+import { addEvent } from "@/app/firebaseUtils"
 
 export default function Contenedor() {
   
   const router = useRouter();
+
+  const handleEvent = async () => {
+    const eventData = {
+        event_name: "click_button", // APP Start, Incident, Quit, Success
+        init_page: "home_page",     // Contenedor, Local
+        incidencia: "none",         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
+        actual_page: "about_page",  // Cualquiera
+    };
+
+    try {
+        const response = await addEvent(eventData);
+        if (response.success) {
+            console.log("Evento enviado con éxito:", response.id);
+        } else {
+            console.error("Error al enviar el evento:", response.error);
+        }
+    } catch (error) {
+        console.error("Error en la función de seguimiento de evento:", error);
+    }
+};
 
   useEffect(() => {
     localStorage.removeItem('session_data');
@@ -25,8 +46,9 @@ export default function Contenedor() {
     if (!storedId) {
       storedId = uuidv4();
       localStorage.setItem('session_id', storedId);
-    }
+    } 
 
+    handleEvent()
 
     // Cargar o inicializar el objeto JSON
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
