@@ -23,10 +23,10 @@ export default function Contenedor() {
 
     console.log("Firebase API Key:", process.env.NEXT_PUBLIC_FIREBASE_API_KEY);
     const eventData = {
-        event_name: "click_button", // APP Start, Incident, Quit, Success
-        init_page: "home_page",     // Contenedor, Local
-        incidencia: "none",         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
-        actual_page: "about_page",  // Cualquiera
+        event_name: "App Start", // App Start, Incident, Quit, Success
+        init_page: "Contenedor",     // Contenedor, Local
+        incidencia: "Contenedor lleno",         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
+        actual_page: "Contenedor",  // Cualquiera
     };
 
     try {
@@ -49,8 +49,6 @@ export default function Contenedor() {
       storedId = uuidv4();
       localStorage.setItem('session_id', storedId);
     } 
-
-    handleEvent()
 
     // Cargar o inicializar el objeto JSON
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
@@ -84,6 +82,7 @@ export default function Contenedor() {
           src={curved_bg}
           alt="Logo ecovidrio"
           className="z-0 w-full"
+          onClick={handleEvent}
         />
         </div>
         <div className="absolute inset-0 z-0 pt-14 px-4 h-10">
