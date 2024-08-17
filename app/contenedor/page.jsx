@@ -20,6 +20,8 @@ export default function Contenedor() {
   const router = useRouter();
 
   const handleEvent = async () => {
+
+    console.log("Firebase API Key:", process.env.NEXT_PUBLIC_FIREBASE_API_KEY);
     const eventData = {
         event_name: "click_button", // APP Start, Incident, Quit, Success
         init_page: "home_page",     // Contenedor, Local
