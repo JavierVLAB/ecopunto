@@ -21,7 +21,7 @@ export default function Contenedor() {
 
   const handleEvent = async () => {
 
-    console.log("Firebase API Key:", process.env.NEXT_PUBLIC_FIREBASE_API_KEY);
+    console.log("sending")
     const eventData = {
         event_name: "App Start", // App Start, Incident, Quit, Success
         init_page: "Contenedor",     // Contenedor, Local
@@ -77,12 +77,12 @@ export default function Contenedor() {
 
   return (
       <main className="h-screen bg-ecovidrio_light">
-        <div className="relative">
+        <div className="relative"           onClick={handleEvent}>
         <Image 
           src={curved_bg}
           alt="Logo ecovidrio"
           className="z-0 w-full"
-          onClick={handleEvent}
+
         />
         </div>
         <div className="absolute inset-0 z-0 pt-14 px-4 h-10">
