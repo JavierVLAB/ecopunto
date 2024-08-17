@@ -57,6 +57,11 @@ class Event(BaseModel):
 def hello_world():
     return {"message": environment}
 
+# End point de prueba
+@app.get("/api/test")
+def test():
+    return {"message": environment}
+
 # Track event
 @app.post("/api/track-event/")
 async def track_event(event: Event):
