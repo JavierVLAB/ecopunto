@@ -3,9 +3,20 @@ import sqlite3
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from datetime import datetime, timedelta, timezone
+import os
+
+environment = os.getenv("ENVIRONMENT", "development")
+
 
 # URL
-url = 'localhost:8000'
+url = ''
+
+if environment=='vercelproduction':
+    url = 'https://ecopunto-gilt.vercel.app'
+
+if environment=='development':
+    url = 'localhost:8000'
+
 
 # Crear un objeto timezone para GMT+2
 gmt_plus_2 = timezone(timedelta(hours=2))
@@ -44,7 +55,7 @@ class Event(BaseModel):
 # End point de prueba
 @app.get("/api/python")
 def hello_world():
-    return {"message": "Hello World"}
+    return {"message": environment}
 
 # Track event
 @app.post("/api/track-event/")
