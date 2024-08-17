@@ -1,21 +1,34 @@
 from fastapi import FastAPI
-import sqlite3
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from datetime import datetime, timedelta, timezone
 import os
+import firebase_admin
+from firebase_admin import credentials, firestore
+import json
+
+
+
 
 environment = os.getenv("ENVIRONMENT", "development")
 
-
 # URL
 url = ''
+cred = None
 
 if environment=='vercelproduction':
     url = 'https://ecopunto-gilt.vercel.app'
+    firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
+    cred = credentials.Certificate(json.loads(firebase_credentials))
 
 if environment=='development':
     url = 'localhost:8000'
+    cred = credentials.Certificate("/Users/javi/Documents/workspace/Propelland/ecopunto/api/ecopunto.json")
+
+# Inicializar Firestore
+
+firebase_admin.initialize_app(cred)
+db = firestore.client()
 
 
 # Crear un objeto timezone para GMT+2
@@ -27,29 +40,12 @@ app = FastAPI(
     openapi_url="/api/openapi.json"
 )
 
-# Base de datos de enventos
-conn = sqlite3.connect('events.db', check_same_thread=False)
-cursor = conn.cursor()
-
-
-# Crear la tabla para almacenar los eventos si no existe
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS events (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        event_name TEXT,
-        init_page TEXT,
-        incidencia TEXT,
-        actual_page TEXT,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
-''')
-conn.commit()
-
 class Event(BaseModel):
     event_name: str                 # APP Start, Incident, Quit, Success
     init_page: str                  # Contenedor, Local
-    incidencia: str = None          # Contenedor lleno, Contenedor Roto, Solicitud Cubos, Whatsapp
+    incidencia: str = None          # Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
     actual_page: str = None         # Cualquiera
+    apiKey: str
 
 
 # End point de prueba
@@ -64,52 +60,82 @@ def test():
 
 # Track event
 @app.post("/api/track-event/")
-async def track_event(event: Event):
-    current_time = datetime.now(gmt_plus_2)
+async def add_event(event: Event):
+    if event.apiKey != "ccVr886c888qvhYBg3pMj3oudziHJjMtIlpJgy-wWEA":
+        return {"error": "Invalid API key"}
+    
+    data = {
+        "event_name": event.event_name,
+        "init_page": event.init_page,
+        "incidencia": event.incidencia,
+        "actual_page": event.actual_page,
+        "apiKey": event.apiKey,
+        "timestamp": datetime.now(gmt_plus_2)
+    }
+    db.collection('events').add(data)
+    return {"message": "Event added successfully"}
 
-    cursor.execute('''
-        INSERT INTO events (event_name, init_page, incidencia, actual_page,timestamp)
-        VALUES (?, ?, ?, ?, ?)
-    ''', (event.event_name, event.init_page, event.incidencia, event.actual_page, current_time))
-    conn.commit()
-    return {"status": "success", "event": event}
-
-# Endpoint para obtener todos los eventos (para análisis)
-@app.get("/api/events/")
-async def get_events():
-
-    cursor.execute('SELECT * FROM events')
-    events = cursor.fetchall()
-    return {"events": events}
+# Endpoint para obtener todos los eventos
+@app.get("/api/events")
+async def get_events():    
+    events_ref = db.collection('events').stream()
+    events = []
+    for event in events_ref:
+        events.append(event.to_dict())
+    return events
 
 
 #######################
 
 @app.get("/api/metrics/")
 async def get_metrics():
+
+    # Aquí NO necesitas inicializar Firestore de nuevo, solo usar `db`
+    events_ref = db.collection('events')
+
     # Número total de conexiones
-    cursor.execute('SELECT COUNT(*) FROM events WHERE event_name = "App Start"')
-    total_connections = cursor.fetchone()[0]
+    total_connections_query = events_ref.where('event_name', '==', 'App Start')
+    total_connections = len([doc for doc in total_connections_query.stream()])
 
     # Conexiones en "Contenedor" y "Local"
-    cursor.execute('SELECT init_page, COUNT(*) FROM events WHERE event_name = "App Start" GROUP BY init_page')
-    init_page_connections = cursor.fetchall()
+    init_page_connections_query = events_ref.where('event_name', '==', 'App Start')
+    init_page_connections = {}
+    for doc in init_page_connections_query.stream():
+        data = doc.to_dict()
+        init_page = data.get('init_page')
+        if init_page in init_page_connections:
+            init_page_connections[init_page] += 1
+        else:
+            init_page_connections[init_page] = 1
 
     # Número total de incidencias reportadas
-    cursor.execute('SELECT COUNT(*) FROM events WHERE event_name = "Incident"')
-    total_incidents = cursor.fetchone()[0]
+    total_incidents_query = events_ref.where('event_name', '==', 'Incident')
+    total_incidents = len([doc for doc in total_incidents_query.stream()])
 
     # Incidencias reportadas y su conteo
-    cursor.execute('SELECT incidencia, COUNT(*) FROM events WHERE event_name = "Incident" GROUP BY incidencia')
-    incident_reports = cursor.fetchall()
-
-    # Abandonos y en qué página ocurriero
-    cursor.execute('SELECT actual_page, COUNT(*) FROM events WHERE event_name = "Quit" GROUP BY actual_page')
-    abandonments = cursor.fetchall()
+    incident_reports_query = events_ref.where('event_name', '==', 'Incident')
+    incident_reports = {}
+    for doc in incident_reports_query.stream():
+        data = doc.to_dict()
+        incidencia = data.get('incidencia')
+        if incidencia in incident_reports:
+            incident_reports[incidencia] += 1
+        else:
+            incident_reports[incidencia] = 1
 
     # Abandonos y en qué página ocurrieron
-    cursor.execute('SELECT COUNT(*) FROM events WHERE event_name = "Quit"')
-    tolal_quits = cursor.fetchone()[0]
+    abandonments_query = events_ref.where('event_name', '==', 'Quit')
+    abandonments = {}
+    for doc in abandonments_query.stream():
+        data = doc.to_dict()
+        actual_page = data.get('actual_page')
+        if actual_page in abandonments:
+            abandonments[actual_page] += 1
+        else:
+            abandonments[actual_page] = 1
+
+    # Número total de abandonos
+    total_quits = len([doc for doc in abandonments_query.stream()])
 
     return {
         "total_connections": total_connections,
@@ -117,6 +143,6 @@ async def get_metrics():
         "total_incidents": total_incidents,
         "incident_reports": incident_reports,
         "abandonments": abandonments,
-        "quits": tolal_quits
+        "total_quits": total_quits
     }
 
