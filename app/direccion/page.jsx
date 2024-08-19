@@ -12,10 +12,10 @@ export default function EstadoContenedor() {
 	const [totalPages, setTotalPage] = useState(0)
 
 	useEffect(() => {
-
+		
 		const storedData = JSON.parse(localStorage.getItem('session_data'));
 		const _estado = storedData.estado || ''
-
+		console.log(storedData)
 		if (_estado == "solicitud"){
 			setPage(3)
 			setTotalPage(6)

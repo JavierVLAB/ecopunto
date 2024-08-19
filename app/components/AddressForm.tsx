@@ -46,17 +46,18 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log(formData)
+    //console.log(formData)
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log('Form Data Submitted:', formData);
+    //console.log('Form Data Submitted:', formData);
     
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 
     const originalPage = storedData.originalPage
+    const _estado = storedData.estado
 
     if(!isGPSAddress){
       let address = formData.local ? formData.local + ', ' : ''
@@ -78,6 +79,8 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
 
     localStorage.setItem('session_data', JSON.stringify(storedData));
     console.log(localStorage.session_data)
+    console.log(`estado: ${_estado}`)
+    console.log(`originalPage: ${originalPage}`)
     
     if(originalPage=="local"){
       if(estado=='lleno'){
@@ -178,7 +181,7 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
               onChange={handleMunicipioChange}
               required
             >
-              <option value="" disabled selected hidden>Municipio</option>
+              <option value="" selected disabled hidden>Municipio</option>
               {municipios.map((municipio, index) => (
                 <option key={index} value={municipio}>
                   {municipio}
@@ -197,7 +200,7 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
               onChange={handleProvinciaChange}
               required
             >
-              <option value="" disabled selected hidden></option>
+              <option value="" selected disabled hidden></option>
               {provincias.map((provincia, index) => (
                 <option key={index} value={provincia}>
                   {provincia}

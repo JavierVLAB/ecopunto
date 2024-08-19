@@ -40,7 +40,7 @@ export default function EstadoContenedor() {
 
 			<div className="px-4 mt-6">
 				<h2 className="font_h2 text-grey06 ">¿Cuándo debemos ponernos en contacto con usted? (Opcional) </h2>
-				<p className="font_body_secondary text-grey06 mt-2">Indique cuándo tiene disponibilidad para recibir entregas en su establecimiento.</p>
+				<p className="font_body text-grey06 mt-2">Indique sus horas disponibles e intente realizar la entrega en ese horario.</p>
 			
 			</div>
 

@@ -21,8 +21,8 @@ export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvin
           const { latitude, longitude } = position.coords;
           setLocation({ latitude, longitude });
           fetchAddress(latitude, longitude);
-          console.log(latitude)
-          console.log(longitude)
+          //console.log(latitude)
+          //console.log(longitude)
         },
         (error) => {
           console.error('Error obtaining location', error);
@@ -43,7 +43,7 @@ export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvin
     setAddress(data.display_name);
     onAddress(data.display_name)
     onMunicipio(data.address.city)
-    onProvincia(data.address.province)
+    onProvincia(data.address.province || data.address.state)
     console.log(data)
   };
 

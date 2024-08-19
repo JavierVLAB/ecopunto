@@ -22,6 +22,7 @@ const PageTitle: React.FC<PageTitleProps> = ({ title, page, totalPages }) => {
 							height={16}
 							alt="arrow"
 							className=""
+							style={{ width: 'auto' }}
 							onClick={() => router.back()}
 						/>
 					</div>

@@ -11,7 +11,7 @@ import '@/app/ui/globals.css'
 export default function EstadoContenedor() {
 	const router = useRouter()
 
-	const [phone, setPhone] = useState(null)
+	const [phone, setPhone] = useState('')
 
 	useEffect(() => {
 	}, []);
@@ -46,7 +46,7 @@ export default function EstadoContenedor() {
 			<div className="mt-4 px-4">
 				<div className="input-with-float-label">
 				<input type="tel" id="phone" className="" placeholder="+34 " value={phone} onChange={handleChange}/>
-					<label for="phone" className="">Número teléfono</label>
+					<label forhtml="phone" className="">Número teléfono</label>
 					<p className="font_body_secondary text-grey06 mt-2">Sólo nos pondremos en contacto con usted para tramitar su solicitud</p>
 				</div>
 			</div>

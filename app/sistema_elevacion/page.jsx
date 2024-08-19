@@ -9,11 +9,8 @@ import '@/app/ui/globals.css'
 
 export default function SistemaElevacion() {
 	const router = useRouter() 
-
 	const [selectedOption, setSelectedOption] = useState(null);
-
 	const [showError, setShowError] = useState(false);
-
 
 	useEffect(() => {
 
@@ -27,14 +24,13 @@ export default function SistemaElevacion() {
             console.log("Opción seleccionada:", selectedOption);
 
 			const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-			storedData.SistemaElevacion = selectedOption;
+			storedData.sistemaElevacion = selectedOption;
 			localStorage.setItem('session_data', JSON.stringify(storedData));
-		
-			console.log(localStorage)
-			router.push('/direccion?estado=solicitud')
+			
+			console.log(storedData)
+			router.push('/direccion')
             
         }
-
 
     };
 

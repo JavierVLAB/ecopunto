@@ -20,44 +20,43 @@ const HorarioSelector = ({onChange}) => {
 
   return (
     <div className="p-4">
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold">Horarios</h2>
-        <div className="flex items-center space-x-2 mt-2">
-            <p className='text-grey06 font_body'>Horarios</p>
-          <button
-            className={`px-4 py-2 rounded ${selectedHorario.includes('Mañana') ? 'bg-ecovidrio_dark text-white' : 'bg-white border text-grey06'}`}
-            onClick={() => toggleHora('Mañana')}
-          >
-            <span className='font_body'>Mañana</span>
-            <br />
-            <span className='font_caption'>9 - 14</span>
-          </button>
-          <button
-            className={`px-4 py-2 rounded ${selectedHorario.includes('Tarde') ? 'bg-ecovidrio_dark text-white' : 'bg-white border text-grey06'}`}
-            onClick={() => toggleHora('Tarde')}
-          >
-            <span className='font_body'>Tarde</span>
-            <br />
-            <span className='font_body_caption'>14 - 18</span>
-          </button>
-        </div>
-      </div>
 
-      <div>
-        <h2 className="text-lg font-semibold">Días</h2>
-        <div className="flex items-center space-x-2 mt-2">
-            <p className='text-grey06 font_body'>Días</p>
-
-            {['L', 'M', 'X', 'J', 'V'].map((dia) => (
-                <button
-                key={dia}
-                className={`w-10 h-10 rounded-full ${selectedDias.includes(dia) ? 'bg-ecovidrio_dark text-white' : 'bg-white text-grey06 border'}`}
-                onClick={() => toggleDia(dia)}
-                >
-                {dia}
-                </button>
-            ))}
+        <div className="flex justify-between items-center space-x-2 mt-6">
+          <p className='text-grey06 font_body'>Horarios</p>
+          <div className='flex'>
+            <button
+              className={`mx-2 px-4 py-1 rounded w-[104px] h-[50px] ${selectedHorario.includes('Mañana') ? 'bg-ecovidrio_dark text-white' : 'bg-white border text-grey06'}`}
+              onClick={() => toggleHora('Mañana')}
+            >
+              <p className='font_h3'>Mañana</p>
+              <p className='font_body_secondary'>9 - 14</p>
+            </button>
+            <button
+              className={`mx-2 px-4 py-1 rounded  w-[104px] h-[50px] ${selectedHorario.includes('Tarde') ? 'bg-ecovidrio_dark text-white' : 'bg-white border text-grey06'}`}
+              onClick={() => toggleHora('Tarde')}
+            >
+              <p className='font_h3'>Tarde</p>
+              <p className='font_body_secondary'>14 - 18</p>
+            </button>
+          </div>
         </div>
+
+
+
+        <div className=" flex justify-between items-center space-x-2 mt-12">
+            <p className='flex text-grey06 font_body'>Días</p>
+            <div>
+              {['L', 'M', 'X', 'J', 'V'].map((dia) => (
+                  <button
+                  key={dia}
+                  className={`mx-1 w-10 h-10 rounded-full ${selectedDias.includes(dia) ? 'bg-ecovidrio_dark text-white' : 'bg-white text-grey06 border'}`}
+                  onClick={() => toggleDia(dia)}
+                  >
+                  {dia}
+                  </button>
+              ))}
+            </div>
+        
       </div>
     </div>
   );

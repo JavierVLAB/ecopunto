@@ -22,11 +22,29 @@ export default function Solicitud() {
 
 	const handleClick = () => {
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-	  	let solicitud = cubo1 ? cubo1 + ' cubos de 40L ' : ''
+
+	  	let solicitud = ''
+		solicitud += cubo1 ? cubo1 + ' cubos de 40L ' : ''
 		solicitud += cubo2 ? cubo2 + ' cubos de 90L ' : ''
 		solicitud += cubo3 ? cubo3 + ' cubos de 120L ' : ''
+
+		let solicitudData = {cubo40:{},cubo90:{},cubo120:{}}
+
+		
+		solicitudData.cubo40.size = 40
+		solicitudData.cubo40.quantity = cubo1 
+		solicitudData.cubo90.size = 90
+		solicitudData.cubo90.quantity = cubo2
+		solicitudData.cubo120.size = 120
+		solicitudData.cubo120.quantity = cubo3
+
 		storedData.solicitud = solicitud
+		storedData.solicitudData = solicitudData
+
+		
 		localStorage.setItem('session_data', JSON.stringify(storedData));
+
+		console.log(storedData)
 
 		router.push('/sistema_elevacion')
 	};

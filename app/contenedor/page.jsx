@@ -19,9 +19,8 @@ export default function Contenedor() {
   
   const router = useRouter();
 
-  const handleEvent = async () => {
+  const sendEventData = async () => {
 
-    console.log("sending")
     const eventData = {
         event_name: "App Start", // App Start, Incident, Quit, Success
         init_page: "Contenedor",     // Contenedor, Local
@@ -29,17 +28,9 @@ export default function Contenedor() {
         actual_page: "Contenedor",  // Cualquiera
     };
 
-    try {
-        const response = await addEvent(eventData);
-        if (response.success) {
-            console.log("Evento enviado con éxito:", response.id);
-        } else {
-            console.error("Error al enviar el evento:", response.error);
-        }
-    } catch (error) {
-        console.error("Error en la función de seguimiento de evento:", error);
-    }
-};
+    await addEvent(eventData);
+
+  };
 
   useEffect(() => {
     localStorage.removeItem('session_data');
@@ -77,7 +68,7 @@ export default function Contenedor() {
 
   return (
       <main className="h-screen bg-ecovidrio_light">
-        <div className="relative"           onClick={handleEvent}>
+        <div className="relative" >
         <Image 
           src={curved_bg}
           alt="Logo ecovidrio"
@@ -95,7 +86,7 @@ export default function Contenedor() {
           </div>
 
           <h1 className="font_h1 mt-8 text-ecovidrio_greenish">Reporte de incidencias</h1>
-          <p className="font_label mt-1">Recogida de vidrio</p>
+          <p className="font_label mt-1 text-white">Recogida de vidrio</p>
 
         </div>
 

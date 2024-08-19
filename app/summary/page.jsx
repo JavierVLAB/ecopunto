@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import { send_to_CRM } from "@/app/utils"
 import Image from "next/image";
+import CuboCardwithSE from "../components/CuboCardwithSE";
 
 import '@/app/ui/globals.css'
+import CuboCard from "../components/CuboCard";
 
 
 export default function Summary() {
@@ -14,9 +16,11 @@ export default function Summary() {
 	const [incidencia, setIncidencia] = useState(null)
 	const [direccion, setDireccion] = useState(null)
 	const [img, setImg] = useState(null)
-	const [sistemaEleva, setSistemaEleva] = useState(null)
 	const [horario, setHorario] = useState(null)
 	const [phone, setPhone] = useState(null)
+	const [solicitud, setSolicitud] = useState(null)
+	const [solicitudData, setSolicitudData] = useState(null)
+	const [sistemaElevacion, setSistemaElevacion] = useState(null)
 
 	useEffect(() => {
 
@@ -33,11 +37,11 @@ export default function Summary() {
 		const provincia = addressData.provincia
 	  }
 	  setDireccion(storedData.address)
-	  setSistemaEleva(storedData.SistemaElevacion)
+	  setSolicitudData(storedData.solicitudData)
 	  setPhone(storedData.phone)
 	  setImg(storedData.image)
 	  setHorario(storedData.horario)
-
+	  setSistemaElevacion(storedData.sistemaElevacion == 'si')
 
 	  //console.log(storedData)
 	}, []);
@@ -79,11 +83,6 @@ export default function Summary() {
 					<p className="font_body text-grey06">{direccion}</p>
 				</div> : <></>}
 
-			{sistemaEleva ? 
-				<div className="summary">
-					<p className="font_body_secondary text-grey06">Sistema de elevación</p>
-					<p className="font_body text-grey06">{sistemaEleva}</p>
-				</div> : <></>}
 
 			{horario ? 
 				<div className="summary">
@@ -100,8 +99,34 @@ export default function Summary() {
 			{img ? 
 				<div className="summary">
 					<p className="font_body_secondary text-grey06">Imagen</p>
-					<Image src={img} alt="Captured" className="h-[140px]" />
+					<Image src={img} alt="Captured" width={8} height={8} className="h-[140px] w-auto" />
 				</div> : <></>}
+
+			{solicitudData ?
+				<div className="pt-3">
+					<div className="flex text-grey06 px-4 pb-1">
+						<p className="flex-grow font_h3">Solicitud</p>
+						<p className="font_body_secondary">Cantidad</p>
+					</div>
+					
+					{solicitudData.cubo40.quantity > 0 ?
+					<CuboCardwithSE 
+						size={solicitudData.cubo40.size} 
+						quantity={solicitudData.cubo40.quantity} 
+						sistemaElevacion={sistemaElevacion}/> : <></>}
+					{solicitudData.cubo90.quantity > 0 ?
+					<CuboCardwithSE 
+						size={solicitudData.cubo90.size} 
+						quantity={solicitudData.cubo90.quantity} 
+						sistemaElevacion={sistemaElevacion}/> : <></>}
+					{solicitudData.cubo120.quantity > 0 ?
+					<CuboCardwithSE 
+						size={solicitudData.cubo120.size} 
+						quantity={solicitudData.cubo120.quantity} 
+						sistemaElevacion={sistemaElevacion}/> : <></>}
+				</div>
+				: <></>
+			}
 
 
 
