@@ -15,9 +15,17 @@ export default function Horarios() {
 	useEffect(() => {
 	  // Leer el objeto JSON desde localStorage
 	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-	  
+	  console.log(storedData)
 	  // Guardar de nuevo en localStorage
-	  localStorage.setItem('session_data', JSON.stringify(storedData));
+	  //localStorage.setItem('session_data', JSON.stringify(storedData));
+	  
+	  if(storedData.phone){
+		  console.log('si')
+		  
+	  } else {
+		  console.log('no')
+	  }
+
 
 	}, []);
 

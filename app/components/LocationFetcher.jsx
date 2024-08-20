@@ -3,15 +3,10 @@ import Image from 'next/image';
 import near_me from '@/public/near_me.svg'
 
 
-export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvincia})  {
+export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvincia, onPostCode})  {
   const [location, setLocation] = useState(null);
   const [address, setAddress] = useState(null);
   const [error, setError] = useState(false)
-
-  const test1 = () => {
-
-    console.log('ddddd')
-  }
 
   const fetchLocation = (e) => {
     
@@ -44,6 +39,7 @@ export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvin
     onAddress(data.display_name)
     onMunicipio(data.address.city)
     onProvincia(data.address.province || data.address.state)
+    onPostCode(data.address.postcode)
     console.log(data)
   };
 
@@ -53,8 +49,9 @@ export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvin
         <Image 
           src={near_me}
           height={16}
+          
           alt="arrow"
-          className=""
+          className="w-auto"
         />
 
         <button type="button" 

@@ -14,7 +14,22 @@ export default function EstadoContenedor() {
 	const [phone, setPhone] = useState('')
 
 	useEffect(() => {
-	}, []);
+		
+		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+		console.log(storedData)
+		// Guardar de nuevo en localStorage
+		//localStorage.setItem('session_data', JSON.stringify(storedData));
+		
+		if(storedData.phone){
+			console.log('si')
+			setPhone(storedData.phone)
+		} else {
+			console.log('no')
+		}
+
+
+
+	  }, []);
 
 	const handleSubmit = () => {
 		// Leer el objeto JSON desde localStorage

@@ -8,6 +8,7 @@ interface FormData {
   direccion: string;
   municipio: string;
   provincia: string;
+  postcode: string;
 }
 
 interface MyProps {
@@ -28,26 +29,29 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
 
   const [isGPSAddress, setIsGPSAddress] = useState(false)
 
-
   const [municipioSelect, setMunicipioSelect] = useState('')
   const [dirSelect, setDirSelect] = useState('')
   const [provinciaSelect, setProvinciaSelect] = useState('')
+  const [postCodeSelect, setPostCodeSelect] = useState('')
+
+  const [error, setError] = useState(false)
 
   const [formData, setFormData] = useState<FormData>({
     local: '',
     direccion: '',
     municipio: '',
     provincia: '',
+    postcode: '',
   });
+    
+  useEffect(() => {
+	  
+    const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 
     
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-    //console.log(formData)
-  };
+
+
+	}, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,28 +63,70 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
     const originalPage = storedData.originalPage
     const _estado = storedData.estado
 
+    let newData = {}
+
+    if(isGPSAddress){
+      newData =
+      {
+        local: formData.local,
+        direccion: dirSelect,
+        municipio: municipioSelect,
+        provincia: provinciaSelect,
+        postcode: postCodeSelect
+      }
+    } else {
+      newData = formData
+    }
+
+    if(!isGPSAddress){
+
+      if(formData.provincia && formData.municipio && formData.direccion && formData.postcode){
+
+        if(estado == 'solicitud'){
+          if(formData.local){
+
+          } else {
+            console.log('aqui')
+            setError(true)
+            return
+          }
+        }
+      } else {
+        setError(true)
+        return
+      }
+    } else {
+      if(estado == 'solicitud'){
+        if(formData.local){
+
+        } else {
+          console.log('aqui')
+          setError(true)
+          return
+        }
+      }
+    }
+
     if(!isGPSAddress){
       let address = formData.local ? formData.local + ', ' : ''
-      address += formData.direccion + ', ' + formData.municipio + ', ' + formData.provincia 
+      address += formData.direccion + ', ' + formData.municipio + ', ' + formData.provincia + ', ' + formData.postcode
       storedData.addressData = formData;
       storedData.address = address;
     } else {
 
-      const newData ={
-        local: formData.local,
-        direccion: dirSelect,
-        municipio: municipioSelect,
-        provincia: provinciaSelect
-      }
+
       storedData.addressData = newData;
       storedData.address = dirSelect;
       
     }
 
     localStorage.setItem('session_data', JSON.stringify(storedData));
-    console.log(localStorage.session_data)
-    console.log(`estado: ${_estado}`)
-    console.log(`originalPage: ${originalPage}`)
+    //console.log(localStorage.session_data)
+    //console.log(`estado: ${_estado}`)
+    //console.log(`originalPage: ${originalPage}`)
+
+    
+    
     
     if(originalPage=="local"){
       if(estado=='lleno'){
@@ -109,6 +155,15 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
       setMunicipios([]);
     }
   }, [provinciaSeleccionada]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    //console.log(formData)
+    setError(false)
+  };
   
   const handleProvinciaChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setFormData({
@@ -117,6 +172,7 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
     });
     console.log(e.target.value)
     setProvinciaSeleccionada(e.target.value);
+    setError(false)
   };
 
   const handleMunicipioChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -125,18 +181,15 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
       municipio: e.target.value,
     });
     console.log(`Municipio seleccionado: ${e.target.value}`);
+    setError(false)
   };
 
-  const update_localStorage = (address: {}) => {
-    
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white">
+    <form onSubmit={handleSubmit} noValidate className="max-w-md mx-auto p-4 bg-white" >
       
       <div className=''>
         { estado == 'solicitud' ?
-        <div className="mt-4 input-with-float-label">
+        <div className={`mt-4 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
           <input
             type="text"
             name="local"
@@ -155,13 +208,14 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
         <LocationFetcher  onGPS={setIsGPSAddress}
                           onAddress={setDirSelect} 
                           onMunicipio={setMunicipioSelect} 
-                          onProvincia={setProvinciaSelect}/> 
+                          onProvincia={setProvinciaSelect}
+                          onPostCode={setPostCodeSelect}/> 
 
 
 
         {!isGPSAddress ?
         <div>
-          <div className="mt-6 mb-4 input-with-float-label">
+          <div className={`mt-6 mb-6 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
             <input
               type="text"
               name="direccion"
@@ -174,7 +228,7 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
             </label>
           </div>
 
-          <div className='mb-4 input-with-float-label'>
+          <div className={`mb-6 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
             <select 
               id="provincia"
               name="provincia"
@@ -194,7 +248,7 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
 
           </div>
 
-          <div className="mb-4 input-with-float-label">
+          <div className={`mb-6 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
             <select
               id="municipio"
               name="municipio"
@@ -213,11 +267,25 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
                 Municipio
               </label>
           </div>
+
+          <div className={`mb-4 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
+            <input
+              type="text"
+              name="postcode"
+              id="postcode"
+              placeholder=" "
+              onChange={handleChange}
+            />
+            <label htmlFor="postcode" className="block font-body_secondary text-grey04 absolute -top-3 left-2 bg-white px-1">
+              Código Postal
+            </label>
+          </div>
+
         </div>
 
       : 
       <div>
-        <div className="mt-6 mb-4 input-with-float-label">
+        <div className={`mb-6 mt-6 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
           <input
             type="text"
             name="direccion"
@@ -231,21 +299,21 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
           </label>
         </div>
 
-        <div className="mb-4 input-with-float-label">
+        <div className={`mb-6 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
           <input
             type="text"
             name="provinciaGPS"
             id="provinciaGPS"
             placeholder=" "
             value={provinciaSelect}
-
+            
           />
           <label htmlFor="provinciaGPS" className="block font-body_secondary text-grey04 absolute -top-3 left-2 bg-white px-1">
             Provincia
           </label>
         </div>
 
-        <div className="mb-4 input-with-float-label">
+        <div className={`mb-6 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
           <input
             type="text"
             name="municipioGPS"
@@ -258,13 +326,31 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
           </label>
         </div>
 
+        <div className={`mb-4 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
+            <input
+              type="text"
+              name="postcodeGPS"
+              id="postcodeGPS"
+              placeholder=" "
+              onChange={handleChange}
+              value={postCodeSelect}
+            />
+            <label htmlFor="postcodeGPS" className="block font-body_secondary text-grey04 absolute -top-3 left-2 bg-white px-1">
+              Código Postal
+            </label>
+          </div>
+
       </div>}
+
+      { error ? <p className='font_body_secondary text-error mb-6 px-5'>Rellena todos los campos
+        </p> : <></>}
 
       </div>
       <div className='fixed inset-x-0 bottom-4 mx-4'>
         <button
           type="submit"
           className="btn_primary_dark"
+          
         >
           Continuar
         </button>
