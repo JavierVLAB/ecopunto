@@ -5,11 +5,11 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
+import WhatsAppPie from "../components/WhatsAppPie";
+import HeaderInitPage from "../components/HeaderInitPage";
 
 
 import '../ui/globals.css'
-import ecovidriologo from "@/public/EcoVidrioLogo.svg"
-import curved_bg from "@/public/curved_bg.svg"
 import contenedor from "@/public/contenedor_generico.svg"
 import chevron_right from "@/public/chevron_right.svg"
 import cubo_generico from "@/public/cubo_generico.svg"
@@ -61,34 +61,15 @@ export default function Local() {
 
   return (
       <main className="h-screen bg-ecovidrio_light">
-        <div className="relative">
-        <Image 
-          src={curved_bg}
-          alt="Logo ecovidrio"
-          className="z-0 w-full"
-        />
-        </div>
-        <div className="absolute inset-0 z-0 pt-14 px-4 h-10">
-          <div className="flex justify-center">
-            <Image 
-              src={ecovidriologo}
-              height={32}
-              alt="Logo ecovidrio"
-            />
-          </div>
-
-          <h1 className="font_h1 mt-8 text-ecovidrio_greenish">Reporte de incidencias</h1>
-          <p className="font_label mt-1 text-white">Recogida de vidrio</p>
-
-        </div>
-
+        
+        <HeaderInitPage />
         
         <p className="font_caption text-grey05 mt-12 ms-6">CONTENEDOR EN LA CALLE</p>
         
         <Link 
           onClick={() => update_localStorage('lleno')}
           href={{ pathname: '/direccion', query:{ estado: 'lleno'} }}
-          className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded px-4 py-3"
+          className="init-white-buttom rounded mt-4"
           >
           <Image 
             src={contenedor}
@@ -111,7 +92,7 @@ export default function Local() {
         <Link 
           onClick={() => update_localStorage('solicitud')}
           href={"/solicitud"}
-          className="flex bg-white items-center text-grey06 mt-4 mx-4 rounded px-4 py-3"
+          className="init-white-buttom rounded mt-4"
           >
           <Image 
             src={cubo_generico}
@@ -128,14 +109,8 @@ export default function Local() {
           />
           
         </Link>
-        <div className="fixed bottom-10">
-          <p className="font_caption text-grey05 mt-12 ms-6">¿OTRAS DUDAS?</p>
-          
-          <div className="px-7">
-            <Link href="/confirmacion" className="font_h3 text-ecovidrio_dark mt-1 underline">Escríbenos por Whatsapp</Link>
-            <p className="font_body_secundary text-grey05 mt-1">Horario de antención de 10-18hrs, <br/>de lunes a viernes</p>
-          </div>
-        </div>
+
+        <WhatsAppPie />
       </main>
 
   );

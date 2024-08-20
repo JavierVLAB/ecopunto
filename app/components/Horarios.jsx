@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const HorarioSelector = ({onChange}) => {
-  const [selectedHorario, setSelectedHorario] = useState(['Tarde','Mañana']);
+  const [selectedHorario, setSelectedHorario] = useState(['Tarde']);
   const [selectedDias, setSelectedDias] = useState(['L', 'M', 'X', 'J', 'V']);
 
   const toggleDia = (dia) => {
@@ -41,22 +41,19 @@ const HorarioSelector = ({onChange}) => {
           </div>
         </div>
 
-
-
         <div className=" flex justify-between items-center space-x-2 mt-12">
-            <p className='flex text-grey06 font_body'>Días</p>
-            <div>
-              {['L', 'M', 'X', 'J', 'V'].map((dia) => (
-                  <button
-                  key={dia}
-                  className={`mx-1 w-10 h-10 rounded-full ${selectedDias.includes(dia) ? 'bg-ecovidrio_dark text-white' : 'bg-white text-grey06 border'}`}
-                  onClick={() => toggleDia(dia)}
-                  >
+          <p className='flex text-grey06 font_body'>Días</p>
+          <div>
+            {['L', 'M', 'X', 'J', 'V'].map((dia) => (
+              <button
+                key={dia}
+                className={`mx-1 w-10 h-10 rounded-full ${selectedDias.includes(dia) ? 'bg-ecovidrio_dark text-white' : 'bg-white text-grey06 border'}`}
+                onClick={() => toggleDia(dia)}
+                >
                   {dia}
-                  </button>
-              ))}
-            </div>
-        
+              </button>
+            ))}
+          </div>
       </div>
     </div>
   );

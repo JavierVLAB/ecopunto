@@ -26,7 +26,7 @@ const PageTitle: React.FC<PageTitleProps> = ({ title, page, totalPages }) => {
 							onClick={() => router.back()}
 						/>
 					</div>
-				<h1 className="font_body text-grey06 flex-grow text-center pe-4">{title}</h1>
+				<h1 className="font_medium text-grey06 flex-grow text-center pe-4">{title}</h1>
 				</div>
 
 				<div className="px-4">

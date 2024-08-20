@@ -79,6 +79,14 @@
   font-weight: 400;
 }
 
+.font_medium {
+  font-family: "Montserrat";
+  font-size: 16px;
+  line-height: 22.4px;
+  letter-spacing: 0em;
+  font-weight: 500;
+}
+
 .font_body_secondary {
   font-family: "Montserrat";
   font-size: 12px;
@@ -220,4 +228,8 @@
 
 .summary {
   @apply px-4 pt-3
+}
+
+.init-white-buttom {
+  @apply flex bg-white items-center text-grey06 mx-4 px-4 py-3 h-[74px]
 }

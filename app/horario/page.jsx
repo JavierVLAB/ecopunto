@@ -8,9 +8,9 @@ import HorarioSelector from '@/app/components/Horarios'
 import '@/app/ui/globals.css'
 
 
-export default function EstadoContenedor() {
+export default function Horarios() {
 	const router = useRouter()
-	const [horario, setHorario] = useState([['Tarde', 'Mañana'],['L', 'M', 'X', 'J', 'V']])
+	const [horario, setHorario] = useState([['Tarde'],['L', 'M', 'X', 'J', 'V']])
 
 	useEffect(() => {
 	  // Leer el objeto JSON desde localStorage
@@ -39,15 +39,12 @@ export default function EstadoContenedor() {
 			<PageTitle title={'Solicitar cubo'} page={5} totalPages={6} />
 
 			<div className="px-4 mt-6">
-				<h2 className="font_h2 text-grey06 ">¿Cuándo debemos ponernos en contacto con usted? (Opcional) </h2>
+				<h2 className="font_h2 text-grey06 ">¿Cuándo podrá recibir la entrega de cubos?</h2>
 				<p className="font_body text-grey06 mt-2">Indique sus horas disponibles e intente realizar la entrega en ese horario.</p>
 			
 			</div>
 
-			
-
 			<HorarioSelector onChange={handleChange}/>
-
 
 			<div className='fixed inset-x-0 bottom-4 mx-4'>
 				<button

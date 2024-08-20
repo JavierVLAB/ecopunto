@@ -49,7 +49,7 @@ export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvin
 
   return (
     <div>
-      <div className={`flex px-4 mt-6 ${ error ? 'mb-1' : 'mb-8'}`}>
+      <div className={`flex mt-6 ${ error ? 'mb-1' : 'mb-8'}`}>
         <Image 
           src={near_me}
           height={16}
@@ -64,7 +64,7 @@ export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvin
         </button>
 
       </div>
-      { error ? <p className='font_body_secondary text-error mb-6'>No se puede acceder a los servicios de localización
+      { error ? <p className='font_body_secondary text-error mb-6 px-5'>No se puede acceder a tu localización
         </p> : <></>}
     </div>
   );

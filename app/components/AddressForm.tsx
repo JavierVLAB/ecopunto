@@ -173,25 +173,6 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
               Dirección
             </label>
           </div>
-          <div className="mb-4 input-with-float-label">
-            <select
-              id="municipio"
-              name="municipio"
-              disabled={!provinciaSeleccionada}
-              onChange={handleMunicipioChange}
-              required
-            >
-              <option value="" selected disabled hidden>Municipio</option>
-              {municipios.map((municipio, index) => (
-                <option key={index} value={municipio}>
-                  {municipio}
-                </option>
-              ))}
-            </select>
-            <label htmlFor="municipio" className="">
-                Municipio
-              </label>
-          </div>
 
           <div className='mb-4 input-with-float-label'>
             <select 
@@ -212,6 +193,26 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
             </label>
 
           </div>
+
+          <div className="mb-4 input-with-float-label">
+            <select
+              id="municipio"
+              name="municipio"
+              disabled={!provinciaSeleccionada}
+              onChange={handleMunicipioChange}
+              required
+            >
+              <option value="" selected disabled hidden>Municipio</option>
+              {municipios.map((municipio, index) => (
+                <option key={index} value={municipio}>
+                  {municipio}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="municipio" className="">
+                Municipio
+              </label>
+          </div>
         </div>
 
       : 
@@ -229,18 +230,7 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
             Dirección
           </label>
         </div>
-        <div className="mb-4 input-with-float-label">
-          <input
-            type="text"
-            name="municipioGPS"
-            id="municipioGPS"
-            placeholder=" "
-            value={municipioSelect}
-          />
-          <label htmlFor="municipioGPS" className="block font-body_secondary text-grey04 absolute -top-3 left-2 bg-white px-1">
-            Municipio
-          </label>
-        </div>
+
         <div className="mb-4 input-with-float-label">
           <input
             type="text"
@@ -254,6 +244,20 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
             Provincia
           </label>
         </div>
+
+        <div className="mb-4 input-with-float-label">
+          <input
+            type="text"
+            name="municipioGPS"
+            id="municipioGPS"
+            placeholder=" "
+            value={municipioSelect}
+          />
+          <label htmlFor="municipioGPS" className="block font-body_secondary text-grey04 absolute -top-3 left-2 bg-white px-1">
+            Municipio
+          </label>
+        </div>
+
       </div>}
 
       </div>
