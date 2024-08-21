@@ -349,8 +349,7 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
       <div className='fixed inset-x-0 bottom-4 mx-4'>
         <button
           type="submit"
-          className="btn_primary_dark"
-          
+          className="btn_primary_dark"      
         >
           Continuar
         </button>

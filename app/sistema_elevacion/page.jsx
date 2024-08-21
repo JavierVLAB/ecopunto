@@ -47,7 +47,7 @@ export default function SistemaElevacion() {
 			<PageTitle title={'Solicitar Cubo'} page={2} totalPages={6} />
 
 			<div className="px-4 mt-6 mb-8">
-				<h2 className="font_h2 text-grey06 ">¿Tu contenedor de la calle más cercana tiene una sistema de elevación para vaciar el cubo?</h2>
+				<h2 className="font_h2 text-grey06 ">¿El contenedor de la calle más cercana tiene un sistema de elevación para vaciar el cubo?</h2>
 				<Image 
                     src={img_sistema_elevacion}
                     alt="contenedor"
@@ -74,7 +74,7 @@ export default function SistemaElevacion() {
 					<input id="default-radio-3" type="radio" value="contactame" name="default-radio" 
 						className={`radio ${showError ? 'border-error' : 'border-grey06'}`} onChange={handleRadioChange}/>
 					<label for="default-radio-3" 
-						className="radio_label">No lo sé, contactame</label>
+						className="radio_label">No lo sé, contáctame</label>
 				</div>
 
 				{showError ? 

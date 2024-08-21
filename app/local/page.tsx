@@ -47,7 +47,7 @@ export default function Local() {
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
     
     if(estado == 'solicitud'){
-      storedData.incidencia = 'Solicitud de cubos'
+      storedData.incidencia = 'Solicitar cubos'
     } else {
       storedData.incidencia = 'Contenedor lleno'
     }

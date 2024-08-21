@@ -65,7 +65,7 @@ export default function Summary() {
   return (
 		<main className="h-screen bg-white">
 
-			<PageTitle title="Resumen" page={6} totalPages={6} />
+			<PageTitle title={incidencia} page={6} totalPages={6} />
 
 			<div className="px-4 mt-6">
 				<h2 className="font_h2 text-grey06 ">Confirme sus datos antes de enviar</h2>

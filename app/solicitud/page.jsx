@@ -13,14 +13,24 @@ export default function Solicitud() {
 	const [cubo1, setCubo1] = useState(0)
     const [cubo2, setCubo2] = useState(0)
     const [cubo3, setCubo3] = useState(0)
+	const [isError, setIsError] = useState(false)
 
 	useEffect(() => {
-		const storedData = JSON.parse(localStorage.getItem('session_data'));
-		console.log(storedData)
+		setIsError(false)
+	}, [cubo1, cubo2, cubo3]);
 
+	useEffect(() => {
+
+		
 	}, []);
 
 	const handleClick = () => {
+
+		if(cubo1 + cubo2 + cubo3 == 0){
+			setIsError(true)
+			return
+		}
+
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 
 	  	let solicitud = ''
@@ -30,7 +40,10 @@ export default function Solicitud() {
 
 		let solicitudData = {cubo40:{},cubo90:{},cubo120:{}}
 
-		
+		if(cubo1+cubo2+cubo3 > 3){
+			solicitudData.contactar=true
+		}
+
 		solicitudData.cubo40.size = 40
 		solicitudData.cubo40.quantity = cubo1 
 		solicitudData.cubo90.size = 90
@@ -44,9 +57,14 @@ export default function Solicitud() {
 		
 		localStorage.setItem('session_data', JSON.stringify(storedData));
 
-		console.log(storedData)
+		//console.log(storedData)
 
-		router.push('/sistema_elevacion')
+		if(cubo3 > 0){
+			router.push('/sistema_elevacion')
+		} else { 
+			router.push('/direccion')
+		}
+
 	};
 
 
@@ -60,13 +78,18 @@ export default function Solicitud() {
 				<p className="font_body text-grey06 pe-4 mt-2">No tendras que pagar por tu cubo</p>
 			</div>
 
-			<CuboCard size = {40} onCounterChange={setCubo1}/>
-			<CuboCard size = {90} onCounterChange={setCubo2}/>
-			<CuboCard size = {120} onCounterChange={setCubo3}/>
+			<CuboCard size = {40} onCounterChange={setCubo1} qty={cubo1}/>
+			<hr className="border-t border-gray-300 m-0" />
+			<CuboCard size = {90} onCounterChange={setCubo2} qty={cubo2}/>
+			<hr className="border-t border-gray-300 m-0" />
+			<CuboCard size = {120} onCounterChange={setCubo3} qty={cubo3}/>
+
+			{ isError ? <p className='font_body_secondary text-error px-5 pt-2'>Escoge al menos un cubo
+				</p> : <></>}
 			
-			<div className="px-7 mt-8">
-				<p className="font_body_secondary text-grey05 mt-1 uppercase">
-					¿No sabes el tamaño de que necesitas?</p>
+			<div className={`px-7 ${isError ? "mt-2" : "mt-8"}`}>
+				<p className="font_caption text-grey05 mt-1 uppercase">
+					¿No sabes que tamaño necesitas?</p>
 				<Link href="/contenedor" className="link_whatsapp">Escríbenos por Whatsapp</Link>
 				
 			</div>

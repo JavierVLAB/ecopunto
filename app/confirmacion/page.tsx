@@ -4,38 +4,46 @@ import { useEffect, useState } from "react";
 
 import check_circle from '@/public/check-circle.svg'
 import ecovidriologogreen from "@/public/EcoVidrioLogoGreen.png"
+import { useRouter } from "next/navigation";
 
 import '@/app/ui/globals.css'
 
 const progress = 25
 
 export default function ConfirmacionContenedor() {
-	const [sessionData, setSessionData] = useState({});
-	
-	const [sistemaElevancion, setSistemaElevacion] = useState('')
+	const router = useRouter()
 	const [title, setTitle] = useState('')
 	const [text, setText] = useState('')
+	const [originalPage, setOriginalPage] = useState('')
 
 	useEffect(() => {
 		// Leer el objeto JSON desde localStorage
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-	
+		setOriginalPage(storedData.originalPage)
 		const incidencia = storedData.incidencia
-		console.log(storedData)
+		storedData.finish = true
 		
-		if (incidencia=='Solicitud de cubos') {
-			setTitle('Hemos recibido la solicitud correctamente')
-			setText('Gracias por su solicitud. Nos pondremos en contacto con usted lo antes posible para confirmar la solicitud.')
+		
+		if (incidencia=='Solicitar cubos') {
+			if(storedData.contactar){
+				setTitle('Te llamaremos para finalizar tu solicitud.')
+				setText('Gracias por su solicitud. Nos pondremos en contacto con usted lo antes posible para confirmar la solicitud.')
+			} else {
+				setTitle('Hemos recibido la solicitud correctamente.')
+				setText('Gracias por su solicitud. Le entregaremos los cubos solicitados lo antes posible.')	
+			}
 		} else {
 			setTitle('Gracias por informarnos sobre el contenedor.')
 			setText('Enviaremos un técnico para solucionar el problema lo antes posible.')
 		}
 
+		localStorage.setItem('session_data', JSON.stringify(storedData));
+
 	  }, []);
 
 	  const handleClick = () => {
-			console.log('cerrado')
-			window.close();
+			
+			router.push('/'+originalPage)
 
 	  };
 

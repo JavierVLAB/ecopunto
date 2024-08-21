@@ -61,7 +61,7 @@ export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvin
         </button>
 
       </div>
-      { error ? <p className='font_body_secondary text-error mb-6 px-5'>No se puede acceder a tu localización
+      { error ? <p className='font_body_secondary text-error mb-6 px-5'>Verifica los permisos de geolocalización
         </p> : <></>}
     </div>
   );
