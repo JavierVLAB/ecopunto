@@ -30,7 +30,7 @@ export default function EstadoContenedor() {
   return (
 		<main className="h-screen bg-white">
 
-			<PageTitle title={estado == 'solicitud' ? 'Solicitar cubo' :'Contenedor ' + estado} page={page} totalPages={totalPages} />
+			<PageTitle title={estado == 'solicitud' ? 'Solicitar cubo' : 'Contenedor ' + estado} page={page} totalPages={totalPages} />
 
 			<div className="px-4 mt-6">
 				{estado == "solicitud"? 
