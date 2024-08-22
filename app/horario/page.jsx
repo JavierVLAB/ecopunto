@@ -1,17 +1,12 @@
 "use client"
 import PageTitle from "@/app/components/PageTitle";
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import HorarioSelector from '@/app/components/Horarios'
-
 
 import '@/app/ui/globals.css'
 
-
 export default function Horarios() {
-	const router = useRouter()
 	const [horario, setHorario] = useState([['Tarde'],['L', 'M', 'X', 'J', 'V']])
-	const [isError,setIsError] = useState(false)
 
 	const handleClick = () => {
 

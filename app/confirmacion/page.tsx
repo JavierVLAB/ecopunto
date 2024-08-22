@@ -72,7 +72,7 @@ export default function ConfirmacionContenedor() {
 			</div>
 
 
-			<div className='m-4'>
+			<div className='fixed inset-x-0 bottom-4 m-4'>
 				<button
 					onClick={handleClick}
 					className="btn_primary_dark"
