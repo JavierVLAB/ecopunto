@@ -52,7 +52,7 @@ export default function CuboCard ({ size, quantity, sistemaElevacion}) {
   };
 
   return (
-    <div className="flex border py-4 px-8 bg-white text-grey06 font_h3">
+    <div className="flex py-4 px-8 bg-white text-grey06 font_h3">
       <div className="flex-shrink-0">
       <Image 
           src={imageSrc}
@@ -68,7 +68,7 @@ export default function CuboCard ({ size, quantity, sistemaElevacion}) {
       </div>
 
       <div className="flex m-2 items-center justify-center">
-        <p className={`${sistemaElevacion? 'text-grey06 bg-ecovidrio_light': 'text-white'} font_h3 py-1 px-2 rounded-md`}>Sist. Elevación</p>
+        <p className={`${sistemaElevacion && size == 120 ? 'text-grey06 bg-ecovidrio_light': 'text-white'} font_h3 py-1 px-2 rounded-md`}>Sist. Elevación</p>
       </div>
 
 

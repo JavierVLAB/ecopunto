@@ -41,7 +41,9 @@ export default function Solicitud() {
 		let solicitudData = {cubo40:{},cubo90:{},cubo120:{}}
 
 		if(cubo1+cubo2+cubo3 > 3){
-			solicitudData.contactar=true
+			storedData.contactar = true
+		} else {
+			storedData.contactar = false
 		}
 
 		solicitudData.cubo40.size = 40
@@ -57,7 +59,7 @@ export default function Solicitud() {
 		
 		localStorage.setItem('session_data', JSON.stringify(storedData));
 
-		//console.log(storedData)
+		console.log(storedData)
 
 		if(cubo3 > 0){
 			router.push('/sistema_elevacion')

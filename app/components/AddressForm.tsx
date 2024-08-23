@@ -2,6 +2,7 @@ import { useState, ChangeEvent, useEffect, FormEvent } from 'react';
 import municipiosData from './provincias_municipios.json';
 import { useRouter } from 'next/navigation'
 import LocationFetcher from '@/app/components/LocationFetcher';
+import Solicitud from '../solicitud/page';
 
 interface FormData {
   local: string;
@@ -48,7 +49,23 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
 	  
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 
-    
+    try {
+      setIsGPSAddress(true)
+      setMunicipioSelect(storedData.addressData.municipio)
+      setPostCodeSelect(storedData.addressData.postcode)
+      setDirSelect(storedData.addressData.direccion)
+      setProvinciaSelect(storedData.addressData.provincia)
+
+      if(storedData.estado == "solicitud"){
+        setFormData({
+          ...formData,
+          ["local"]: storedData.addressData.local,
+        });
+      }
+
+    } catch {
+
+    }
 
 
 	}, []);
@@ -166,10 +183,12 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
   };
   
   const handleProvinciaChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    
     setFormData({
       ...formData,
       provincia: e.target.value,
     });
+
     console.log(e.target.value)
     setProvinciaSeleccionada(e.target.value);
     setError(false)
@@ -189,13 +208,13 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
       
       <div className=''>
         { estado == 'solicitud' ?
-        <div className={`mt-4 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
+        <div className={`mt-4 ${error  && formData.local == '' ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
           <input
             type="text"
             name="local"
             id="local"
             placeholder=" "
-            //value={formData.local}
+            value={formData.local}
             onChange={handleChange}
             className=""
           />
@@ -215,7 +234,7 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
 
         {!isGPSAddress ?
         <div>
-          <div className={`mt-6 mb-6 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
+          <div className={`mt-6 mb-6 ${error && formData.direccion? 'input-with-float-label-error' : 'input-with-float-label'}`}>
             <input
               type="text"
               name="direccion"
@@ -228,7 +247,7 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
             </label>
           </div>
 
-          <div className={`mb-6 ${error ? 'input-with-float-label-error' : 'input-with-float-label'}`}>
+          <div className={`mb-6 ${error && provinciaSeleccionada? 'input-with-float-label-error' : 'input-with-float-label'}`}>
             <select 
               id="provincia"
               name="provincia"

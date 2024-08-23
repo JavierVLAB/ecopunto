@@ -15,8 +15,22 @@ export default function Foto() {
   const [modalOpen, setModalOpen] = useState(false);
 	const videoRef = useRef(null);
 	const [showSaltar, setShowSaltar] = useState(true);
+  const [estado, setEstado] = useState('')
 
   useEffect(() => {
+
+    const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+		
+    if(storedData.estado == 'roto'){
+      setShowSaltar(false)
+    }
+    setEstado(storedData.estado)
+
+    try{
+      console.log("")
+     } catch {
+  
+     }
 
   }, []);
 
@@ -92,7 +106,7 @@ export default function Foto() {
   return (
 	<main className="h-screen bg-white">
 
-			<PageTitle title={'Contenedor roto'} page={2} totalPages={3} />
+			<PageTitle title={'Contenedor ' + estado} page={2} totalPages={3} />
 			
 			<div className="px-4 mt-6 mb-4">
 				<h2 className="font_h2 text-grey06 ">Sube foto del estado del contenedor</h2>

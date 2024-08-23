@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { send_to_CRM } from "@/app/utils"
 import Image from "next/image";
 import CuboCardwithSE from "../components/CuboCardwithSE";
+import Link from "next/link";
 
 import '@/app/ui/globals.css'
 import CuboCard from "../components/CuboCard";
@@ -71,29 +72,29 @@ export default function Summary() {
 				<h2 className="font_h2 text-grey06 ">Confirme sus datos antes de enviar</h2>
 			</div>
 
-			{incidencia ? 
+			{/*incidencia ? 
 				<div className="summary">
 					<p className="font_body_secondary text-grey06">Incidencia</p>
-					<p className="font_body text-grey06">{incidencia}</p>
-				</div> : <></>}
+					<p className="font_body text-grey06 pt-3">{incidencia}</p>
+				</div> : <></>*/}
 
 			{direccion ? 
 				<div className="summary">
 					<p className="font_body_secondary text-grey06">Dirección</p>
-					<p className="font_body text-grey06">{direccion}</p>
+					<p className="font_body text-grey06 pt-3">{direccion}</p>
 				</div> : <></>}
 
 
 			{horario ? 
 				<div className="summary">
 					<p className="font_body_secondary text-grey06">Horario contacto</p>
-					<p className="font_body text-grey06">{horario}</p>
+					<p className="font_body text-grey06 pt-3">{horario}</p>
 				</div> : <></>}
 			
 			{phone ? 
 				<div className="summary">
 					<p className="font_body_secondary text-grey06">Telefono</p>
-					<p className="font_body text-grey06">{phone}</p>
+					<p className="font_body text-grey06 pt-3">{phone}</p>
 				</div> : <></>}
 
 			{img ? 
@@ -103,7 +104,7 @@ export default function Summary() {
 				</div> : <></>}
 
 			{solicitudData ?
-				<div className="pt-3">
+				<div className="pt-6">
 					<div className="flex text-grey06 px-4 pb-1">
 						<p className="flex-grow font_h3">Solicitud</p>
 						<p className="font_body_secondary">Cantidad</p>
@@ -113,12 +114,20 @@ export default function Summary() {
 					<CuboCardwithSE 
 						size={solicitudData.cubo40.size} 
 						quantity={solicitudData.cubo40.quantity} 
-						sistemaElevacion={sistemaElevacion}/> : <></>}
+						sistemaElevacion={sistemaElevacion}/> : <></>
+					}
+
+					{ solicitudData.cubo40.quantity > 0 && solicitudData.cubo90.quantity > 0 || solicitudData.cubo40.quantity > 0 && solicitudData.cubo120.quantity > 0 ? <hr className="border-t border-gray-300 m-0" /> : <></>}
+					
 					{solicitudData.cubo90.quantity > 0 ?
 					<CuboCardwithSE 
 						size={solicitudData.cubo90.size} 
 						quantity={solicitudData.cubo90.quantity} 
 						sistemaElevacion={sistemaElevacion}/> : <></>}
+					
+
+					{ solicitudData.cubo90.quantity > 0 && solicitudData.cubo120.quantity > 0 ? <hr className="border-t border-gray-300 m-0" /> : <></>}
+
 					{solicitudData.cubo120.quantity > 0 ?
 					<CuboCardwithSE 
 						size={solicitudData.cubo120.size} 
@@ -129,8 +138,12 @@ export default function Summary() {
 			}
 
 
+			
+
 
             <div className='fixed inset-x-0 bottom-4 mx-4'>
+				<p className="font_body_secondary text-grey06 mb-4">Al enviar, usted acepta nuestra <Link href={"/privacidad"} className="underline">Política de privacidad</Link></p>
+
                 <button
                     onClick={handleClick}
                     className="btn_primary_dark"
