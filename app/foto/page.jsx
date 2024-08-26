@@ -40,14 +40,13 @@ export default function Foto() {
 		setShowSaltar(false)
 		setCameraActive(true);
 		setPermissionError(false);
+
     try {
       //const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       videoRef.current.srcObject = stream;
       videoRef.current.play();
-			
-      
-
+			  
     } catch (err) {
 			console.log(err)
 			setCameraActive(false);
