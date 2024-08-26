@@ -23,6 +23,7 @@ export default function Summary() {
 	const [solicitud, setSolicitud] = useState(null)
 	const [solicitudData, setSolicitudData] = useState(null)
 	const [sistemaElevacion, setSistemaElevacion] = useState(null)
+	const [initPage, setInitPage] = useState(null)
 
 	useEffect(() => {
 
@@ -46,16 +47,18 @@ export default function Summary() {
 	  setHorario(storedData.horario)
 	  setSistemaElevacion(storedData.sistemaElevacion == 'si')
 	  setIncidencia(storedData.incidencia)
+	  setInitPage(storedData.originalPage)
 
 	  //console.log(storedData)
 	}, []);
 
-	const sendEventData = async (init_page, _incidencia) => {
-
+	const sendEventData = async () => {
+		console.log(initPage)
+		console.log(incidencia)
 		const eventData = {
 			event_name: "Success", // App Start, Incident, Quit, Success
-			init_page: init_page,     // Contenedor, Local
-			incidencia: _incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
+			init_page: initPage,     // Contenedor, Local
+			incidencia: incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
 			actual_page: "summary",  // Cualquiera
 		};
 	
@@ -76,7 +79,7 @@ export default function Summary() {
 			console.error('Error al enviar los datos:', error);
 		}
 		
-		sendEventData(initPage, incidencia)
+		sendEventData()
         router.push("/confirmacion")
 	};
 
