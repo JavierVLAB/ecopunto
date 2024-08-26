@@ -18,12 +18,12 @@ export default function Contenedor() {
   
   const router = useRouter();
 
-  const sendEventData = async () => {
+  const sendEventData = async (incidencia) => {
 
     const eventData = {
         event_name: "App Start", // App Start, Incident, Quit, Success
         init_page: "Contenedor",     // Contenedor, Local
-        incidencia: "Contenedor lleno",         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
+        incidencia: incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
         actual_page: "Contenedor",  // Cualquiera
     };
 
@@ -61,6 +61,7 @@ export default function Contenedor() {
       estado: estado_contenedor
     }
 
+    sendEventData(storedData.incidencia)
     const queryString = new URLSearchParams(query).toString();
     router.push(`/direccion?${queryString}`);
   }

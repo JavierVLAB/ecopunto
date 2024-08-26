@@ -7,11 +7,11 @@ export default function Horarios() {
   return (
 		<main className="bg-white text-grey06 px-4">
 
-<p className='font_h2 pt-14 mb-6'>Política de privacidad</p>
+<p className='font_h2 pt-14 mb-6'>Política de privacidad</p>
 
 
 <p className='politicaTitles'> 1. RESPONSABLE DEL TRATAMIENTO</p> 
-<p className='politicaText'>SOCIEDAD ECOLÓGICA PARA EL RECICLADO DE LOS ENVASES DE VIDRIO (“ECOVIDRIO”), con domicilio en Madrid, calle Estébanez Calderón, 3-5 (4ª planta) 28020, (España), inscrita en el Registro Nacional de Asociaciones con número nacional 160.493 (“ECOVIDRIO”) le informa que los datos de carácter personal que proporcione o que en el futuro pueda proporcionar, serán tratados de conformidad con lo previsto en la presente Política de Privacidad (“Política”).Esta Política describe el tratamiento de los datos personales del usuario por parte de ECOVIDRIO, a través de la página web www.ecovidrio.es (el "Sitio Web"). A los efectos de la legislación de protección de datos aplicable y vigente en cada momento, ECOVIDRIO es el responsable del tratamiento de los datos personales del usuario.
+<p className='politicaText'>SOCIEDAD ECOLÓGICA PARA EL RECICLADO DE LOS ENVASES DE VIDRIO (“ECOVIDRIO”), con domicilio en Madrid, calle Estébanez Calderón, 3-5 (4ª planta) 28020, (España), inscrita en el Registro Nacional de Asociaciones con número nacional 160.493 (&ldquo;ECOVIDRIO&rdquo;) le informa que los datos de carácter personal que proporcione o que en el futuro pueda proporcionar, serán tratados de conformidad con lo previsto en la presente Política de Privacidad (&ldquo;Política&rdquo;).Esta Política describe el tratamiento de los datos personales del usuario por parte de ECOVIDRIO, a través de la página web www.ecovidrio.es (el &ldquo;Sitio Web&rdquo;). A los efectos de la legislación de protección de datos aplicable y vigente en cada momento, ECOVIDRIO es el responsable del tratamiento de los datos personales del usuario.
 ¿QUÉ DATOS PERSONALES TRATAMOS?</p>
 <p className='politicaText'>El usuario puede proporcionar a ECOVIDRIO sus datos de carácter personal cuando (i) se suscribe al Sitio Web mediante la creación de una cuenta; (ii) da de alta una iniciativa a través de la pestaña “Crear iniciativa” del Sitio Web; (iii) contacta con ECOVIDRIO a través de la dirección de correo electrónico disponible en la pestaña “Contacto” del Sitio Web, por alguno de los siguientes motivos: aviso de recogida y/o de reposición de contenedores, solicitud de homologación, solicitud de adhesión a ECOVIDRIO, creación de un usuario para hacer la declaración de envases, formar parte del proceso de reciclado, o trabajar en ECOVIDRIO.
 </p>
@@ -54,7 +54,7 @@ export default function Horarios() {
 <p className='politicaTitles'>9. DERECHOS</p>
 <p className='politicaText'>El usuario podrá, en los términos establecidos en la normativa sobre protección de datos vigente en cada momento, revocar en cualquier momento la autorización concedida para el tratamiento y la cesión de los datos personales, así como ejercer los derechos de acceso, rectificación, la supresión, oposición, derecho a solicitar la limitación del tratamiento de sus datos personales y el derecho a la portabilidad de sus datos. Para ello, el usuario se podrá dirigir por escrito con justificante de su identidad mediante correo electrónico dirigido a info@ecovidrio.es. Igualmente, el usuario tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos.
 </p>
-<p className='politicaTitles'>10. MODIFICACIONES</p>
+<p className='politicaTitles'>10. MODIFICACIONES </p>
 <p className='politicaText pb-[100px]'>ECOVIDRIO podrá, en cualquier momento, modificar la presente Política, bastando para ello comunicarlo a través del Sitio Web. Por ello, recomendamos la revisión periódica de esta Política para estar informado de cómo se tratan y protegen los datos personales.
 </p>
 

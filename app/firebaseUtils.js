@@ -10,11 +10,11 @@ export async function addEvent(eventData) {
     try {
         // Crear el objeto de datos
         const data = {
-            event_name,
-            init_page,
-            incidencia,
-            actual_page,
-            apiKey,
+            event_name,     // App Start, Quit, Incidencia, Success 
+            init_page,      // Contenedor, Local
+            incidencia,     // Contenedor roto, Contenedor lleno, Solicitar cubos
+            actual_page,    // x
+            apiKey,         
             timestamp: new Date().toISOString(), // Usar la fecha actual en formato ISO
         };
 
@@ -28,3 +28,5 @@ export async function addEvent(eventData) {
         return { success: false, error: error.message };
     }
 }
+
+

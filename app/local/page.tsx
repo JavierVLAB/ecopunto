@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import WhatsAppPie from "../components/WhatsAppPie";
 import HeaderInitPage from "../components/HeaderInitPage";
+import { addEvent } from "../firebaseUtils";
 
 
 import '../ui/globals.css'
@@ -28,7 +29,6 @@ export default function Local() {
       localStorage.setItem('session_id', storedId);
     }
 
-
     // Cargar o inicializar el objeto JSON
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
     storedData.sessionId = storedId;
@@ -48,16 +48,31 @@ export default function Local() {
     
     if(estado == 'solicitud'){
       storedData.incidencia = 'Solicitar cubos'
+      
     } else {
       storedData.incidencia = 'Contenedor lleno'
     }
 
     storedData.estado = estado
 
+    sendEventData(storedData.incidencia)
+
     localStorage.setItem('session_data', JSON.stringify(storedData));
     console.log(localStorage)
   }
 
+  const sendEventData = async (incidencia: string) => {
+
+    const eventData = {
+        event_name: "App Start", // App Start, Incident, Quit, Success
+        init_page: "Local",     // Contenedor, Local
+        incidencia: incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
+        actual_page: "Local",  // Cualquiera
+    };
+
+    await addEvent(eventData);
+
+  };
 
   return (
       <main className="h-screen bg-ecovidrio_light">

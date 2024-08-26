@@ -6,6 +6,7 @@ import { send_to_CRM } from "@/app/utils"
 import Image from "next/image";
 import CuboCardwithSE from "../components/CuboCardwithSE";
 import Link from "next/link";
+import { addEvent } from "../firebaseUtils";
 
 import '@/app/ui/globals.css'
 import CuboCard from "../components/CuboCard";
@@ -37,15 +38,30 @@ export default function Summary() {
 		const municipio = addressData.municipio
 		const provincia = addressData.provincia
 	  }
+
 	  setDireccion(storedData.address)
 	  setSolicitudData(storedData.solicitudData)
 	  setPhone(storedData.phone)
 	  setImg(storedData.image)
 	  setHorario(storedData.horario)
 	  setSistemaElevacion(storedData.sistemaElevacion == 'si')
+	  setIncidencia(storedData.incidencia)
 
 	  //console.log(storedData)
 	}, []);
+
+	const sendEventData = async (init_page, _incidencia) => {
+
+		const eventData = {
+			event_name: "Success", // App Start, Incident, Quit, Success
+			init_page: init_page,     // Contenedor, Local
+			incidencia: _incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
+			actual_page: "summary",  // Cualquiera
+		};
+	
+		await addEvent(eventData);
+	
+	  };
 
     const handleClick = () => {
 		const jsonBody = {
@@ -60,6 +76,7 @@ export default function Summary() {
 			console.error('Error al enviar los datos:', error);
 		}
 		
+		sendEventData(initPage, incidencia)
         router.push("/confirmacion")
 	};
 
