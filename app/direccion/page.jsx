@@ -72,7 +72,12 @@ export default function EstadoContenedor() {
 
 		localStorage.setItem('session_data', JSON.stringify(storedData));
 
-		router.push('/summary')
+		if(storedData.originalPage == 'contenedor'){
+			router.push('/foto')
+		} else {
+			router.push('/summary')
+		}
+		
 
 
 	}
