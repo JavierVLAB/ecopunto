@@ -38,7 +38,7 @@ export default function SistemaElevacion() {
 			localStorage.setItem('session_data', JSON.stringify(storedData));
 			
 			console.log(storedData)
-			router.push('/direccion')
+			router.push('/nombreLocal')
             
         }
 

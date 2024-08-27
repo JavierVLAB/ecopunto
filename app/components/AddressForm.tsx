@@ -141,9 +141,6 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
     //console.log(localStorage.session_data)
     //console.log(`estado: ${_estado}`)
     //console.log(`originalPage: ${originalPage}`)
-
-    
-    
     
     if(originalPage=="local"){
       if(estado=='lleno'){
@@ -224,11 +221,7 @@ const AddressForm: React.FC<MyProps> =({estado}) =>{
         </div>
         : <></>}
 
-        <LocationFetcher  onGPS={setIsGPSAddress}
-                          onAddress={setDirSelect} 
-                          onMunicipio={setMunicipioSelect} 
-                          onProvincia={setProvinciaSelect}
-                          onPostCode={setPostCodeSelect}/> 
+        <LocationFetcher  onLocalizationValue={setFormData}/> 
 
 
 

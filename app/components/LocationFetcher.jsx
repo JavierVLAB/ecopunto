@@ -3,7 +3,7 @@ import Image from 'next/image';
 import near_me from '@/public/near_me.svg'
 
 
-export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvincia, onPostCode})  {
+export default function LocationFetcher({onLocalizationValue})  {
   const [location, setLocation] = useState(null);
   const [address, setAddress] = useState(null);
   const [error, setError] = useState(false)
@@ -34,18 +34,13 @@ export default function LocationFetcher({onGPS, onAddress, onMunicipio, onProvin
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=es&extratags=1&countrycodes=es`
     );
     const data = await response.json();
-    onGPS(true)
-    setAddress(data.display_name);
-    onAddress(data.display_name)
-    onMunicipio(data.address.city)
-    onProvincia(data.address.province || data.address.state)
-    onPostCode(data.address.postcode)
-    console.log(data)
+    onLocalizationValue(data)
+    //console.log(data)
   };
 
   return (
     <div>
-      <div className={`flex mt-6 ${ error ? 'mb-1' : 'mb-8'}`}>
+      <div className={`flex mt-6 mx-4 ${ error ? 'mb-1' : 'mb-8'}`}>
         <Image 
           src={near_me}
           height={16}

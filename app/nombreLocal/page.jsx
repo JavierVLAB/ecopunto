@@ -21,7 +21,7 @@ export default function EstadoContenedor() {
 
 		if(storedData.nameLocal){
 			console.log('si')
-			setPhone(storedData.nameLocal)
+			setName(storedData.nameLocal)
 		} else {
 			console.log('no')
 		}

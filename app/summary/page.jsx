@@ -84,10 +84,10 @@ export default function Summary() {
 	};
 
   return (
-	<div className="min-h-screen flex flex-col justify-between bg-white">
-
+	<div className="min-h-screen flex flex-col justify-between bg-white items-starts">
+			<div className="mt-0">
 			<PageTitle title={incidencia} page={6} totalPages={6} />
-
+			
 			<div className="px-4 mt-6">
 				<h2 className="font_h2 text-grey06 ">Confirme sus datos antes de enviar</h2>
 			</div>
@@ -159,7 +159,7 @@ export default function Summary() {
 
 
 			
-
+			</div>
 
             <div className='p-4'>
 				<p className="font_body_secondary text-grey06 mb-4">Al enviar, usted acepta nuestra <Link href={"/privacidad"} className="underline">Política de privacidad</Link></p>

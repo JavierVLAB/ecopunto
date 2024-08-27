@@ -64,7 +64,7 @@ export default function Solicitud() {
 		if(cubo3 > 0){
 			router.push('/sistema_elevacion')
 		} else { 
-			router.push('/direccion')
+			router.push('/nombreLocal')
 		}
 
 	};
