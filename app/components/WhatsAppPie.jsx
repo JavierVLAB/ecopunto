@@ -10,7 +10,7 @@ export default function WhatsAppPie() {
             <p className="font_caption text-grey05 mt-12 ms-6">¿OTRAS DUDAS?</p>
             
             <div className="px-7 mt-[12px]">
-            <a  href="https://api.whatsapp.com/send?phone=+34611517914" 
+            <a  href="https://api.whatsapp.com/send?phone=+34629045150" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="font_h3 text-ecovidrio_dark mt-1 underline">Escríbenos por Whatsapp</a>

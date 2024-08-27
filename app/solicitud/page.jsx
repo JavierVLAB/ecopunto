@@ -93,7 +93,7 @@ export default function Solicitud() {
 			<div className={`px-7 ${isError ? "mt-12" : "mt-14"} pb-4`}>
 				<p className="font_caption text-grey05 uppercase mb-3">
 					¿No sabes que tamaño necesitas?</p>
-				<a href="/contenedor" className="link_whatsapp">Escríbenos por Whatsapp</a>
+				<a href="https://api.whatsapp.com/send?phone=+34629045150" className="link_whatsapp">Escríbenos por Whatsapp</a>
 			</div>
 
 				
