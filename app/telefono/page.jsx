@@ -13,6 +13,8 @@ export default function EstadoContenedor() {
 
 	const [phone, setPhone] = useState('')
 
+	const [isError, setIsError] = useState(false)
+
 	useEffect(() => {
 		
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
@@ -27,12 +29,24 @@ export default function EstadoContenedor() {
 			console.log('no')
 		}
 
-
-
 	  }, []);
 
 	const handleSubmit = () => {
 		// Leer el objeto JSON desde localStorage
+
+		if(phone==''){
+			setIsError(true)
+			return
+		}
+
+		const phoneRegex = /^\+34 \d{9}$/;
+		if (!phoneRegex.test(phone)) {
+			setIsError(true);
+			return
+		} else {
+			setIsError(false);
+		}
+
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 
 		storedData.phone = phone;
@@ -46,7 +60,16 @@ export default function EstadoContenedor() {
 	const handleChange = (event) => {
 		setPhone(event.target.value)
 		//console.log(event.target.value)
+		setIsError(false)
+
 		
+		
+	};
+
+	const handleFocus = () => {
+		if (!phone.startsWith('+34')) {
+		  setPhone('+34 ');
+		}
 	};
 
   return (
@@ -59,12 +82,15 @@ export default function EstadoContenedor() {
 			</div>
 
 			<div className="mt-4 px-4">
-				<div className="input-with-float-label">
-				<input type="tel" id="phone" className="" placeholder="+34 " value={phone} onChange={handleChange}/>
+				<div className={`${isError ? "input-with-float-label-error":"input-with-float-label"}`}>
+				<input type="tel" id="phone" className="" placeholder="+34 " onFocus={handleFocus} value={phone} onChange={handleChange}/>
 					<label forhtml="phone" className="">Número teléfono</label>
 					<p className="font_body_secondary text-grey06 mt-2">Sólo nos pondremos en contacto con usted para tramitar su solicitud</p>
 				</div>
+				{ isError ? <p className='font_body_secondary text-error px-5 pt-2'>Escribe un número valido (+34 XXXXXXXXX)
+					</p> : <></>}
 			</div>
+
 
 			<div className='fixed inset-x-0 bottom-4 mx-4'>
 				<button

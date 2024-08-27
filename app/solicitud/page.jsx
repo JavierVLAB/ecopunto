@@ -71,7 +71,8 @@ export default function Solicitud() {
 
 
   return (
-		<main className=" min-h-screen bg-white relative">
+  	<div className="min-h-screen flex flex-col justify-between bg-white">
+		<div className="flex-grow pb-6">
 
 			<PageTitle title={'Solicitar Cubo'} page={1} totalPages={4} />
 
@@ -79,7 +80,7 @@ export default function Solicitud() {
 				<h2 className="font_h2 text-grey06 ">¿Qué tamaño de cubo necesitas?</h2>
 				<p className="font_body text-grey06 pe-4 mt-2">No tendras que pagar por tu cubo</p>
 			</div>
-
+ 
 			<CuboCard size = {40} onCounterChange={setCubo1} qty={cubo1}/>
 			<hr className="border-t border-gray-300 m-0" />
 			<CuboCard size = {90} onCounterChange={setCubo2} qty={cubo2}/>
@@ -90,22 +91,25 @@ export default function Solicitud() {
 				</p> : <></>}
 			
 			<div className={`px-7 ${isError ? "mt-12" : "mt-14"} pb-4`}>
-				<p className="font_caption text-grey05 mt-1 uppercase">
+				<p className="font_caption text-grey05 uppercase mb-3">
 					¿No sabes que tamaño necesitas?</p>
 				<a href="/contenedor" className="link_whatsapp">Escríbenos por Whatsapp</a>
 			</div>
 
-			<div className='absolute w-full bottom-4 px-4'>
+				
+
+		</div>
+
+			<div className="p-4 ">
 				<button
 					type="submit"
 					onClick={handleClick}
-					className="btn_primary_dark"
+					className="btn_primary_dark "
 				>
 					Continuar
 				</button>
-			</div>
-
-		</main>
+				</div>
+		</div>
 
   );
 }

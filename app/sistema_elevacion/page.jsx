@@ -14,6 +14,16 @@ export default function SistemaElevacion() {
 
 	useEffect(() => {
 
+		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+		console.log(storedData)
+
+		if(storedData.sistemaElevacion){
+			console.log('si')
+			setSelectedOption(storedData.sistemaElevacion)
+		} else {
+			console.log('no')
+		}
+
 	}, []);
 
 	const handleSubmit = () => {
@@ -57,21 +67,21 @@ export default function SistemaElevacion() {
 
 			<div className="">
 				<div className="flex items-center px-4">
-					<input id="default-radio-1" type="radio" value="si" name="default-radio" 
+					<input id="default-radio-1" type="radio" value="si" name="default-radio" checked={selectedOption === 'si'}
 						className={`radio ${showError ? 'border-error' : 'border-grey06'}`} onChange={handleRadioChange}/>
 					<label for="default-radio-1" 
 						className="radio_label">Si, el contenedor lo tiene</label>
 				</div>
 
 				<div className="flex items-center mt-6 px-4">
-					<input id="default-radio-2" type="radio" value="no" name="default-radio" 
+					<input id="default-radio-2" type="radio" value="no" name="default-radio" checked={selectedOption === 'no'}
 						className={`radio ${showError ? 'border-error' : 'border-grey06'}`} onChange={handleRadioChange}/>
 					<label for="default-radio-2" 
 						className="radio_label">No</label>
 				</div>
 
 				<div className="flex items-center mt-6 px-4">
-					<input id="default-radio-3" type="radio" value="contactame" name="default-radio" 
+					<input id="default-radio-3" type="radio" value="contactame" name="default-radio" checked={selectedOption === 'contactame'}
 						className={`radio ${showError ? 'border-error' : 'border-grey06'}`} onChange={handleRadioChange}/>
 					<label for="default-radio-3" 
 						className="radio_label">No lo sé, contáctame</label>

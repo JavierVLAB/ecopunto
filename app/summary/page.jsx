@@ -84,7 +84,7 @@ export default function Summary() {
 	};
 
   return (
-		<main className="h-screen bg-white">
+	<div className="min-h-screen flex flex-col justify-between bg-white">
 
 			<PageTitle title={incidencia} page={6} totalPages={6} />
 
@@ -161,7 +161,7 @@ export default function Summary() {
 			
 
 
-            <div className='fixed inset-x-0 bottom-4 mx-4'>
+            <div className='p-4'>
 				<p className="font_body_secondary text-grey06 mb-4">Al enviar, usted acepta nuestra <Link href={"/privacidad"} className="underline">Política de privacidad</Link></p>
 
                 <button
@@ -173,7 +173,7 @@ export default function Summary() {
             </div>
 
 
-		</main>
+		</div>
 
   );
 }
