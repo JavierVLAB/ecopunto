@@ -48,7 +48,7 @@ export default function ConfirmacionContenedor() {
 	  };
 
   return (
-		<main className="h-screen bg-white flex flex-col justify-between">
+		<main className="min-h-screen bg-white flex flex-col justify-between">
 			<div className="flex justify-center mt-6">
 				<Image 
 					src={ecovidriologogreen}

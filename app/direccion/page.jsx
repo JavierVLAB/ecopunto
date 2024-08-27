@@ -153,7 +153,7 @@ export default function EstadoContenedor() {
 
 				<div className={`mb-6 ${isError ? isErrorPC ? 'input-with-float-label' : 'input-with-float-label-error' : 'input-with-float-label'}`}>
 					<input
-					type="text"
+					type="number"
 					name="postcode"
 					id="postcode"
 					placeholder=" "
