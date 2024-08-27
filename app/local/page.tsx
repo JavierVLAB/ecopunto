@@ -47,7 +47,7 @@ export default function Local() {
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
     
     if(estado == 'solicitud'){
-      storedData.incidencia = 'Solicitar cubos'
+      storedData.incidencia = 'Solicitar cubo'
       
     } else {
       storedData.incidencia = 'Contenedor lleno'
@@ -75,7 +75,7 @@ export default function Local() {
   };
 
   return (
-      <main className="h-screen bg-ecovidrio_light">
+      <main className="min-h-screen bg-ecovidrio_light">
         
         <HeaderInitPage />
         
@@ -114,7 +114,7 @@ export default function Local() {
             height={34}
             alt="contenedor"
           />
-          <p className="mx-4 font_h3 flex-grow">Solicitar Cubo</p>
+          <p className="mx-4 font_h3 flex-grow">Solicitar cubo</p>
 
           <Image 
             src={chevron_right}

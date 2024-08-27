@@ -17,6 +17,7 @@ export default function Foto() {
 	const [showSaltar, setShowSaltar] = useState(true);
   const [estado, setEstado] = useState('')
 
+
   useEffect(() => {
 
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
@@ -109,7 +110,7 @@ export default function Foto() {
 			
 			<div className="px-4 mt-6 mb-4">
 				<h2 className="font_h2 text-grey06 ">Sube foto del estado del contenedor</h2>
-				<p className="font_body text-grey06 mt-1">Necesitamos una foto del contenedor para determinar el tipo de avería y enviar al técnico adecuado.</p>
+				<p className="font_body text-grey06 mt-1">{showSaltar ? "Una foto nos ayuda a localizar el contenedor y resolver el incidente más rápidamente." : "Necesitamos una foto del contenedor para determinar el tipo de avería y enviar al técnico adecuado."}</p>
 			</div>
 
       {cameraActive ? (

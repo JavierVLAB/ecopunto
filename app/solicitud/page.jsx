@@ -71,12 +71,12 @@ export default function Solicitud() {
 
 
   return (
-		<main className="h-screen bg-white">
+		<main className=" min-h-screen bg-white relative">
 
 			<PageTitle title={'Solicitar Cubo'} page={1} totalPages={4} />
 
 			<div className="px-4 mt-6 mb-8">
-				<h2 className="font_h2 text-grey06 ">¿Que tamaño de cubo necesitas?</h2>
+				<h2 className="font_h2 text-grey06 ">¿Qué tamaño de cubo necesitas?</h2>
 				<p className="font_body text-grey06 pe-4 mt-2">No tendras que pagar por tu cubo</p>
 			</div>
 
@@ -89,14 +89,13 @@ export default function Solicitud() {
 			{ isError ? <p className='font_body_secondary text-error px-5 pt-2'>Escoge al menos un cubo
 				</p> : <></>}
 			
-			<div className={`px-7 ${isError ? "mt-2" : "mt-8"}`}>
+			<div className={`px-7 ${isError ? "mt-12" : "mt-14"} pb-4`}>
 				<p className="font_caption text-grey05 mt-1 uppercase">
 					¿No sabes que tamaño necesitas?</p>
-				<Link href="/contenedor" className="link_whatsapp">Escríbenos por Whatsapp</Link>
-				
+				<a href="/contenedor" className="link_whatsapp">Escríbenos por Whatsapp</a>
 			</div>
 
-			<div className='fixed inset-x-0 bottom-4 mx-4'>
+			<div className='absolute w-full bottom-4 px-4'>
 				<button
 					type="submit"
 					onClick={handleClick}

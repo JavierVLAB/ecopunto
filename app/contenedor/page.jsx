@@ -67,7 +67,7 @@ export default function Contenedor() {
   }
 
   return (
-      <main className="h-screen bg-ecovidrio_light">
+      <main className="min-h-screen bg-ecovidrio_light">
 
         <HeaderInitPage />
 
