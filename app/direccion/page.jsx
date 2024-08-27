@@ -23,6 +23,7 @@ export default function EstadoContenedor() {
 	const [totalPages, setTotalPage] = useState(0)
 	const [direccion, setDireccion] = useState(null)
 	const [isError, setIsError] = useState(false)
+	const [isErrorPC, setIsErrorPC] = useState(false)
 	const [postcode, setPostcode] = useState('')
 	const [municipio, setMunicipio] = useState('')
 
@@ -60,6 +61,14 @@ export default function EstadoContenedor() {
 		if(municipio =="" || direccion =="" || postcode ==""){
 			setIsError(true)
 			return
+		}
+
+		const postcodeRegex = /^\d{5}$/;
+		if (!postcodeRegex.test(postcode)) {
+			setIsErrorPC(true);
+			return
+		} else {
+			setIsErrorPC(false);
 		}
 
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
@@ -142,7 +151,7 @@ export default function EstadoContenedor() {
 					</label>
 				</div>
 
-				<div className={`mb-6 ${isError ? postcode ? 'input-with-float-label' : 'input-with-float-label-error' : 'input-with-float-label'}`}>
+				<div className={`mb-6 ${isError ? isErrorPC ? 'input-with-float-label' : 'input-with-float-label-error' : 'input-with-float-label'}`}>
 					<input
 					type="text"
 					name="postcode"
@@ -155,6 +164,9 @@ export default function EstadoContenedor() {
 					Código Postal
 					</label>
 				</div>
+				
+				{ isErrorPC ? <p className='font_body_secondary text-error mb-2 px-5'>El código postal no es válido
+					</p> : <></>}
 
 				{ isError ? <p className='font_body_secondary text-error mb-6 px-5'>Rellena todos los campos
 					</p> : <></>}
