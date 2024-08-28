@@ -48,6 +48,17 @@ export default function Summary() {
 	  setIncidencia(storedData.incidencia)
 	  setInitPage(storedData.originalPage)
 
+	  const handleResize = () => {
+		const vh = window.innerHeight * 0.01;
+		document.documentElement.style.setProperty('--vh', `${vh}px`);
+	  };
+	
+	  window.addEventListener('resize', handleResize);
+	  handleResize();
+	
+	  return () => window.removeEventListener('resize', handleResize);
+  
+
 	  //console.log(storedData)
 	}, []);
 
@@ -83,7 +94,7 @@ export default function Summary() {
 	};
 
   return (
-	<div className="min-h-screen flex flex-col justify-between bg-white items-starts">
+	<div className="min-h-screen-corrected flex flex-col justify-between bg-white items-starts">
 			<div className="mt-0">
 			<PageTitle title={incidencia} page={6} totalPages={6} />
 			

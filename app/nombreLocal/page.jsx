@@ -1,7 +1,7 @@
 "use client"
 
 import PageTitle from "@/app/components/PageTitle";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 import '@/app/ui/globals.css'
@@ -9,6 +9,7 @@ import '@/app/ui/globals.css'
 
 export default function EstadoContenedor() {
 	const router = useRouter()
+	const inputRef = useRef(null);
 
 	const [name, setName] = useState('')
 
@@ -20,10 +21,14 @@ export default function EstadoContenedor() {
 		console.log(storedData)
 
 		if(storedData.nameLocal){
-			console.log('si')
+			//console.log('si')
 			setName(storedData.nameLocal)
 		} else {
-			console.log('no')
+			//console.log('no')
+		}
+
+		if (inputRef.current) {
+			inputRef.current.focus();
 		}
 
 	  }, []);
@@ -62,6 +67,7 @@ export default function EstadoContenedor() {
 			
                 <div className={`mt-4 ${isError? 'input-with-float-label-error' : 'input-with-float-label'}`}>
                     <input
+						ref={inputRef}
                         type="text"
                         name="local"
                         id="local"

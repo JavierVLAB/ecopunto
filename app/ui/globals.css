@@ -265,3 +265,7 @@ a {
 .politicaLi {
   @apply font_body
 }
+
+.min-h-screen-corrected {
+  min-height: calc(var(--vh, 1vh) * 100);
+}

@@ -1,6 +1,6 @@
 "use client"
 import PageTitle from "@/app/components/PageTitle";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import '@/app/ui/globals.css'
 import LocationFetcher from "../components/LocationFetcher";
 import { useRouter } from "next/navigation";
@@ -18,6 +18,8 @@ const municipios = [
 export default function EstadoContenedor() {
 	const router = useRouter()
 
+	const inputRef = useRef(null);
+
   	const [estado, setEstado] = useState('')
 
 	const [page, setPage] = useState(0)
@@ -33,6 +35,10 @@ export default function EstadoContenedor() {
 		const storedData = JSON.parse(localStorage.getItem('session_data'));
 		const _estado = storedData.estado || ''
 
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+
 		if (_estado == "solicitud"){
 			setPage(3)
 			setTotalPage(6)
@@ -45,7 +51,6 @@ export default function EstadoContenedor() {
 				setTotalPage(3)
 			}
 		}
-
 
 		setEstado(_estado)
 
@@ -110,7 +115,6 @@ export default function EstadoContenedor() {
 			router.push('/confirmacion')
 		}
 		
-
 	}
 
 	const localizationValue = (value) => {
@@ -143,6 +147,7 @@ export default function EstadoContenedor() {
 
 				<div className={`mb-6 ${isError ? direccion ? 'input-with-float-label' : 'input-with-float-label-error' : 'input-with-float-label'}`}>
 					<input
+					ref={inputRef}
 					type="text"
 					name="direccion"
 					id="direccion"

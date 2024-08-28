@@ -1,15 +1,15 @@
 "use client"
 
 import PageTitle from "@/app/components/PageTitle";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import near_me from '@/public/near_me.svg'
 
 import '@/app/ui/globals.css'
 
 
 export default function EstadoContenedor() {
 	const router = useRouter()
+	const inputRef = useRef(null)
 
 	const [phone, setPhone] = useState('')
 
@@ -27,6 +27,10 @@ export default function EstadoContenedor() {
 			setPhone(storedData.phone)
 		} else {
 			console.log('no')
+		}
+
+		if (inputRef.current) {
+			inputRef.current.focus();
 		}
 
 	  }, []);
@@ -83,7 +87,7 @@ export default function EstadoContenedor() {
 
 			<div className="mt-4 px-4">
 				<div className={`${isError ? "input-with-float-label-error":"input-with-float-label"}`}>
-				<input type="tel" id="phone" className="" placeholder="+34 " onFocus={handleFocus} value={phone} onChange={handleChange}/>
+				<input ref={inputRef} type="tel" id="phone" className="" placeholder="+34 " onFocus={handleFocus} value={phone} onChange={handleChange}/>
 					<label forhtml="phone" className="">Número teléfono</label>
 					<p className="font_body_secondary text-grey06 mt-2">Sólo nos pondremos en contacto con usted para tramitar su solicitud</p>
 				</div>

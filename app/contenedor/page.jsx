@@ -50,6 +50,16 @@ export default function Contenedor() {
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
 
+    const handleResize = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+  
+    window.addEventListener('resize', handleResize);
+    handleResize();
+  
+    return () => window.removeEventListener('resize', handleResize);
+
   }, []);
 
   const handleClick = (estado_contenedor) => {
@@ -67,7 +77,7 @@ export default function Contenedor() {
   }
 
   return (
-      <main className="min-h-screen bg-ecovidrio_light">
+      <main className="min-h-screen-corrected bg-ecovidrio_light">
 
         <HeaderInitPage />
 
