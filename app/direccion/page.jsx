@@ -93,7 +93,9 @@ export default function EstadoContenedor() {
 
 	const localizationValue = (value) => {
 		console.log(value)
-		setDireccion(value.address.road)
+		let direccion = value.address.road
+		direccion += value.address.house_number ? ', ' + value.address.house_number : ''
+		setDireccion(direccion)
 		setPostcode(value.address.postcode)
 	}
 
