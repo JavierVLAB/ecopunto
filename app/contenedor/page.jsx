@@ -8,6 +8,7 @@ import HeaderInitPage from "../components/HeaderInitPage";
 import { useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
+import Link from "next/link";
 
 import '../ui/globals.css'
 import contenedor from "@/public/contenedor_generico.svg"
@@ -62,8 +63,7 @@ export default function Contenedor() {
     }
 
     sendEventData(storedData.incidencia)
-    const queryString = new URLSearchParams(query).toString();
-    router.push(`/direccion?${queryString}`);
+
   }
 
   return (
@@ -73,8 +73,9 @@ export default function Contenedor() {
 
         <p className="font_caption text-grey05 mt-12 ms-6">CONTENEDOR EN LA CALLE</p>
         
-        <div
+        <Link
           onClick={() => handleClick('lleno')}
+          href={"/direccion"}
           className="init-white-buttom rounded-t-lg mt-4"
           >
           <Image 
@@ -91,10 +92,11 @@ export default function Contenedor() {
             className=""
           />
           
-        </div>
+        </Link>
 
-        <div
+        <Link
           onClick={() => handleClick('roto')}
+          href={"/direccion"}
           className="init-white-buttom rounded-b-lg mt-[2px]"
           >
           <Image 
@@ -111,7 +113,7 @@ export default function Contenedor() {
             className=""
           />
           
-        </div>
+        </Link>
 
         <WhatsAppPie />
       </main>
