@@ -79,3 +79,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 
 Ecovidrio2024
+
+"dev": "concurrently \"npm run next-dev\" \"npm run fastapi-dev\"",

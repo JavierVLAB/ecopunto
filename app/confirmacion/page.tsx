@@ -24,7 +24,7 @@ export default function ConfirmacionContenedor() {
 		storedData.finish = true
 		
 		
-		if (incidencia=='Solicitar cubos') {
+		if (incidencia=='Solicitar cubo') {
 			if(storedData.contactar){
 				setTitle('Te llamaremos para finalizar tu solicitud.')
 				setText('Gracias por su solicitud. Nos pondremos en contacto con usted lo antes posible para confirmar la solicitud.')

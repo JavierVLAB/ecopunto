@@ -9,7 +9,6 @@ import Link from "next/link";
 import { addEvent } from "../firebaseUtils";
 
 import '@/app/ui/globals.css'
-import CuboCard from "../components/CuboCard";
 
 
 export default function Summary() {
@@ -64,7 +63,7 @@ export default function Summary() {
 	
 		await addEvent(eventData);
 	
-	  };
+	};
 
     const handleClick = () => {
 		const jsonBody = {
