@@ -36,9 +36,16 @@ export default function EstadoContenedor() {
 			setPage(3)
 			setTotalPage(6)
 		} else {
-			setPage(1)
-			setTotalPage(3)
+			if (storedData.originalPage == 'local') {
+				setTotalPage(0)
+
+			} else {
+				setPage(1)
+				setTotalPage(3)
+			}
 		}
+
+		
 
 		setEstado(_estado)
 
@@ -83,8 +90,10 @@ export default function EstadoContenedor() {
 
 		if(storedData.originalPage == 'contenedor'){
 			router.push('/foto')
+		} else if (estado == "Solicitar cubo"){
+			router.push('')
 		} else {
-			router.push('/summary')
+			router.push('/telefono')
 		}
 		
 
