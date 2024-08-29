@@ -96,7 +96,7 @@ export default function Solicitud() {
 			{ isError ? <p className='font_body_secondary text-error px-5 pt-2'>Escoge al menos un cubo
 				</p> : <></>}
 			
-			<div className={`px-7 ${isError ? "mt-12" : "mt-14"} pb-4`}>
+			<div className={`px-7 ${isError ? "mt-4" : "mt-10"}`}>
 				<p className="font_caption text-grey05 uppercase mb-3">
 					¿No sabes que tamaño necesitas?</p>
 				<a href="https://api.whatsapp.com/send?phone=+34629045150" className="link_whatsapp">Escríbenos por Whatsapp</a>
@@ -106,7 +106,7 @@ export default function Solicitud() {
 
 		</div>
 
-			<div className="p-4 ">
+			<div className="p-4">
 				<button
 					type="submit"
 					onClick={handleClick}

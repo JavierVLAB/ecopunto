@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import img_sistema_elevacion from '@/public/sistema_elevacion.png'
 import '@/app/ui/globals.css'
+import { sendTrack } from "../firebaseUtils";
 
 export default function SistemaElevacion() {
 	const router = useRouter() 
 	const [selectedOption, setSelectedOption] = useState(null);
 	const [showError, setShowError] = useState(false);
-	const [isSend, setIsSend] = useState(false)
 
 	useEffect(() => {
 
@@ -24,10 +24,9 @@ export default function SistemaElevacion() {
 			console.log('no')
 		}
 
-		if(!isSend) {
-			sendTrack(storedData.originalPage, 'sistema de elevacíon', storedData.incidencia)
-			setIsSend(true)
-		} 
+		console.log('Environment:', process.env.NODE_ENV);
+
+		process.env.NODE_ENV == 'production' ? '' : sendTrack(storedData.originalPage, 'sistema de elevacíon', storedData.incidencia)
 		
 	}, []);
 
