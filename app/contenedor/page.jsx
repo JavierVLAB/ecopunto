@@ -4,7 +4,7 @@ import Image from "next/image";
 import WhatsAppPie from "../components/WhatsAppPie";
 import HeaderInitPage from "../components/HeaderInitPage";
 
-import { useEffect} from 'react';
+import { useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import Link from "next/link";
@@ -17,6 +17,8 @@ import { sendTrack } from "@/app/firebaseUtils"
 export default function Contenedor() {
   
   const router = useRouter();
+
+  const [isSend, setIsSend] = useState(false)
 
   useEffect(() => {
 
@@ -45,7 +47,10 @@ export default function Contenedor() {
     window.addEventListener('resize', handleResize);
     handleResize();
 
-    sendTrack('Contenedor', 'contenedor')
+    if(!isSend) {
+      sendTrack('Contenedor', 'contenedor')
+      setIsSend(true)
+    } 
   
     return () => {
       window.removeEventListener('resize', handleResize);

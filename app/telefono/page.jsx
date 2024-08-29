@@ -34,7 +34,10 @@ export default function EstadoContenedor() {
 			inputRef.current.focus();
 		}
 
-		sendTrack(storedData.originalPage, 'telefono', storedData.incidencia)
+		if(!isSend) {
+			sendTrack(storedData.originalPage, 'telefono', storedData.incidencia)
+			setIsSend(true)
+		} 
 
 	  }, []);
 

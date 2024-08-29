@@ -29,6 +29,7 @@ export default function EstadoContenedor() {
 	const [isErrorPC, setIsErrorPC] = useState(false)
 	const [postcode, setPostcode] = useState('')
 	const [municipio, setMunicipio] = useState('')
+	const [isSend, setIsSend] = useState(false)
 
 	useEffect(() => {
 		
@@ -64,7 +65,11 @@ export default function EstadoContenedor() {
 
 		}
 
-		sendTrack(storedData.originalPage, 'direccion', storedData.incidencia)
+		if(!isSend) {
+			sendTrack(storedData.originalPage, 'direccion', storedData.incidencia)
+			setIsSend(true)
+		  } 
+		
 
 	}, []);
 

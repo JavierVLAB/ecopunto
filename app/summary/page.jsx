@@ -23,6 +23,7 @@ export default function Summary() {
 	const [solicitudData, setSolicitudData] = useState(null)
 	const [sistemaElevacion, setSistemaElevacion] = useState(null)
 	const [initPage, setInitPage] = useState(null)
+	const [isSend, setIsSend] = useState(false)
 
 	useEffect(() => {
 
@@ -56,7 +57,11 @@ export default function Summary() {
 	  window.addEventListener('resize', handleResize);
 	  handleResize();
 	
-	  sendTrack(storedData.originalPage, 'summary', storedData.incidencia)
+	if(!isSend) {
+		sendTrack(storedData.originalPage, 'summary', storedData.incidencia)
+		setIsSend(true)
+	} 
+	  
 
 	  return () => window.removeEventListener('resize', handleResize);
   

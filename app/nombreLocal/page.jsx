@@ -14,6 +14,7 @@ export default function EstadoContenedor() {
 	const [name, setName] = useState('')
 
 	const [isError, setIsError] = useState(false)
+	const [isSend, setIsSend] = useState(false)
 
 	useEffect(() => {
 		
@@ -31,7 +32,11 @@ export default function EstadoContenedor() {
 			inputRef.current.focus();
 		}
 
-		sendTrack(storedData.originalPage, 'nombreLocal', storedData.incidencia)
+		if(!isSend) {
+			sendTrack(storedData.originalPage, 'nombreLocal', storedData.incidencia)
+			setIsSend(true)
+		  } 
+		
 
 	  }, []);
 

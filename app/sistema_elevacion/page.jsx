@@ -1,7 +1,6 @@
 "use client"
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import img_sistema_elevacion from '@/public/sistema_elevacion.png'
@@ -11,6 +10,7 @@ export default function SistemaElevacion() {
 	const router = useRouter() 
 	const [selectedOption, setSelectedOption] = useState(null);
 	const [showError, setShowError] = useState(false);
+	const [isSend, setIsSend] = useState(false)
 
 	useEffect(() => {
 
@@ -24,8 +24,11 @@ export default function SistemaElevacion() {
 			console.log('no')
 		}
 
-		sendTrack(storedData.originalPage, 'sistema de elevacion', storedData.incidencia)
-
+		if(!isSend) {
+			sendTrack(storedData.originalPage, 'sistema de elevacíon', storedData.incidencia)
+			setIsSend(true)
+		} 
+		
 	}, []);
 
 	const handleSubmit = () => {

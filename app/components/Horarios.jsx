@@ -8,6 +8,7 @@ const HorarioSelector = ({onChange}) => {
   const [selectedDias, setSelectedDias] = useState(['L', 'M', 'X', 'J', 'V']);
   const [isErrorD,setIsErrorD] = useState(false)
   const [isErrorH,setIsErrorH] = useState(false)
+  const [isSend, setIsSend] = useState(false)
 
   const toggleDia = (dia) => {
     const newD = selectedDias.includes(dia) ? selectedDias.filter((D) => D !== dia) : [...selectedDias, dia]
@@ -56,7 +57,13 @@ const HorarioSelector = ({onChange}) => {
 	  // Leer el objeto JSON desde localStorage
 	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 
-    sendTrack(storedData.originalPage, 'horarios', storedData.incidencia)
+
+    if(!isSend) {
+      sendTrack(storedData.originalPage, 'horarios', storedData.incidencia)
+      setIsSend(true)
+    }
+
+    
 	  
 	 try{
     setSelectedDias(storedData.horarioData[1])
