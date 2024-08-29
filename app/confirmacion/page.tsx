@@ -16,7 +16,7 @@ export default function ConfirmacionContenedor() {
 	const [title, setTitle] = useState('')
 	const [text, setText] = useState('')
 	const [originalPage, setOriginalPage] = useState('')
-	const [isSend, setIsSend] = useState(false)
+	  
 
 	useEffect(() => {
 		// Leer el objeto JSON desde localStorage
@@ -49,10 +49,9 @@ export default function ConfirmacionContenedor() {
 		  window.addEventListener('resize', handleResize);
 		  handleResize();
 		
-		  if(!isSend) {
+
 			sendTrack(storedData.originalPage, 'confirmacion', storedData.incidencia)
-			setIsSend(true)
-		} 
+		 
 
 		  return () => window.removeEventListener('resize', handleResize);
 	  

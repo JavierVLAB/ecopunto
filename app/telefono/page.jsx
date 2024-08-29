@@ -15,7 +15,6 @@ export default function EstadoContenedor() {
 	const [phone, setPhone] = useState('')
 
 	const [isError, setIsError] = useState(false)
-	const [isSend, setIsSend] = useState(false)
 
 	useEffect(() => {
 		
@@ -36,10 +35,8 @@ export default function EstadoContenedor() {
 			inputRef.current.focus();
 		}
 
-		if(!isSend) {
-			sendTrack(storedData.originalPage, 'telefono', storedData.incidencia)
-			setIsSend(true)
-		} 
+		process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'telefono', storedData.incidencia)
+		 
 
 	  }, []);
 

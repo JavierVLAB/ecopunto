@@ -18,7 +18,7 @@ export default function Contenedor() {
   
   const router = useRouter();
 
-  const [isSend, setIsSend] = useState(false)
+    
 
   useEffect(() => {
 
@@ -47,10 +47,8 @@ export default function Contenedor() {
     window.addEventListener('resize', handleResize);
     handleResize();
 
-    if(!isSend) {
-      sendTrack('Contenedor', 'contenedor')
-      setIsSend(true)
-    } 
+		process.env.NODE_ENV == 'development' ? '' : sendTrack('Contenedor', 'contenedor')
+ 
   
     return () => {
       window.removeEventListener('resize', handleResize);

@@ -14,7 +14,7 @@ export default function Solicitud() {
     const [cubo2, setCubo2] = useState(0)
     const [cubo3, setCubo3] = useState(0)
 	const [isError, setIsError] = useState(false)
-	const [isSend, setIsSend] = useState(false)
+	  
 
 	useEffect(() => {
 		setIsError(false)
@@ -23,10 +23,8 @@ export default function Solicitud() {
 	useEffect(() => {
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 
-		if(!isSend) {
-			sendTrack(storedData.originalPage, 'solicitud', storedData.incidencia)
-			setIsSend(true)
-		} 
+		process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'solicitud', storedData.incidencia)
+		 
 		
 	}, []);
 

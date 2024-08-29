@@ -14,7 +14,6 @@ export default function EstadoContenedor() {
 	const [name, setName] = useState('')
 
 	const [isError, setIsError] = useState(false)
-	const [isSend, setIsSend] = useState(false)
 
 	useEffect(() => {
 		
@@ -37,11 +36,7 @@ export default function EstadoContenedor() {
 			setTimeout(iosFocusHack, 100);
 		}
 
-		if(!isSend) {
-			sendTrack(storedData.originalPage, 'nombreLocal', storedData.incidencia)
-			setIsSend(true)
-		  } 
-		
+		process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'nombreLocal', storedData.incidencia)		
 
 	  }, []);
 

@@ -18,7 +18,7 @@ import cubo_generico from "@/public/cubo_generico.svg"
 export default function Local() {
 
   const router = useRouter();
-  const [isSend, setIsSend] = useState(false)
+    
 
   useEffect(() => {
     // Generar un nuevo ID y construir el JSON inicial
@@ -40,10 +40,8 @@ export default function Local() {
     localStorage.setItem('session_data', JSON.stringify(storedData));
 
     
-    if(!isSend) {
-      sendTrack('Local', 'local')
-      setIsSend(true)
-    } 
+		process.env.NODE_ENV == 'development' ? '' : sendTrack('Local', 'local')
+ 
     //console.log(storedData)
 
   }, []);
@@ -56,7 +54,7 @@ export default function Local() {
       storedData.incidencia = 'Solicitar cubo'
       
     } else {
-      storedData.incidencia = 'Contenedor lleno'
+      storedData.incidencia = 'Contenedor lleno (local)'
     }
 
     storedData.estado = estado

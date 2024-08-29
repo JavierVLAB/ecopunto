@@ -26,7 +26,7 @@ export default function SistemaElevacion() {
 
 		console.log('Environment:', process.env.NODE_ENV);
 
-		process.env.NODE_ENV == 'production' ? '' : sendTrack(storedData.originalPage, 'sistema de elevacíon', storedData.incidencia)
+		process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'sistema de elevacíon', storedData.incidencia)
 		
 	}, []);
 

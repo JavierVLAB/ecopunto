@@ -17,7 +17,7 @@ export default function Foto() {
 	const videoRef = useRef(null);
 	const [showSaltar, setShowSaltar] = useState(true);
   const [estado, setEstado] = useState('')
-  const [isSend, setIsSend] = useState(false)
+    
 
 
   useEffect(() => {
@@ -35,12 +35,8 @@ export default function Foto() {
   
      }
 
-     if(!isSend) {
-			sendTrack(storedData.originalPage, 'foto', storedData.incidencia)
-			setIsSend(true)
-		  } 
+     process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'foto', storedData.incidencia)
      
-
   }, []);
 
   
