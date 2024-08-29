@@ -32,6 +32,7 @@ export default function EstadoContenedor() {
 		}
 
 		if (inputRef.current) {
+			inputRef.current.click();
 			inputRef.current.focus();
 		}
 

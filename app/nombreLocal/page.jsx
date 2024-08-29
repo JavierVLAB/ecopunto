@@ -30,6 +30,11 @@ export default function EstadoContenedor() {
 
 		if (inputRef.current) {
 			inputRef.current.focus();
+
+			const iosFocusHack = () => {
+				inputRef.current.setSelectionRange(inputRef.current.value.length, inputRef.current.value.length);
+			};
+			setTimeout(iosFocusHack, 100);
 		}
 
 		if(!isSend) {
