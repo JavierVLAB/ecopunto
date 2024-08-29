@@ -15,6 +15,7 @@ export default function EstadoContenedor() {
 	const [phone, setPhone] = useState('')
 
 	const [isError, setIsError] = useState(false)
+	const [isSend, setIsSend] = useState(false)
 
 	useEffect(() => {
 		

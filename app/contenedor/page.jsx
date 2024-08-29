@@ -34,7 +34,7 @@ export default function Contenedor() {
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
     storedData.sessionId = storedId;
     storedData.timestamp = new Date().toISOString();
-    storedData.originalPage = 'Contenedor';
+    storedData.originalPage = 'contenedor';
 
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
