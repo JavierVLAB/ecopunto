@@ -4,7 +4,6 @@ import Image from "next/image";
 import WhatsAppPie from "../components/WhatsAppPie";
 import HeaderInitPage from "../components/HeaderInitPage";
 
-
 import { useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,26 +12,14 @@ import Link from "next/link";
 import '../ui/globals.css'
 import contenedor from "@/public/contenedor_generico.svg"
 import chevron_right from "@/public/chevron_right.svg"
-import { addEvent } from "@/app/firebaseUtils"
+import { sendTrack } from "@/app/firebaseUtils"
 
 export default function Contenedor() {
   
   const router = useRouter();
 
-  const sendEventData = async (incidencia) => {
-
-    const eventData = {
-        event_name: "App Start", // App Start, Incident, Quit, Success
-        init_page: "Contenedor",     // Contenedor, Local
-        incidencia: incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
-        actual_page: "Contenedor",  // Cualquiera
-    };
-
-    await addEvent(eventData);
-
-  };
-
   useEffect(() => {
+
     localStorage.removeItem('session_data');
 
     let storedId = localStorage.getItem('session_id');
@@ -45,7 +32,7 @@ export default function Contenedor() {
     const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
     storedData.sessionId = storedId;
     storedData.timestamp = new Date().toISOString();
-    storedData.originalPage = 'contenedor';
+    storedData.originalPage = 'Contenedor';
 
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
@@ -57,8 +44,14 @@ export default function Contenedor() {
   
     window.addEventListener('resize', handleResize);
     handleResize();
+
+    sendTrack('Contenedor', 'contenedor')
   
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+
+
 
   }, []);
 
@@ -72,7 +65,7 @@ export default function Contenedor() {
       estado: estado_contenedor
     }
 
-    sendEventData(storedData.incidencia)
+
 
   }
 

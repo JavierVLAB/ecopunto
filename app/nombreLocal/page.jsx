@@ -3,9 +3,9 @@
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { sendTrack } from "../firebaseUtils";
 
 import '@/app/ui/globals.css'
-
 
 export default function EstadoContenedor() {
 	const router = useRouter()
@@ -30,6 +30,8 @@ export default function EstadoContenedor() {
 		if (inputRef.current) {
 			inputRef.current.focus();
 		}
+
+		sendTrack(storedData.originalPage, 'nombreLocal', storedData.incidencia)
 
 	  }, []);
 

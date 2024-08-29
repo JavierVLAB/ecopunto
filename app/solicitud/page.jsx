@@ -2,7 +2,7 @@
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from "next/link";
+import { sendTrack } from "../firebaseUtils";
 import '@/app/ui/globals.css'
 import CuboCard from "../components/CuboCard";
 
@@ -20,7 +20,8 @@ export default function Solicitud() {
 	}, [cubo1, cubo2, cubo3]);
 
 	useEffect(() => {
-
+		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+		sendTrack(storedData.originalPage, 'solicitud', storedData.incidencia)
 		
 	}, []);
 

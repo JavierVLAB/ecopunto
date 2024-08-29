@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { sendTrack } from '../firebaseUtils';
 
 const HorarioSelector = ({onChange}) => {
   const router = useRouter()
@@ -54,9 +55,8 @@ const HorarioSelector = ({onChange}) => {
   useEffect(() => {
 	  // Leer el objeto JSON desde localStorage
 	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-	  //console.log(storedData)
-	  // Guardar de nuevo en localStorage
-	  //localStorage.setItem('session_data', JSON.stringify(storedData));
+
+    sendTrack(storedData.originalPage, 'horarios', storedData.incidencia)
 	  
 	 try{
     setSelectedDias(storedData.horarioData[1])

@@ -24,6 +24,8 @@ export default function SistemaElevacion() {
 			console.log('no')
 		}
 
+		sendTrack(storedData.originalPage, 'sistema de elevacion', storedData.incidencia)
+
 	}, []);
 
 	const handleSubmit = () => {

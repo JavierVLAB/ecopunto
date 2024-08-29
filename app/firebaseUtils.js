@@ -27,6 +27,31 @@ export async function addEvent(eventData) {
         console.error("Error adding document: ", error);
         return { success: false, error: error.message };
     }
+} 
+
+export async function sendTrack(init_page, actual_page, incidencia = '') {
+
+    const eventData = {
+      event_name: "Track", // App Start, Incident, Quit, Success
+      init_page: init_page,     // Contenedor, Local
+      incidencia: incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
+      actual_page: actual_page,  // Cualquiera
+    }
+
+    await addEvent(eventData)
+
 }
 
+export async function sendSuccess(init_page, incidencia) {
+
+    const eventData = {
+      event_name: "Success", // App Start, Incident, Quit, Success
+      init_page: init_page,     // Contenedor, Local
+      incidencia: incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
+      actual_page: "summary",  // Cualquiera
+    }
+
+    await addEvent(eventData)
+
+}
 

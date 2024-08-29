@@ -2,7 +2,7 @@
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
-import { send_to_CRM } from "@/app/utils"
+import { sendSuccess, sendTrack } from "../firebaseUtils";
 import Image from "next/image";
 import CuboCardwithSE from "../components/CuboCardwithSE";
 import Link from "next/link";
@@ -56,32 +56,15 @@ export default function Summary() {
 	  window.addEventListener('resize', handleResize);
 	  handleResize();
 	
+	  sendTrack(storedData.originalPage, 'summary', storedData.incidencia)
+
 	  return () => window.removeEventListener('resize', handleResize);
   
 
 	  //console.log(storedData)
 	}, []);
 
-	const sendEventData = async () => {
-		console.log(initPage)
-		console.log(incidencia)
-		const eventData = {
-			event_name: "Success", // App Start, Incident, Quit, Success
-			init_page: initPage,     // Contenedor, Local
-			incidencia: incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
-			actual_page: "summary",  // Cualquiera
-		};
-	
-		await addEvent(eventData);
-	
-	};
-
     const handleClick = () => {
-		const jsonBody = {
-			"nombre": "nuevo envio",
-			"apellido": "desde",
-			"email": "summary.com"
-		}
 
 		try {
 			//send_to_CRM(jsonBody)
@@ -89,7 +72,7 @@ export default function Summary() {
 			console.error('Error al enviar los datos:', error);
 		}
 		
-		sendEventData()
+		sendSuccess(initPage, incidencia)
         router.push("/confirmacion")
 	};
 

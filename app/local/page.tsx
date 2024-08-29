@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import WhatsAppPie from "../components/WhatsAppPie";
 import HeaderInitPage from "../components/HeaderInitPage";
-import { addEvent } from "../firebaseUtils";
+import { sendTrack } from "../firebaseUtils";
 
 
 import '../ui/globals.css'
@@ -18,6 +18,7 @@ import cubo_generico from "@/public/cubo_generico.svg"
 export default function Local() {
 
   const router = useRouter();
+  const [isSend, setIsSend] = useState(false)
 
   useEffect(() => {
     // Generar un nuevo ID y construir el JSON inicial
@@ -38,7 +39,12 @@ export default function Local() {
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
 
-    console.log(storedData)
+    
+    if(!isSend) {
+      sendTrack('Local', 'local')
+      setIsSend(true)
+    } 
+    //console.log(storedData)
 
   }, []);
 
@@ -55,24 +61,9 @@ export default function Local() {
 
     storedData.estado = estado
 
-    sendEventData(storedData.incidencia)
-
     localStorage.setItem('session_data', JSON.stringify(storedData));
     console.log(localStorage)
   }
-
-  const sendEventData = async (incidencia: string) => {
-
-    const eventData = {
-        event_name: "App Start", // App Start, Incident, Quit, Success
-        init_page: "Local",     // Contenedor, Local
-        incidencia: incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
-        actual_page: "Local",  // Cualquiera
-    };
-
-    await addEvent(eventData);
-
-  };
 
   return (
       <main className="min-h-screen bg-ecovidrio_light">

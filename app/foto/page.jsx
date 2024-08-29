@@ -5,6 +5,7 @@ import PageTitle from "@/app/components/PageTitle";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { sendTrack } from '../firebaseUtils';
 
 
 export default function Foto() {
@@ -32,6 +33,8 @@ export default function Foto() {
      } catch {
   
      }
+
+     sendTrack(storedData.originalPage, 'foto', storedData.incidencia)
 
   }, []);
 

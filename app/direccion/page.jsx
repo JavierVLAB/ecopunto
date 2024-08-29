@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import '@/app/ui/globals.css'
 import LocationFetcher from "../components/LocationFetcher";
 import { useRouter } from "next/navigation";
-import { addEvent } from "../firebaseUtils";
+import { sendTrack } from "../firebaseUtils";
 
 const municipios = [
 	"Alcalá de Guadaira", 
@@ -64,21 +64,10 @@ export default function EstadoContenedor() {
 
 		}
 
+		sendTrack(storedData.originalPage, 'direccion', storedData.incidencia)
 
 	}, []);
 
-
-	const sendEventData = async () => {
-		const eventData = {
-			event_name: "Success", // App Start, Incident, Quit, Success
-			init_page: 'local',     // Contenedor, Local
-			incidencia: 'Contenedor lleno',         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
-			actual_page: "direccion",  // Cualquiera
-		};
-	
-		await addEvent(eventData);
-	
-	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -111,7 +100,6 @@ export default function EstadoContenedor() {
 		} else if (estado == "solicitud"){
 			router.push('/telefono')
 		} else {
-			sendEventData()
 			router.push('/confirmacion')
 		}
 		
