@@ -39,9 +39,10 @@ export default function Local() {
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
 
-    
+    if(!storedData.finish){
 		process.env.NODE_ENV == 'development' ? '' : sendTrack('Local', 'local')
- 
+      console.log('si')
+    }
     //console.log(storedData)
 
   }, []);

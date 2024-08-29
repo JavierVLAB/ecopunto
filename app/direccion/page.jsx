@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import '@/app/ui/globals.css'
 import LocationFetcher from "../components/LocationFetcher";
 import { useRouter } from "next/navigation";
-import { sendTrack } from "../firebaseUtils";
+import { sendSuccess, sendTrack } from "../firebaseUtils";
 
 const municipios = [
 	"Alcalá de Guadaira", 
@@ -68,7 +68,6 @@ export default function EstadoContenedor() {
 		process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'direccion', storedData.incidencia)
 
 		
-
 	}, []);
 
 
@@ -103,6 +102,7 @@ export default function EstadoContenedor() {
 		} else if (estado == "solicitud"){
 			router.push('/telefono')
 		} else {
+			process.env.NODE_ENV == 'development' ? '' : sendSuccess(storedData.originalPage, storedData.incidencia)
 			router.push('/confirmacion')
 		}
 		
