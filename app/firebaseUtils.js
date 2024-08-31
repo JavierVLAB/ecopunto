@@ -1,4 +1,4 @@
-// lib/firebaseUtils.js
+
 import { db } from './firebaseConfig'; // Ajusta la ruta según la ubicación de tu archivo firebaseConfig.js
 import { collection, addDoc } from "firebase/firestore";
 

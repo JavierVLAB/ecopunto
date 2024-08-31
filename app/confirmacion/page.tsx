@@ -50,7 +50,7 @@ export default function ConfirmacionContenedor() {
 		  handleResize();
 		
 
-			sendTrack(storedData.originalPage, 'confirmacion', storedData.incidencia)
+		  process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'confirmacion', storedData.incidencia)
 		 
 
 		  return () => window.removeEventListener('resize', handleResize);

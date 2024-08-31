@@ -6,7 +6,7 @@ import { sendSuccess, sendTrack } from "../firebaseUtils";
 import Image from "next/image";
 import CuboCardwithSE from "../components/CuboCardwithSE";
 import Link from "next/link";
-import { addEvent } from "../firebaseUtils";
+import { send_to_CRM_test } from "../utils";
 
 import '@/app/ui/globals.css'
 
@@ -22,14 +22,14 @@ export default function Summary() {
 	const [solicitud, setSolicitud] = useState(null)
 	const [solicitudData, setSolicitudData] = useState(null)
 	const [sistemaElevacion, setSistemaElevacion] = useState(null)
-	const [initPage, setInitPage] = useState(null)
-	  
+	const [initPage, setInitPage] = useState(null)	  
 
 	useEffect(() => {
 
 	  // Leer el objeto JSON desde localStorage
 	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 	  console.log(storedData)
+
 	  setIncidencia(storedData.incidencia)
 	  
 	  if(storedData.addressData){
@@ -67,13 +67,11 @@ export default function Summary() {
 
     const handleClick = () => {
 
-		try {
-			//send_to_CRM(jsonBody)
-		} catch (error) {
-			console.error('Error al enviar los datos:', error);
-		}
-		
-		sendSuccess(initPage, incidencia)
+		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
+		send_to_CRM_test(storedData)
+				
+		process.env.NODE_ENV == 'development' ? '' : sendSuccess(initPage, incidencia)
+
         router.push("/confirmacion")
 	};
 

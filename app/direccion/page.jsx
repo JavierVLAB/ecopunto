@@ -7,13 +7,16 @@ import { useRouter } from "next/navigation";
 import { sendSuccess, sendTrack } from "../firebaseUtils";
 
 const municipios = [
-	"Alcalá de Guadaira", 
-	"Alcalá de Henares",
-	"Dos hermanas",
-	"Leganés en Madrid",
-	"Logroño",
-	"Santander",
-	"Sevilla"]
+	"Alcalá de Guadaíra" 
+	,"Alcalá de Henares"
+	,"Dos hermanas"
+	,"Leganés"
+	,"Logroño"
+	,"Santander"
+	//,"Sevilla"
+]
+
+
 
 export default function EstadoContenedor() {
 	const router = useRouter()

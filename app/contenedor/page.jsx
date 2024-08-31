@@ -13,12 +13,11 @@ import '../ui/globals.css'
 import contenedor from "@/public/contenedor_generico.svg"
 import chevron_right from "@/public/chevron_right.svg"
 import { sendTrack } from "@/app/firebaseUtils"
+import { send_to_CRM_test } from "@/app/utils"
 
 export default function Contenedor() {
   
   const router = useRouter();
-
-    
 
   useEffect(() => {
 
@@ -49,7 +48,8 @@ export default function Contenedor() {
 
 		process.env.NODE_ENV == 'development' ? '' : sendTrack('Contenedor', 'contenedor')
  
-  
+    
+
     return () => {
       window.removeEventListener('resize', handleResize);
     }
@@ -68,6 +68,7 @@ export default function Contenedor() {
       estado: estado_contenedor
     }
 
+    send_to_CRM_test(storedData)
 
 
   }
@@ -81,7 +82,7 @@ export default function Contenedor() {
         
         <Link
           onClick={() => handleClick('lleno')}
-          href={"/direccion"}
+          href={""}
           className="init-white-buttom rounded-t-lg mt-4"
           >
           <Image 

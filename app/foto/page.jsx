@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { sendTrack } from '../firebaseUtils';
 
-
 export default function Foto() {
   const router = useRouter()
   const [cameraActive, setCameraActive] = useState(false);
@@ -17,8 +16,6 @@ export default function Foto() {
 	const videoRef = useRef(null);
 	const [showSaltar, setShowSaltar] = useState(true);
   const [estado, setEstado] = useState('')
-    
-
 
   useEffect(() => {
 
@@ -29,27 +26,68 @@ export default function Foto() {
     }
     setEstado(storedData.estado)
 
-    try{
-      console.log("")
-     } catch {
-  
-     }
-
-     process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'foto', storedData.incidencia)
+    process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'foto', storedData.incidencia)
      
   }, []);
 
+  const handleUploadClick = async () => {
+    setShowSaltar(false);
+    setCameraActive(true);
+    setPermissionError(false);
+  
+    try {
+      // Intenta acceder a la cámara trasera
+      const constraints = {
+        video: {
+          facingMode: { exact: "environment" } // Solicita la cámara trasera
+        }
+      };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      videoRef.current.srcObject = stream;
+      videoRef.current.muted = true;  // Silenciar video para iOS
+      videoRef.current.play();
+    } catch (err) {
+      if (err.name === "OverconstrainedError" || err.name === "ConstraintNotSatisfiedError") {
+        // Si hay un error por restricciones, intenta acceder a cualquier cámara disponible
+        try {
+          const fallbackConstraints = {
+            video: true // Esto seleccionará cualquier cámara disponible (trasera o delantera)
+          };
+          const stream = await navigator.mediaDevices.getUserMedia(fallbackConstraints);
+          videoRef.current.srcObject = stream;
+          videoRef.current.muted = true;
+          videoRef.current.play();
+        } catch (fallbackErr) {
+          console.error("No se pudo acceder a la cámara: ", fallbackErr);
+          setCameraActive(false);
+          setPermissionError(true);
+        }
+      } else {
+        console.error("Error de permisos u otro error: ", err);
+        setCameraActive(false);
+        setPermissionError(true);
+      }
+    }
+  };
   
 
-  const handleUploadClick = async () => {
+  const handleUploadClick2 = async () => {
 		setShowSaltar(false)
 		setCameraActive(true);
 		setPermissionError(false);
 
     try {
       //const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+      const constraints = {
+        video: {
+          facingMode: { exact: "environment" } // Esto intenta activar la cámara trasera
+        }
+      };
+
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
+      //videoRef.current.muted = true;
       videoRef.current.play();
 			  
     } catch (err) {
@@ -61,7 +99,8 @@ export default function Foto() {
 
 	const handleCaptureClick = () => {
 		const canvas = document.createElement('canvas');
-		const video = document.querySelector("#videoElement");
+		//const video = document.querySelector("#videoElement");
+    const video = videoRef.current;
 		canvas.width = video.videoWidth;
 		canvas.height = video.videoHeight;
 		const ctx = canvas.getContext('2d');
@@ -73,7 +112,8 @@ export default function Foto() {
 	};
 	
 	const stopCamera = () => {
-		const video = document.querySelector("#videoElement");
+		//const video = document.querySelector("#videoElement");
+    const video = videoRef.current;
 		const stream = video.srcObject;
 		const tracks = stream.getTracks();
 		tracks.forEach(track => {
@@ -81,13 +121,6 @@ export default function Foto() {
 		});
 		video.srcObject = null;
 	};
-
-  const handleUploadImage = () => {
-    // Save the image and transition back to normal state
-    const imageJson = JSON.stringify({ image });
-    // Save imageJson to the desired location or handle accordingly
-    setImage(image);
-  };
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -119,7 +152,7 @@ export default function Foto() {
 
       {cameraActive ? (
         <div className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black">
-          <video id="videoElement" ref={videoRef} autoPlay className="max-w-none w-auto h-full object-cover"></video>
+          <video id="videoElement" ref={videoRef} className="max-w-none w-auto h-full object-cover" autoPlay playsInline muted/>
       
           <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
 						<button
