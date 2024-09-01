@@ -82,7 +82,7 @@ export default function Contenedor() {
         
         <Link
           onClick={() => handleClick('lleno')}
-          href={""}
+          href={"/direccion"}
           className="init-white-buttom rounded-t-lg mt-4"
           >
           <Image 
