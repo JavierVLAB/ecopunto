@@ -29,12 +29,30 @@ const PageTitle: React.FC<PageTitleProps> = ({ title, page, totalPages }) => {
 				<h1 className="font_medium text-grey06 flex-grow text-center pe-4">{title}</h1>
 				</div>
 
-				{totalPages > 0 ? <div className="px-4">
+				{totalPages > 0 ? 
+					<>
+					{/*<div className="px-4">
+					
 					<div className=" bg-grey03 rounded-full h-1.5">
 						<div className="bg-ecovidrio_dark h-1.5 rounded-full" 
 									style={{ width: `${progress}%` }}></div>
+						</div>
+					</div>*/}
+
+					<div className="px-4 flex space-x-1">
+						{Array.from({ length: totalPages }).map((_, index) => (
+							<div
+							key={index}
+							className={`h-1.5 rounded-full flex-1 ${
+								index < page ? 'bg-ecovidrio_dark' : 'bg-grey03'
+							}`}
+							></div>
+						))}
 					</div>
-				</div> : <></>}
+					</>
+				: <></>}
+
+
 			</div>
 	);
 };

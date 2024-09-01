@@ -141,7 +141,7 @@ export default function Foto() {
 	};
 
   return (
-	<main className="h-screen bg-white">
+	<main className="min-h-screen-corrected h-screen bg-white">
 
 			<PageTitle title={'Contenedor ' + estado} page={2} totalPages={3} />
 			
@@ -154,7 +154,7 @@ export default function Foto() {
         <div className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black">
           <video id="videoElement" ref={videoRef} className="max-w-none w-auto h-full object-cover" autoPlay playsInline muted/>
       
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+          <div className="absolute bottom-[100px] left-1/2 transform -translate-x-1/2">
 						<button
 							className="relative flex items-center justify-center w-[80px] h-[80px] bg-transparent rounded-full border-2 border-ecovidrio_dark"
 							onClick={handleCaptureClick}
@@ -172,7 +172,7 @@ export default function Foto() {
                 alt="Captured" 
                 width={8}
                 height={8}
-                className="w-full h-auto" />
+                className="h-[200px] w-auto" />
               <button 
                 className="absolute -top-4 -right-4 bg-grey04 p-1 rounded-full border border-2 border-white"
                 onClick={() => setModalOpen(true)}

@@ -44,8 +44,8 @@ export default function EstadoContenedor() {
 		}
 
 		if (_estado == "solicitud"){
-			setPage(3)
-			setTotalPage(6)
+			setPage(4)
+			setTotalPage(7)
 		} else {
 			if (storedData.originalPage == 'local') {
 				setTotalPage(0)
@@ -106,6 +106,8 @@ export default function EstadoContenedor() {
 			router.push('/telefono')
 		} else {
 			process.env.NODE_ENV == 'development' ? '' : sendSuccess(storedData.originalPage, storedData.incidencia)
+			process.env.NODE_ENV == 'development' ? '' : send_to_CRM_test(storedData)
+		
 			router.push('/confirmacion')
 		}
 		
@@ -119,9 +121,6 @@ export default function EstadoContenedor() {
 		setPostcode(value.address.postcode)
 	}
 
-	const handleChange = (e) => {
-		console.log(e)
-	}
 
   return (
 		<main className="h-screen bg-white">

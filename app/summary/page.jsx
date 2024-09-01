@@ -7,9 +7,7 @@ import Image from "next/image";
 import CuboCardwithSE from "../components/CuboCardwithSE";
 import Link from "next/link";
 import { send_to_CRM_test } from "../utils";
-
 import '@/app/ui/globals.css'
-
 
 export default function Summary() {
 	const router = useRouter()
@@ -22,13 +20,20 @@ export default function Summary() {
 	const [solicitud, setSolicitud] = useState(null)
 	const [solicitudData, setSolicitudData] = useState(null)
 	const [sistemaElevacion, setSistemaElevacion] = useState(null)
-	const [initPage, setInitPage] = useState(null)	  
+	const [initPage, setInitPage] = useState(null)	
+	const [page, setPage] = useState(0)  
 
 	useEffect(() => {
 
 	  // Leer el objeto JSON desde localStorage
 	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 	  console.log(storedData)
+
+	  if (storedData.originalPage == "contenedor") {
+		setPage(3)
+	  } else {
+		setPage(7)
+	  }
 
 	  setIncidencia(storedData.incidencia)
 	  
@@ -67,7 +72,8 @@ export default function Summary() {
     const handleClick = () => {
 
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-		send_to_CRM_test(storedData)
+		//Enviar datos al CRM
+		process.env.NODE_ENV == 'development' ? '' : send_to_CRM_test(storedData)
 				
 		process.env.NODE_ENV == 'development' ? '' : sendSuccess(initPage, incidencia)
 
@@ -77,7 +83,7 @@ export default function Summary() {
   return (
 	<div className="min-h-screen-corrected flex flex-col justify-between bg-white items-starts">
 			<div className="mt-0">
-			<PageTitle title={incidencia} page={6} totalPages={6} />
+			<PageTitle title={incidencia} page={page} totalPages={page} />
 			
 			<div className="px-4 mt-6">
 				<h2 className="font_h2 text-grey06 ">Confirme sus datos antes de enviar</h2>

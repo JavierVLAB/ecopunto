@@ -58,7 +58,7 @@ export default function SistemaElevacion() {
   return (
 		<main className="h-screen bg-white">
 
-			<PageTitle title={'Solicitar Cubo'} page={2} totalPages={6} />
+			<PageTitle title={'Solicitar Cubo'} page={2} totalPages={7} />
 
 			<div className="px-4 mt-6 mb-8">
 				<h2 className="font_h2 text-grey06 ">¿El contenedor de la calle más cercana tiene un sistema de elevación para vaciar el cubo?</h2>

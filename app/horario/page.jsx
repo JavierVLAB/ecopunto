@@ -26,7 +26,7 @@ export default function Horarios() {
   return (
 		<main className="h-screen bg-white ">
 
-			<PageTitle title={'Solicitar cubo'} page={5} totalPages={6} />
+			<PageTitle title={'Solicitar cubo'} page={6} totalPages={7} />
 
 			<div className="px-4 mt-6">
 				<h2 className="font_h2 text-grey06 ">¿Cuándo podrá recibir la entrega de cubos?</h2>

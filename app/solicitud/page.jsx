@@ -78,7 +78,7 @@ export default function Solicitud() {
   	<div className="min-h-screen flex flex-col justify-between bg-white">
 		<div className="flex-grow pb-6">
 
-			<PageTitle title={'Solicitar cubo'} page={1} totalPages={4} />
+			<PageTitle title={'Solicitar cubo'} page={1} totalPages={7} />
 
 			<div className="px-4 mt-6 mb-8">
 				<h2 className="font_h2 text-grey06 ">¿Qué tamaño de cubo necesitas?</h2>

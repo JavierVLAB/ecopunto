@@ -31,7 +31,7 @@ export async function send_to_CRM(data) {
 
 export async function send_to_CRM_test(data) {
 
-  prepare_data(data)
+  const dataCRM = prepare_data(data)
 
   const myHeaders = new Headers();
   myHeaders.append("x-api-key", "123456");
@@ -46,14 +46,14 @@ export async function send_to_CRM_test(data) {
   const requestOptions = {
     method: "POST",
     headers: myHeaders,
-    body: raw,
+    body: JSON.stringify(dataCRM),
     redirect: "follow"
   };
 
-  // fetch("https://prod-66.westeurope.logic.azure.com:443/workflows/8dce564530624a73a46c68373ecbf40b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=IiuoMPLzbJaquefcOU2gtKVBVcpdw683IiwTXrpkKP4", requestOptions)
-  //   .then((response) => response.text())
-  //   .then((result) => console.log(result))
-  //   .catch((error) => console.error(error));
+  fetch("https://prod-66.westeurope.logic.azure.com:443/workflows/8dce564530624a73a46c68373ecbf40b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=IiuoMPLzbJaquefcOU2gtKVBVcpdw683IiwTXrpkKP4", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log("enviado"))
+    .catch((error) => console.error(error));
 
 }
 
@@ -139,32 +139,30 @@ export function prepare_data (data){
   const dataCRM = {
     //"Id": "",                                  
     "Nombre": data.incidencia || '',           
-    "Tipo de cuenta": "",                      
+    "Tipo Cuenta": "",                      
     "Tipología del Caso": data.incidencia || '',
     "Calle": data.direccion || '',             
     //"Contacto": "",                            
     "Teléfono Contacto": data.phone || '',  
     "Dirección": data.address,                           
     "Calle": data.addressData.direccion,
-    "Código postal": data.addressData.postcode|| '',     
+    "Código Postal": data.addressData.postcode|| '',     
     "Municipio": municipio,         
     "Provincia": municipio_data[municipio]['PROVINCIA'],
     "Código Provincia": municipio_data[municipio]['COD_PROVINCIA'],
     "Código Municipio": municipio_data[municipio]['COD_MUNICIPIO'],                    
     "Lote": municipio_data[municipio]['LOTE'],                                
     "Imagen": data.image || '',               
-    "Solicitud cubo": JSON.stringify(result),  
+    "Solicitud Cubo": JSON.stringify(result),  
     "Nombre Establecimiento": data.nameLocal || '',
     "Horario": data.horario || '',
     "Contactar": data.contactar ? 'Sí' : 'No'                    
   }
 
-
-
-
-
   console.log(data)
   console.log(dataCRM)
+
+  return dataCRM
 
 }
 

@@ -84,7 +84,7 @@ export default function EstadoContenedor() {
   return (
 		<main className="h-screen bg-white">
 
-			<PageTitle title={'Solicitar cubo'} page={4} totalPages={6} />
+			<PageTitle title={'Solicitar cubo'} page={5} totalPages={7} />
 
 			<div className="px-4 mt-6">
 				<h2 className="font_h2 text-grey06 ">¿Cómo nos ponemos en contacto con usted?</h2>
