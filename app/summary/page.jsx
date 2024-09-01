@@ -61,7 +61,6 @@ export default function Summary() {
 
 	  return () => window.removeEventListener('resize', handleResize);
   
-
 	  //console.log(storedData)
 	}, []);
 
@@ -148,8 +147,6 @@ export default function Summary() {
 				</div>
 				: <></>
 			}
-
-
 			
 			</div>
 
@@ -163,7 +160,6 @@ export default function Summary() {
                     Enviar
                 </button>
             </div>
-
 
 		</div>
 

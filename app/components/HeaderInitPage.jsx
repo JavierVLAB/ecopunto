@@ -1,22 +1,22 @@
 "use client"
 import Image from "next/image"
 import ecovidriologo from "@/public/ecovidrio_logo.svg"
-import curved_bg from "@/public/fondo_curved.svg"
+import curved_bg from "@/public/fondo_curved2.svg"
 import '../ui/globals.css'
 
 export default function HeaderInitPage() {
     return (
         <div>
-            <div className="relative" >
+
+            <div className="" >
                 <Image 
                     src={curved_bg}
-                    alt="Logo ecovidrio"
-                    className="z-0 h-[232px] w-full"
-                    
+                    alt="fondo verde"
+                    className="h-[200px]"
                 />
             </div>
             {
-            <div className="absolute inset-0 z-0 pt-14 px-4 h-10">
+            <div className="absolute inset-0 z-0 pt-[32px] px-4 h-10">
                 <div className="flex">
                     <Image 
                     src={ecovidriologo}
