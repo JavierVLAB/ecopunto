@@ -38,6 +38,8 @@ export default function Contenedor() {
     // Guardar el objeto JSON en localStorage
     localStorage.setItem('session_data', JSON.stringify(storedData));
 
+    process.env.NODE_ENV == 'development' ? '' : sendTrack('Contenedor', 'contenedor')
+
     const handleResize = () => {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -45,10 +47,6 @@ export default function Contenedor() {
   
     window.addEventListener('resize', handleResize);
     handleResize();
-
-		process.env.NODE_ENV == 'development' ? '' : sendTrack('Contenedor', 'contenedor')
- 
-    
 
     return () => {
       window.removeEventListener('resize', handleResize);

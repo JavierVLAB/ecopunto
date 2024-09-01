@@ -25,6 +25,19 @@ export default function Solicitud() {
 
 		process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'solicitud', storedData.incidencia)
 		 
+		const handleResize = () => {
+			const vh = window.innerHeight * 0.01;
+			document.documentElement.style.setProperty('--vh', `${vh}px`);
+		  };
+		
+		  window.addEventListener('resize', handleResize);
+		  handleResize();
+	  
+		  return () => {
+			window.removeEventListener('resize', handleResize);
+		  }
+	  
+	  
 		
 	}, []);
 
@@ -75,7 +88,7 @@ export default function Solicitud() {
 
 
   return (
-  	<div className="min-h-screen flex flex-col justify-between bg-white">
+  	<div className="min-h-screen-corrected flex flex-col justify-between bg-white">
 		<div className="flex-grow pb-6">
 
 			<PageTitle title={'Solicitar cubo'} page={1} totalPages={7} />
