@@ -28,6 +28,18 @@ export default function Foto() {
 
     process.env.NODE_ENV == 'development' ? '' : sendTrack(storedData.originalPage, 'foto', storedData.incidencia)
      
+    const handleResize = () => {
+			const vh = window.innerHeight * 0.01;
+			document.documentElement.style.setProperty('--vh', `${vh}px`);
+		};
+		
+		window.addEventListener('resize', handleResize);
+		handleResize();
+	  
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		}
+
   }, []);
 
   const handleUploadClick = async () => {

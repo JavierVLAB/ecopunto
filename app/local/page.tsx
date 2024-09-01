@@ -40,10 +40,22 @@ export default function Local() {
     localStorage.setItem('session_data', JSON.stringify(storedData));
 
     if(!storedData.finish){
-		process.env.NODE_ENV == 'development' ? '' : sendTrack('Local', 'local')
+		  process.env.NODE_ENV == 'development' ? '' : sendTrack('Local', 'local')
       console.log('si')
     }
     //console.log(storedData)
+
+    const handleResize = () => {
+			const vh = window.innerHeight * 0.01;
+			document.documentElement.style.setProperty('--vh', `${vh}px`);
+		  };
+		
+		  window.addEventListener('resize', handleResize);
+		  handleResize();
+	  
+		  return () => {
+			window.removeEventListener('resize', handleResize);
+		}
 
   }, []);
 
@@ -59,13 +71,13 @@ export default function Local() {
     }
 
     storedData.estado = estado
-
+    storedData.finish = false
     localStorage.setItem('session_data', JSON.stringify(storedData));
     console.log(localStorage)
   }
 
   return (
-      <main className="min-h-screen bg-ecovidrio_light">
+      <main className="min-h-screen-corrected bg-ecovidrio_light">
         
         <HeaderInitPage />
         
