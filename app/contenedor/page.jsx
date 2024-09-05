@@ -13,7 +13,6 @@ import '../ui/globals.css'
 import contenedor from "@/public/contenedor_generico.svg"
 import chevron_right from "@/public/chevron_right.svg"
 import { sendTrack } from "@/app/firebaseUtils"
-import { send_to_CRM_test } from "@/app/utils"
 
 export default function Contenedor() {
   
@@ -65,9 +64,6 @@ export default function Contenedor() {
     const query = {
       estado: estado_contenedor
     }
-
-    send_to_CRM_test(storedData)
-
 
   }
 

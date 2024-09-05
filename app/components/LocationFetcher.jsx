@@ -6,7 +6,7 @@ import near_me from '@/public/near_me.svg'
 export default function LocationFetcher({onLocalizationValue})  {
   const [location, setLocation] = useState(null);
   const [address, setAddress] = useState(null);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(true)
 
   const fetchLocation = (e) => {
     
@@ -56,7 +56,7 @@ export default function LocationFetcher({onLocalizationValue})  {
         </button>
 
       </div>
-      { error ? <p className='font_body_secondary text-error mb-6 px-5'>Verifica los permisos de geolocalización
+      { error ? <p className='font_body_secondary text-error mb-6 px-9'>Verifica los permisos de geolocalización
         </p> : <></>}
     </div>
   );
