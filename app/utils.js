@@ -67,7 +67,7 @@ const municipio_data = {
 		'CCAA': 'Andalucía',
 		'COD_CCAA': 1},
   'Logroño': 
-   		{'LOTE': '22CRE00030',
+   	{'LOTE': '22CRE00030',
 		'COD_MUNICIPIO': 26089,
 		'PROVINCIA': 'La Rioja',
 		'COD_PROVINCIA': 26,
@@ -100,7 +100,14 @@ const municipio_data = {
 		'PROVINCIA': 'Sevilla',
 		'COD_PROVINCIA': 41,
 		'CCAA': 'Andalucía',
-		'COD_CCAA': 1}
+		'COD_CCAA': 1},
+  'Málaga': 
+    {'LOTE': '22CRE00005',
+    'COD_MUNICIPIO': 29067,
+    'PROVINCIA': 'Málaga',
+    'COD_PROVINCIA': 29,
+    'CCAA': 'Andalucía',
+    'COD_CCAA': 1}
 }
 
 

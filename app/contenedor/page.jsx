@@ -51,6 +51,7 @@ export default function Contenedor() {
 
       if (isMobileDevice) {
         setIsMobile(true);
+        console.log("esmovil")
       } else {
         setIsMobile(false);
       }

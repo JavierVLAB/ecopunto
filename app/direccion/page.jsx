@@ -8,13 +8,14 @@ import { sendSuccess, sendTrack } from "../firebaseUtils";
 import { send_to_CRM_test } from "../utils";
 
 const municipios = [
-	"Alcalá de Guadaíra" 
-	,"Alcalá de Henares"
-	,"Dos hermanas"
+	//"Alcalá de Guadaíra" 
+	//,"Alcalá de Henares"
+	"Dos hermanas"
 	,"Leganés"
-	,"Logroño"
-	,"Santander"
+	//,"Logroño"
+	//,"Santander"
 	//,"Sevilla"
+	,"Málaga"
 ]
 
 
@@ -178,7 +179,7 @@ export default function EstadoContenedor() {
 					<input
 					type="number"
 					pattern="[0-9]*" 
-					inputmode="numeric"
+					inputMode="numeric"
 					name="postcode"
 					id="postcode"
 					placeholder=" "
