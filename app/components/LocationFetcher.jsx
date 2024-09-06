@@ -6,7 +6,7 @@ import near_me from '@/public/near_me.svg'
 export default function LocationFetcher({onLocalizationValue})  {
   const [location, setLocation] = useState(null);
   const [address, setAddress] = useState(null);
-  const [error, setError] = useState(true)
+  const [error, setError] = useState(false)
 
   const fetchLocation = (e) => {
     

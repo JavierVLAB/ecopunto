@@ -5,7 +5,7 @@ import WhatsAppPie from "../components/WhatsAppPie";
 import HeaderInitPage from "../components/HeaderInitPage";
 
 import { useState, useEffect} from 'react';
-import { useRouter } from 'next/navigation';
+
 import { v4 as uuidv4 } from 'uuid';
 import Link from "next/link";
 
@@ -13,12 +13,16 @@ import '../ui/globals.css'
 import contenedor from "@/public/contenedor_generico.svg"
 import chevron_right from "@/public/chevron_right.svg"
 import { sendTrack } from "@/app/firebaseUtils"
+import DesktopAlert from "../components/DesktopAlert";
 
 export default function Contenedor() {
-  
-  const router = useRouter();
+
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
+
+    ///////////////////////
+    
 
     localStorage.removeItem('session_data');
 
@@ -42,6 +46,14 @@ export default function Contenedor() {
     const handleResize = () => {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
+      
+      const isMobileDevice = /Mobi/i.test(navigator.userAgent);
+
+      if (isMobileDevice) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
     };
   
     window.addEventListener('resize', handleResize);
@@ -69,6 +81,8 @@ export default function Contenedor() {
 
   return (
       <main className="min-h-screen-corrected bg-ecovidrio_light">
+
+      {!isMobile && (<DesktopAlert qr={'contenedor'}/>)}
 
         <HeaderInitPage />
 

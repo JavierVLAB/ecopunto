@@ -6,7 +6,7 @@ import '../ui/globals.css'
 
 export default function HeaderInitPage() {
     return (
-        <div>
+        <div className="relative">
 
             <div className="" >
                 <Image 
@@ -16,7 +16,7 @@ export default function HeaderInitPage() {
                 />
             </div>
             {
-            <div className="absolute inset-0 z-0 pt-[32px] px-4 h-10">
+            <div className="absolute inset-0 z-0 pt-[32px] px-4 h-10 w-full max-w-md mx-autos">
                 <div className="flex">
                     <Image 
                     src={ecovidriologo}

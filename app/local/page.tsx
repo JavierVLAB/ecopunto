@@ -3,12 +3,11 @@
 import Image from "next/image";
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import WhatsAppPie from "../components/WhatsAppPie";
 import HeaderInitPage from "../components/HeaderInitPage";
 import { sendTrack } from "../firebaseUtils";
-
+import DesktopAlert from "../components/DesktopAlert";
 
 import '../ui/globals.css'
 import contenedor from "@/public/contenedor_generico.svg"
@@ -17,8 +16,7 @@ import cubo_generico from "@/public/cubo_generico.svg"
 
 export default function Local() {
 
-  const router = useRouter();
-    
+  const [isMobile, setIsMobile] = useState(true);    
 
   useEffect(() => {
     // Generar un nuevo ID y construir el JSON inicial
@@ -46,9 +44,17 @@ export default function Local() {
     //console.log(storedData)
 
     const handleResize = () => {
-			const vh = window.innerHeight * 0.01;
-			document.documentElement.style.setProperty('--vh', `${vh}px`);
-		  };
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      
+      const isMobileDevice = /Mobi/i.test(navigator.userAgent);
+
+      if (isMobileDevice) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
 		
 		  window.addEventListener('resize', handleResize);
 		  handleResize();
@@ -79,6 +85,8 @@ export default function Local() {
   return (
       <main className="min-h-screen-corrected bg-ecovidrio_light">
         
+        {!isMobile && (<DesktopAlert qr={'local'}/>)}
+
         <HeaderInitPage />
         
         <p className="font_caption text-grey05 mt-12 ms-6">CONTENEDOR EN LA CALLE</p>

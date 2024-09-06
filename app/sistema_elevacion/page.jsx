@@ -102,15 +102,16 @@ export default function SistemaElevacion() {
 					Como se ve el sistema de elevación</p>
 				
 			</div>*/}
-
-			<div className='fixed inset-x-0 bottom-4 mx-4'>
-				<button
-				type="submit"
-				onClick={handleSubmit}
-				className="btn_primary_dark"
-				>
-				Continuar
-				</button>
+			<div className="relative ">
+				<div className='fixed inset-x-0 bottom-4 px-4 max-w-md mx-auto'>
+					<button
+					type="submit"
+					onClick={handleSubmit}
+					className="btn_primary_dark"
+					>
+					Continuar
+					</button>
+				</div>
 			</div>
 
 		</main>
