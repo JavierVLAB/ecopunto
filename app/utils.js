@@ -13,14 +13,16 @@ export async function envio_CRM() {
 
 
 export async function get_tokens() {
+
     try {
       const myHeaders = new Headers();
       //myHeaders.append("Cookie", "fpc=AlxCpKz7OSNNljzgT-BuWVa-U9PJAQAAAKT8cd4OAAAA; stsservicecookie=estsfd; x-ms-gateway-slice=estsfd");
-      console.log(process.env.NEXT_CRM_CS)
+      
+      
       const formdata = new FormData();
       formdata.append("grant_type", "client_credentials");
       formdata.append("client_id", "c1613d8f-2173-4f41-b559-afe735b3a5b9");
-      formdata.append("client_secret", process.env.NEXT_CRM_CS || '');
+      formdata.append("client_secret", process.env.NEXT_PUBLIC_CRM_CS || '');
       formdata.append("scope", "https://service.flow.microsoft.com//.default");
 
       const requestOptions = {
@@ -29,7 +31,7 @@ export async function get_tokens() {
         body: formdata,
       };
 
-      const tokenResponse = await fetch("https://login.microsoftonline.com/6d3d1871-d11d-4430-bfdb-65c462c4bd2f/oauth2/v2.0/token", requestOptions)
+      const tokenResponse = await fetch("https://aaalogin.microsoftonline.com/6d3d1871-d11d-4430-bfdb-65c462c4bd2f/oauth2/v2.0/token", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.error(error))
