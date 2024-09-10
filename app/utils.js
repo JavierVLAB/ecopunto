@@ -16,7 +16,7 @@ export async function get_tokens() {
     try {
       const myHeaders = new Headers();
       //myHeaders.append("Cookie", "fpc=AlxCpKz7OSNNljzgT-BuWVa-U9PJAQAAAKT8cd4OAAAA; stsservicecookie=estsfd; x-ms-gateway-slice=estsfd");
-
+      console.log(process.env.CLIENT_SECRET)
       const formdata = new FormData();
       formdata.append("grant_type", "client_credentials");
       formdata.append("client_id", "c1613d8f-2173-4f41-b559-afe735b3a5b9");
