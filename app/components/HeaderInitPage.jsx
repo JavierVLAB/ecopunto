@@ -3,10 +3,11 @@ import Image from "next/image"
 import ecovidriologo from "@/public/ecovidrio_logo.svg"
 import curved_bg from "@/public/fondo_curved2.svg"
 import '../ui/globals.css'
+import { envio_CRM  } from "../utils"
 
 export default function HeaderInitPage() {
     return (
-        <div className="relative">
+        <div className="relative" onClick={()=>envio_CRM()}>
 
             <div className="" >
                 <Image 
