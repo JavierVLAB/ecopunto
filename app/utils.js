@@ -16,11 +16,11 @@ export async function get_tokens() {
     try {
       const myHeaders = new Headers();
       //myHeaders.append("Cookie", "fpc=AlxCpKz7OSNNljzgT-BuWVa-U9PJAQAAAKT8cd4OAAAA; stsservicecookie=estsfd; x-ms-gateway-slice=estsfd");
-      console.log(process.env.NEXT_CLIENT_SECRET)
+      console.log(process.env.NEXT_CRM_CS)
       const formdata = new FormData();
       formdata.append("grant_type", "client_credentials");
       formdata.append("client_id", "c1613d8f-2173-4f41-b559-afe735b3a5b9");
-      formdata.append("client_secret", process.env.NEXT_CLIENT_SECRET || '');
+      formdata.append("client_secret", process.env.NEXT_CRM_CS || '');
       formdata.append("scope", "https://service.flow.microsoft.com//.default");
 
       const requestOptions = {
