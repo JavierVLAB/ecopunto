@@ -10,7 +10,7 @@ import { envio_CRM  } from "../utils"
 const municipios = [
 	//"Alcalá de Guadaíra" 
 	//,"Alcalá de Henares"
-	"Dos hermanas"
+	"Dos Hermanas"
 	,"Leganés"
 	//,"Logroño"
 	//,"Santander"
@@ -76,7 +76,7 @@ export default function EstadoContenedor() {
 	}, []);
 
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if(municipio =="" || direccion =="" || postcode ==""){
@@ -107,9 +107,11 @@ export default function EstadoContenedor() {
 		} else if (estado == "solicitud"){
 			router.push('/telefono')
 		} else {
+			//process.env.NODE_ENV == 'development' ? '' : envio_CRM(storedData)
+			await envio_CRM(storedData)
+
 			process.env.NODE_ENV == 'development' ? '' : sendSuccess(storedData.originalPage, storedData.incidencia)
-			process.env.NODE_ENV == 'development' ? '' : envio_CRM(storedData)
-		
+			
 			router.push('/confirmacion')
 		}
 		

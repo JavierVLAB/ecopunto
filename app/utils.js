@@ -81,6 +81,26 @@ export async function get_tokens_API() {
   }
 }
 
+const test =
+{
+  "Nombre": "Propelland - TEST Solicitar cubo",
+  "Tipo Cuenta": "",
+  "Tipología del Caso": "Solicitar cubo",
+  "Calle": "Calle uno numero 2",
+  "Teléfono Contacto": "+34 666666666",
+  "Dirección": "Calle uno numero 2, Logroño, 22222",
+  "Código Postal": "22222",
+  "Municipio": "Logroño",
+  "Provincia": "La Rioja",
+  "Código Provincia": 26,
+  "Código Municipio": 26089,
+  "Lote": "22CRE00030",
+  "Imagen": "",
+  "Solicitud cubo": "[{\"Cubo\":\"CUBO 40 L - PL01748.001\",\"Número\":1},{\"Cubo\":\"CUBO 90L - PL01748.003\",\"Número\":1},{\"Cubo\":\"CUBO 120 VACRI - PL01748.005\",\"Número\":1}]",
+  "Nombre Establecimiento": "Local Test",
+  "Horario": "Tarde, L,X,J,V",
+  "Contactar": "Sí"
+}
 
 export async function creacion_caso (data, tokens) {
 
@@ -93,11 +113,12 @@ export async function creacion_caso (data, tokens) {
   const requestOptions = {
     method: "POST",
     headers: myHeaders,
-    body: JSON.stringify(dataCRM),
+    body: JSON.stringify(test),
+    //body: JSON.stringify(dataCRM),
     redirect: "follow"
   };
 
-  fetch("https://prod-58.northeurope.logic.azure.com:443/workflows/bb1255a327a643ca9d76505440580798/triggers/manual/paths/invoke?api-version=2016-06-01", requestOptions)
+  await fetch("https://prod-58.northeurope.logic.azure.com:443/workflows/bb1255a327a643ca9d76505440580798/triggers/manual/paths/invoke?api-version=2016-06-01", requestOptions)
     .then((response) => response.text())
     .then((result) => console.log("respuesta: " + result))
     .catch((error) => {
@@ -206,10 +227,9 @@ export function prepare_data (data){
   }
 
   // corregimos si no hay solicitud de cubos para que lo acepte el CRM
-  result = result.length == 0 ? '' : result
 
   const municipio = data.addressData.municipio 
-
+  console.log(municipio)
   const dataCRM = {
     //"Id": "",                                  
     "Nombre": "Propelland - " + data.incidencia + (data.contactar ? ' - Contactar' : '') || '',        

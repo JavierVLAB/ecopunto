@@ -23,11 +23,13 @@ export default function Summary() {
 	const [initPage, setInitPage] = useState(null)	
 	const [page, setPage] = useState(0)  
 
+	const [isSending, setIsSending] = useState(false)
+
 	useEffect(() => {
 
 	  // Leer el objeto JSON desde localStorage
 	  const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
-	  console.log(storedData)
+	  //console.log(storedData)
 
 	  if (storedData.originalPage == "contenedor") {
 		setPage(3)
@@ -69,15 +71,21 @@ export default function Summary() {
 	  //console.log(storedData)
 	}, []);
 
-    const handleClick = () => {
+    const handleClick = async () => {
+
+		setIsSending(true)
 
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 		//Enviar datos al CRM
-		process.env.NODE_ENV != 'development' ? '' : envio_CRM(storedData)
-				
+		//process.env.NODE_ENV == 'development' ? '' : await envio_CRM(storedData)
+		
+		await envio_CRM(storedData)
+
 		process.env.NODE_ENV == 'development' ? '' : sendSuccess(initPage, incidencia)
 
-        //router.push("/confirmacion")
+		setIsSending(false)
+        
+		router.push("/confirmacion")
 	};
 
   return (
@@ -156,14 +164,15 @@ export default function Summary() {
 			
 			</div>
 
+
             <div className='p-4'>
 				<p className="font_body_secondary text-grey06 mb-4">Al enviar, usted acepta nuestra <Link href={"/privacidad"} className="underline">Política de privacidad</Link></p>
 
                 <button
                     onClick={handleClick}
-                    className="btn_primary_dark"
+                    className={`btn_primary_dark ${isSending ? 'animate-pulse' : '' }`}
                     >
-                    Enviar
+                    {isSending ? "Enviando" : "Enviar"}
                 </button>
             </div>
 
