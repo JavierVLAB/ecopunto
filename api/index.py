@@ -30,13 +30,13 @@ def get_token():
 
     
     try:
-        return {"access_token": os.getenv("NEXT_PUBLIC_CRM_CS")}
+
         # Solicitud a Microsoft para obtener el token
         response = requests.request("POST", url, data=params)
         response.raise_for_status()
         
         token_data = response.json()
-        print(token_data)
+        
         return {"access_token": token_data["access_token"]}
     
     except requests.exceptions.RequestException as e:
