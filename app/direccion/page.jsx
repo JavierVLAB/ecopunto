@@ -5,7 +5,7 @@ import '@/app/ui/globals.css'
 import LocationFetcher from "../components/LocationFetcher";
 import { useRouter } from "next/navigation";
 import { sendSuccess, sendTrack } from "../firebaseUtils";
-import { send_to_CRM_test } from "../utils";
+import { envio_CRM  } from "../utils"
 
 const municipios = [
 	//"Alcalá de Guadaíra" 
@@ -108,7 +108,7 @@ export default function EstadoContenedor() {
 			router.push('/telefono')
 		} else {
 			process.env.NODE_ENV == 'development' ? '' : sendSuccess(storedData.originalPage, storedData.incidencia)
-			process.env.NODE_ENV == 'development' ? '' : send_to_CRM_test(storedData)
+			process.env.NODE_ENV == 'development' ? '' : envio_CRM(storedData)
 		
 			router.push('/confirmacion')
 		}

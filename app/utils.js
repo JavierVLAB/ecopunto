@@ -1,20 +1,23 @@
 import axios from 'axios';
 
 
-export async function envio_CRM() {
+export async function envio_CRM(data) {
 
-  //const tokens_response = await get_tokens()
+  console.log(data)
+  const tokens_response = await get_tokens_API()
 
-  //const tokens = tokens_response.access_tokens
-  
-  //console.log("okens :", tokens_response )
+  console.log(tokens_response)
 
   try {
-    //const tokens = tokens_response.access_tokens
 
-    creacion_caso("a")
-  } catch {
+    const tokens = tokens_response.access_token
+    await creacion_caso(data, tokens)
+    console.log("se ha enviado")
 
+
+  } catch (error) {
+    console.log("error al enviar")
+    console.log(error)
   }
 
 }
@@ -43,8 +46,8 @@ export async function get_tokens() {
 
       const tokenResponse = await fetch("https://login.microsoftonline.com/6d3d1871-d11d-4430-bfdb-65c462c4bd2f/oauth2/v2.0/token", requestOptions)
         .then((response) => response.json())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error))
+        .then((result) => console.log("result ", result))
+        .catch((error) => {console.error("result ", error)})
 
       const tokenData = await tokenResponse;
       return tokenData; // Retorna el token
@@ -56,109 +59,36 @@ export async function get_tokens() {
 }
 
 
-export async function get_tokens_API(req, res) {
+export async function get_tokens_API() {
   
   try {
     // Hacer una llamada a la API de FastAPI para obtener el token
-    const response = await fetch('http://localhost:8000/api/get_token', {
+    const url_api = 'https://ecopunto-gilt.vercel.app/api/token'
+    //const url_api = 'http://localhost:3000/api/token'
+    const response = await fetch(url_api, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    if (!response.ok) {
-      throw new Error('Error al obtener el token de FastAPI');
-    }
-
     const data = await response.json();
-    res.status(200).json(data); // Devolver el token al cliente de Next.js
+
+    return data
   } catch (error) {
     console.error('Error en Next.js:', error);
-    res.status(500).json({ error: 'Error al obtener el token desde FastAPI' });
+
   }
 }
 
 
-export async function creacion_caso (tokens) {
-
-  const mytokens = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ikg5bmo1QU9Tc3dNcGhnMVNGeDdqYVYtbEI5dyIsImtpZCI6Ikg5bmo1QU9Tc3dNcGhnMVNGeDdqYVYtbEI5dyJ9.eyJhdWQiOiJodHRwczovL3NlcnZpY2UuZmxvdy5taWNyb3NvZnQuY29tLyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzZkM2QxODcxLWQxMWQtNDQzMC1iZmRiLTY1YzQ2MmM0YmQyZi8iLCJpYXQiOjE3MjYyMTc4ODQsIm5iZiI6MTcyNjIxNzg4NCwiZXhwIjoxNzI2MjIxNzg0LCJhaW8iOiJFMmRnWURnWG1mSll6WjdaSkZUcDd2bnFWV2NPQVFBPSIsImFwcGlkIjoiYzE2MTNkOGYtMjE3My00ZjQxLWI1NTktYWZlNzM1YjNhNWI5IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNmQzZDE4NzEtZDExZC00NDMwLWJmZGItNjVjNDYyYzRiZDJmLyIsImlkdHlwIjoiYXBwIiwib2lkIjoiNDlmMTJmZDItMWU1My00YTAxLTg4N2EtY2E3ODUxZTY3ZmIzIiwicmgiOiIwLkFRd0FjUmc5YlIzUk1FU18yMlhFWXNTOUx5V2g4SDItMDVaTXFsUlpINFBfVkJ5V0FBQS4iLCJzdWIiOiI0OWYxMmZkMi0xZTUzLTRhMDEtODg3YS1jYTc4NTFlNjdmYjMiLCJ0aWQiOiI2ZDNkMTg3MS1kMTFkLTQ0MzAtYmZkYi02NWM0NjJjNGJkMmYiLCJ1dGkiOiJ1alNxQzRsZFZreTAwUTg3QzRVbkFRIiwidmVyIjoiMS4wIiwieG1zX2lkcmVsIjoiMiA3In0.DlgeQ6sRAKFTj4f6Ix3uaeI5MP7ylLtCmD4P2os5zZLIeei8QgDneRUr4pPK_dBfN0OPuVzkgu-4rCIkggXMuPYKnf_6hJPCSFMQ2u_gFQB5hLarJ-59-INPCs7qUy1zhdQXUW5B6cspfRFPKtg-AKQc7IV0y-qP20FLp0cgHeHad1BSipTvQrooZEiVkXGyajRsj1PSIF1Cm9G_crNE-9C15ehTSO0UvI8Ai3QJmdqv5u_qHCWU3ztH4PHUY93RDntfzFwNoZCc_OzBBqxOIguWQOVEbRfFCVgettSwTEN1aJrUGTPGjMeTEm7R0F-XJAUB65LpjGD0xaALujC-5Q"
+export async function creacion_caso (data, tokens) {
 
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", "Bearer " + mytokens);
+  myHeaders.append("Authorization", "Bearer " + tokens);
   myHeaders.append("Content-Type", "application/json");
-  //myHeaders.append("Cookie", "ARRAffinity=f2f616db1fb852bebf8d33f4c2e809bd2033537707f3f091cc1bbac7ec19b816; ARRAffinitySameSite=f2f616db1fb852bebf8d33f4c2e809bd2033537707f3f091cc1bbac7ec19b816");
-
-  const raw = JSON.stringify({
-    "Nombre": "Propelland - Test desde ",
-    "Tipo Cuenta": "",
-    "Tipología del Caso": "Solicitar cubo",
-    "Calle": "Calle uno numero 2",
-    "Teléfono Contacto": "+34 666666666",
-    "Dirección": "Calle uno numero 2, Logroño, 22222",
-    "Código Postal": "22222",
-    "Municipio": "Logroño",
-    "Provincia": "La Rioja",
-    "Código Provincia": 26,
-    "Código Municipio": 26089,
-    "Lote": "22CRE00030",
-    "Imagen": "",
-    "Solicitud cubo": "[{\"CUBO 40 L - PL01748.001\":1},{\"CUBO 90L - PL01748.003\":1},{\"CUBO 120 VACRI - PL01748.005\":2}]",
-    "Nombre Establecimiento": "Local Test",
-    "Horario": "Tarde, L,X,J,V",
-    "Contactar": "Sí"
-  });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://prod-58.northeurope.logic.azure.com:443/workflows/bb1255a327a643ca9d76505440580798/triggers/manual/paths/invoke?api-version=2016-06-01", requestOptions)
-    .then((response) => response.text())
-    .then((result) => console.log("respuesta " + result))
-    .catch((error) => console.error(error));
-
-}
-
-export async function send_to_CRM(data) {
-
-  console.log(data)
-    
-  const url = 'https://prod-66.westeurope.logic.azure.com:443/workflows/8dce564530624a73a46c68373ecbf40b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=IiuoMPLzbJaquefcOU2gtKVBVcpdw683IiwTXrpkKP4';
-	
-  try {
-    const response = await axios.post(
-			url, 
-			data1, 
-			{
-				headers: {
-					'Content-Type': 'application/json',
-				},
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error al enviar los datos:', error);
-    throw error;
-  }
-};
-
-
-export async function send_to_CRM_test(data) {
 
   const dataCRM = prepare_data(data)
-
-  const myHeaders = new Headers();
-  myHeaders.append("x-api-key", "123456");
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({
-    "nombre": "algo mas",
-    "apellido": "Pérsdddddaaaez",
-    "email": "juan.peaaarez@example.com"
-  });
 
   const requestOptions = {
     method: "POST",
@@ -167,13 +97,16 @@ export async function send_to_CRM_test(data) {
     redirect: "follow"
   };
 
-  fetch("https://prod-66.westeurope.logic.azure.com:443/workflows/8dce564530624a73a46c68373ecbf40b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=IiuoMPLzbJaquefcOU2gtKVBVcpdw683IiwTXrpkKP4", requestOptions)
+  fetch("https://prod-58.northeurope.logic.azure.com:443/workflows/bb1255a327a643ca9d76505440580798/triggers/manual/paths/invoke?api-version=2016-06-01", requestOptions)
     .then((response) => response.text())
-    .then((result) => console.log("enviado"))
-    .catch((error) => console.error(error));
+    .then((result) => console.log("respuesta: " + result))
+    .catch((error) => {
+
+      console.error("error" + error)
+      throw error
+    });
 
 }
-
 
 const municipio_data = {
 	'Dos Hermanas': 
@@ -228,8 +161,6 @@ const municipio_data = {
 }
 
 
-
-
 export function prepare_data (data){
 
   const miJson = data.solicitudData
@@ -238,31 +169,50 @@ export function prepare_data (data){
   for (const key in miJson) {
 
       if (miJson.hasOwnProperty(key)) {
-          if(miJson[key].size == 90)
+          if(miJson[key].size == 90 && miJson[key].quantity > 0)
             {
-              result.push({"CUBO 90L - PL01748.003":miJson[key].quantity})
-            } else if(miJson[key].size == 40)
+              result.push({
+                "Cubo":"CUBO 90L - PL01748.003",
+                "Número":miJson[key].quantity
+              })
+            } else if(miJson[key].size == 40 && miJson[key].quantity > 0)
             {
-              result.push({"CUBO 40 L - PL01748.001":miJson[key].quantity})
-            } else if(miJson[key].size == 120)
+              result.push({
+                "Cubo":"CUBO 40 L - PL01748.001",
+                "Número":miJson[key].quantity
+              })
+            } else if(miJson[key].size == 120 && miJson[key].quantity > 0)
             {
               if(data.sistemaElevacion == 'si') {
-                result.push({"CUBO 120 VACRI - PL01748.005":miJson[key].quantity})
+                result.push({
+                  "Cubo":"CUBO 120 VACRI - PL01748.005",
+                  "Número":miJson[key].quantity
+                })
               } else if(data.sistemaElevacion == 'no') {
-                result.push({"CUBO 120L - PL01748.006":miJson[key].quantity})
+                result.push({
+                  "Cubo":"CUBO 120L - PL01748.006",
+                  "Número":miJson[key].quantity
+                })
               } else {
-                result.push({"CUBO 120L - PL01748.006":miJson[key].quantity})
+                result.push({
+                  "Cubo":"CUBO 120L - PL01748.006",
+                  "Número":miJson[key].quantity
+                })
               }
             }
 
       }
+
   }
+
+  // corregimos si no hay solicitud de cubos para que lo acepte el CRM
+  result = result.length == 0 ? '' : result
 
   const municipio = data.addressData.municipio 
 
   const dataCRM = {
     //"Id": "",                                  
-    "Nombre": data.incidencia || '',           
+    "Nombre": "Propelland - " + data.incidencia + (data.contactar ? ' - Contactar' : '') || '',        
     "Tipo Cuenta": "",                      
     "Tipología del Caso": data.incidencia || '',
     "Calle": data.direccion || '',             
@@ -277,7 +227,7 @@ export function prepare_data (data){
     "Código Municipio": municipio_data[municipio]['COD_MUNICIPIO'],                    
     "Lote": municipio_data[municipio]['LOTE'],                                
     "Imagen": data.image || '',               
-    "Solicitud Cubo": JSON.stringify(result),  
+    "Solicitud Cubo": result.length == 0 ? '' : JSON.stringify(result),  
     "Nombre Establecimiento": data.nameLocal || '',
     "Horario": data.horario || '',
     "Contactar": data.contactar ? 'Sí' : 'No'                    
@@ -290,54 +240,5 @@ export function prepare_data (data){
 
 }
 
-/*
-
-Id
-Nombre
-Tipo de cuenta
-Tipología del Caso
-Calle 
-Contacto 
-Teléfono Contacto 
-Dirección 
-Código postal 
-Municipio
-Código Municipio
-Lote 
-Imagen
-Sulicitud cubo
 
 
-Cosas
-
-- en la linea 3088 del excel, (3086) hay un unico cod municipio, 41039
-- sevilla no es un municipio
-- la provincia tiene varios codigos en el caso de sevilla he escogido 41
-
-- definir bien, nombre, tipologi, tipo de caso, y nombre establecimiento
-
-
-
-Cubos
-
-Nombre
-
-CUBO 120 ALE HOP - PL01748.004
-
-CUBO 120 VACRI - PL01748.005
-
-CUBO 120L - PL01748.006
-
-CUBO 240 L - PL01748.007
-
-CUBO 40 L - PL01748.001
-
-CUBO 45 L - PL01748.008
-
-CUBO 60 L - PL01748.002
-
-CUBO 90L - PL01748.003
-
-CUBO 90L VACRI ESPECIAL - PL01748.009
-
-*/

@@ -6,7 +6,7 @@ import { sendSuccess, sendTrack } from "../firebaseUtils";
 import Image from "next/image";
 import CuboCardwithSE from "../components/CuboCardwithSE";
 import Link from "next/link";
-import { send_to_CRM_test } from "../utils";
+import { envio_CRM } from "../utils";
 import '@/app/ui/globals.css'
 
 export default function Summary() {
@@ -73,11 +73,11 @@ export default function Summary() {
 
 		const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 		//Enviar datos al CRM
-		process.env.NODE_ENV == 'development' ? '' : send_to_CRM_test(storedData)
+		process.env.NODE_ENV != 'development' ? '' : envio_CRM(storedData)
 				
 		process.env.NODE_ENV == 'development' ? '' : sendSuccess(initPage, incidencia)
 
-        router.push("/confirmacion")
+        //router.push("/confirmacion")
 	};
 
   return (

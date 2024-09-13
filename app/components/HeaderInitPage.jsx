@@ -7,7 +7,8 @@ import { envio_CRM  } from "../utils"
 
 export default function HeaderInitPage() {
     return (
-        <div className="relative" onClick={()=>envio_CRM()}>
+        <div className="relative" >
+        {/* <div className="relative" onClick={()=>envio_CRM()}> */}
 
             <div className="" >
                 <Image 
