@@ -26,7 +26,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env*
 
 # vercel
 .vercel
@@ -38,5 +38,9 @@ next-env.d.ts
 venv/
 
 __pycache__/
-
-/api
+file.py
+index_*.*
+credential.py
+apikey.py
+#/api
+/api/QRgenerator
