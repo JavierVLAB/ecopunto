@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 import requests
 from pydantic import BaseModel
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     docs_url="/api/docs",
@@ -9,9 +10,20 @@ app = FastAPI(
     openapi_url="/api/openapi.json"
 )
 
-# Configura los detalles de autenticación de tu app de Azure AD
+# Configurar los orígenes permitidos (en este caso, localhost y tu frontend en Vercel)
+origins = [
+    "http://localhost:3000",  # Permitir solicitudes desde localhost:3000
+    "https://ecopunto-gilt.vercel.app",  # Permitir solicitudes desde tu app desplegada en Vercel
+]
 
-# Modelo de respuesta para enviar el token
+# Agregar el middleware de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Permitir solo estos orígenes
+    allow_credentials=True,  # Permitir el uso de cookies y credenciales
+    allow_methods=["*"],  # Permitir todos los métodos (GET, POST, etc.)
+    allow_headers=["*"],  # Permitir todos los headers
+)
 class TokenResponse(BaseModel):
     access_token: str
 
@@ -36,7 +48,7 @@ def get_token():
         response.raise_for_status()
         
         token_data = response.json()
-        
+
         return {"access_token": token_data["access_token"]}
     
     except requests.exceptions.RequestException as e:
