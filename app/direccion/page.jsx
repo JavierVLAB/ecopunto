@@ -34,6 +34,7 @@ export default function EstadoContenedor() {
 	const [isErrorPC, setIsErrorPC] = useState(false)
 	const [postcode, setPostcode] = useState('')
 	const [municipio, setMunicipio] = useState('')
+	const [isSending, setIsSending] = useState(false)
 	  
 
 	useEffect(() => {
@@ -107,11 +108,13 @@ export default function EstadoContenedor() {
 		} else if (estado == "solicitud"){
 			router.push('/telefono')
 		} else {
+			setIsSending(true)
 			//process.env.NODE_ENV == 'development' ? '' : envio_CRM(storedData)
 			await envio_CRM(storedData)
 
 			process.env.NODE_ENV == 'development' ? '' : sendSuccess(storedData.originalPage, storedData.incidencia)
 			
+			setIsSending(false)
 			router.push('/confirmacion')
 		}
 		
@@ -202,10 +205,11 @@ export default function EstadoContenedor() {
 				<div className='fixed inset-x-0 bottom-4 mx-4'>
 					<button
 					type="submit"
-					className="btn_primary_dark"      
+					className={`btn_primary_dark ${isSending ? 'animate-pulse' : '' }`}     
 					>
-					Continuar
+						{isSending ? "Enviando" : "Continuar"}
 					</button>
+
 				</div>
 			</form>
 
