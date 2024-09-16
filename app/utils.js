@@ -152,7 +152,7 @@ const municipio_data = {
 		'CCAA': 'Madrid, Comunidad de',
 		'COD_CCAA': 13},
   'Leganés': 
-		{'LOTE': '15CRE00010',
+		{'LOTE': '18CRE00010/1',
 		'COD_MUNICIPIO': 28074,
 		'PROVINCIA': 'Madrid',
 		'COD_PROVINCIA': 28,
