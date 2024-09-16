@@ -118,7 +118,10 @@ export async function creacion_caso (data, tokens) {
     redirect: "follow"
   };
 
-  await fetch("https://prod-58.northeurope.logic.azure.com:443/workflows/bb1255a327a643ca9d76505440580798/triggers/manual/paths/invoke?api-version=2016-06-01", requestOptions)
+  //const dev_url = "https://prod-58.northeurope.logic.azure.com:443/workflows/bb1255a327a643ca9d76505440580798/triggers/manual/paths/invoke?api-version=2016-06-01"
+  const pre_url = "https://prod-222.westeurope.logic.azure.com:443/workflows/a373d25a325f47f280ed8646246e021b/triggers/manual/paths/invoke?api-version=2016-06-01"
+  
+  await fetch(pre_url, requestOptions)
     .then((response) => response.text())
     .then((result) => console.log("respuesta: " + result))
     .catch((error) => {
