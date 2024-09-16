@@ -113,7 +113,7 @@ export async function creacion_caso (data, tokens) {
   const requestOptions = {
     method: "POST",
     headers: myHeaders,
-    body: JSON.stringify(test),
+    body: JSON.stringify(dataCRM),
     //body: JSON.stringify(dataCRM),
     redirect: "follow"
   };
