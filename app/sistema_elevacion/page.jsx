@@ -39,6 +39,9 @@ export default function SistemaElevacion() {
 
 			const storedData = JSON.parse(localStorage.getItem('session_data') || '{}');
 			storedData.sistemaElevacion = selectedOption;
+			
+			if(selectedOption == 'contactame') storedData.contactar = true
+
 			localStorage.setItem('session_data', JSON.stringify(storedData));
 			
 			console.log(storedData)
