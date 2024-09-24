@@ -131,7 +131,7 @@ export default function Contenedor() {
           
         </Link>
 
-        <WhatsAppPie />
+        <WhatsAppPie page="contenedor"/>
       </main>
 
   );

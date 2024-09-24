@@ -135,7 +135,7 @@ export default function Local() {
           
         </Link>
 
-        <WhatsAppPie />
+        <WhatsAppPie page="local"/>
       </main>
 
   );

@@ -1,7 +1,8 @@
 "use client"
 import Link from 'next/link'
+import { sendSuccess } from '../firebaseUtils'
 
-export default function WhatsAppPie() {
+export default function WhatsAppPie({page}) {
     return (
 
 
@@ -13,6 +14,7 @@ export default function WhatsAppPie() {
             <a  href="https://api.whatsapp.com/send?phone=+34629045150" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                onClick={() => sendSuccess(page,"whatsapp")}
                 className="font_h3 text-ecovidrio_dark mt-1 underline">Escríbenos por Whatsapp</a>
             <p className="font_body_secondary text-grey05 mt-1">Horario de atención de 10-18hrs, <br/>de lunes a viernes</p>
             </div>
