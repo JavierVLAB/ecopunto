@@ -123,7 +123,7 @@ export async function creacion_caso (data, tokens) {
   const prod_url = "https://prod-210.westeurope.logic.azure.com:443/workflows/3d8e187d0872482da0d37d3b0a68ff1b/triggers/manual/paths/invoke?api-version=2016-06-01"
 
 
-  await fetch(pre_url, requestOptions)
+  await fetch(prod_url, requestOptions)
     .then((response) => response.text())
     .then((result) => console.log("respuesta: " + result))
     .catch((error) => {
