@@ -2,11 +2,11 @@
 import PageTitle from "@/app/components/PageTitle";
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
-import { sendSuccess, sendTrack } from "../firebaseUtils";
+import { sendSuccess, sendBackup, sendTrack } from "../firebaseUtils";
 import Image from "next/image";
 import CuboCardwithSE from "../components/CuboCardwithSE";
 import Link from "next/link";
-import { envio_CRM } from "../utils";
+import { envio_CRM, keyFilter } from "../utils";
 import '@/app/ui/globals.css'
 
 export default function Summary() {
@@ -82,7 +82,11 @@ export default function Summary() {
 		await envio_CRM(storedData)
 
 		process.env.NODE_ENV == 'development' ? '' : sendSuccess(initPage, incidencia)
-
+		const newjson = keyFilter(storedData) 
+		
+		process.env.NODE_ENV == 'development' ? '' : sendBackup(initPage, incidencia, JSON.stringify(newjson))
+		//console.log(storedData)
+		//console.log(JSON.stringify(newjson))
 		setIsSending(false)
         
 		router.push("/confirmacion")

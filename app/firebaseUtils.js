@@ -55,4 +55,17 @@ export async function sendSuccess(init_page, incidencia) {
 
 }
 
+export async function sendBackup(init_page, incidencia, info) {
+
+    const eventData = {
+      event_name: "Backup", // App Start, Incident, Quit, Success
+      init_page: init_page,     // Contenedor, Local
+      incidencia: incidencia,         // Contenedor lleno, Contenedor roto, Solicitud cubos, Whatsapp
+      actual_page: info  // Cualquiera
+    }
+
+    await addEvent(eventData)
+
+}
+
 

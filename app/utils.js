@@ -239,8 +239,7 @@ export function prepare_data (data){
     //"Id": "",                                  
     "Nombre": "Propelland - " + data.incidencia + (data.contactar ? ' - Contactar' : '') || '',        
     "Tipo Cuenta": "",                      
-    "Tipología del Caso": data.incidencia || '',
-    "Calle": data.direccion || '',             
+    "Tipología del Caso": data.incidencia || '',            
     //"Contacto": "",                            
     "Teléfono Contacto": data.phone || '',  
     "Dirección": data.address,                           
@@ -263,6 +262,19 @@ export function prepare_data (data){
 
   return dataCRM
 
+}
+
+export function keyFilter(obj) {
+  let newObj = {};
+  
+  const clavesParaConservar = ["incidencia", "phone", "solicitudData", "address", "contactar","nameLocal"]
+  clavesParaConservar.forEach(clave => {
+      if (obj.hasOwnProperty(clave)) {
+          newObj[clave] = obj[clave];
+      }
+  });
+  
+  return newObj;
 }
 
 
