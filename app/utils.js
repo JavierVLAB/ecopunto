@@ -139,7 +139,7 @@ const municipio_data = {
 		{'LOTE': '22CRE0003b',
 		'COD_MUNICIPIO': 41038,
 		'PROVINCIA': 'Sevilla',
-		'COD_PROVINCIA': 42,
+		'COD_PROVINCIA': 41,
 		'CCAA': 'Andalucía',
 		'COD_CCAA': 1},
   'Logroño': 
