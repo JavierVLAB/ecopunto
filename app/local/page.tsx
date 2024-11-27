@@ -73,7 +73,7 @@ export default function Local() {
       storedData.incidencia = 'Solicitar cubo'
       
     } else {
-      storedData.incidencia = 'Contenedor lleno (local)'
+      storedData.incidencia = 'Contenedor lleno'
     }
 
     storedData.estado = estado
