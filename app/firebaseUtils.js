@@ -19,10 +19,10 @@ export async function addEvent(eventData) {
         };
 
         // Agregar el documento a la colección 'events'
-        const docRef = await addDoc(collection(db, 'events'), data);
+        // const docRef = await addDoc(collection(db, 'events'), data);
 
-        console.log("Event added successfully with ID: ", docRef.id);
-        return { success: true, id: docRef.id };
+        // console.log("Event added successfully with ID: ", docRef.id);
+        // return { success: true, id: docRef.id };
     } catch (error) {
         console.error("Error adding document: ", error);
         return { success: false, error: error.message };
