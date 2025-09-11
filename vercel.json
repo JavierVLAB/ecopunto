@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://ecopuntoapp.azurewebsites.net/:path*",
+      "statusCode": 307
+    }
+  ]
+}

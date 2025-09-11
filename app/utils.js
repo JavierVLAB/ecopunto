@@ -258,7 +258,7 @@ export function prepare_data (data){
   }
 
   console.log(data)
-  console.log(dataCRM)
+  console.log(JSON.stringify(dataCRM))
 
   return dataCRM
 
