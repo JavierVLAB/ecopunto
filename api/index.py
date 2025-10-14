@@ -36,7 +36,7 @@ def get_token():
     print(os.getenv("NEXT_PUBLIC_CRM_CS"))
 
     params = {'grant_type': 'client_credentials',
-    'client_id': 'c1613d8f-2173-4f41-b559-afe735b3a5b9',
+    'client_id': 'e766a9e0-6b5b-4adb-b9e6-7d26eacfe16f',#'client_id': 'c1613d8f-2173-4f41-b559-afe735b3a5b9',
     'client_secret': os.getenv("NEXT_PUBLIC_CRM_CS"),
     'scope': 'https://service.flow.microsoft.com//.default'}
 
