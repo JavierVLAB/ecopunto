@@ -121,8 +121,9 @@ export async function creacion_caso (data, tokens) {
   //const dev_url = "https://prod-58.northeurope.logic.azure.com:443/workflows/bb1255a327a643ca9d76505440580798/triggers/manual/paths/invoke?api-version=2016-06-01"
   //const pre_url = "https://prod-222.westeurope.logic.azure.com:443/workflows/a373d25a325f47f280ed8646246e021b/triggers/manual/paths/invoke?api-version=2016-06-01"
   //const prod_url = "https://prod-210.westeurope.logic.azure.com:443/workflows/3d8e187d0872482da0d37d3b0a68ff1b/triggers/manual/paths/invoke?api-version=2016-06-01"
-  //const prod_url_Oct_2025 = "https://03cb57dc7e08e8febb8a013f758714.51.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/3d8e187d0872482da0d37d3b0a68ff1b/triggers/manual/paths/invoke?api-version=1"
-  const prod_url_Oct_2025 = "https://03cb57dc7e08e8febb8a013f758714.51.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/abd13279789f43c6b782862d36e10c1b/triggers/manual/paths/invoke?api-version=1"
+  const prod_url_Oct_2025 = "https://03cb57dc7e08e8febb8a013f758714.51.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/3d8e187d0872482da0d37d3b0a68ff1b/triggers/manual/paths/invoke?api-version=1"
+  //const prod_url_Oct_2025_2 = "https://03cb57dc7e08e8febb8a013f758714.51.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/abd13279789f43c6b782862d36e10c1b/triggers/manual/paths/invoke?api-version=1"
+  
   await fetch(prod_url_Oct_2025, requestOptions)
     .then((response) => response.text())
     .then((result) => console.log("respuesta: " + result))
